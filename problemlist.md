@@ -77,8 +77,8 @@ Si te divertiste resolviendo ***alguno de mis problemas***, también ***no dudes
  
 &#10004; <span style="color:green;"> **El de la grilla - Distrital OBI** </span><br>
 
-*Este es por mucho, el problema que más me divirtió redactar. *<br>
-*La dedicación que le puse es simplemente indescriptible. *<br>
+*Este es por mucho, el problema que más me divirtió redactar.*<br>
+*La dedicación que le puse es simplemente indescriptible.*<br>
  - [PDF](/assets/problems/2022/OBI/grilla/grilla.pdf)
  - **Solution:** 
     - Code: [C++](/assets/problems/2022/OBI/grilla/full.cpp)
