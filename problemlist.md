@@ -10,11 +10,17 @@ Some of these problems are uploaded on an online judge, if so I will provide a l
 If possible, I will also include a code that solves the problem and its respective explanation.<br>
 In case anyone wishes to use any of these problems for a contest, ***please contact me*** and I will gladly send the test cases and different test generators I used.
 
+***Also***, if you need any help to solve any of these problems, or you have some comment or remark about anything; ***feel free to contact me***.<br>
+If you had fun solving ***any of my problems***, also ***feel free to let me know*** ;)
+
 ### Español:   
 Aqui pondre una lista de los problemas de Programacion Competitiva ***escritos y creados*** por mi.<br>
 Algunos de estos problemas estan subidos en un juez virtual, de ser asi pondre el link al problema.<br>
 De ser posible tambien pondre un codigo que resuelve el problema y la respectiva explicación.<br>
-En caso que alguien desee usar alguno de estos problemas para un concurso, ***por favor contactarme*** y con gusto le mandare los casos de prueba y distintos generadores que utilice.
+En caso que alguien desee usar alguno de estos problemas para un concurso, ***por favor contactarme*** y con gusto le mandare los casos de prueba y distintos generadores que utilice.<br>
+
+***Además***, si necesitas ayuda para resolver alguno de estos problemas, o tienes algún comentario u observación sobre algo; ***no dudes en contactarme***.<br>
+Si te divertiste resolviendo ***alguno de mis problemas***, también ***no dudes en hacérmelo saber*** ;)
 
 ## 2023
  &#10004; <span style="color:green;"> **Joven por siempre - EGOI classification round** </span>
@@ -71,8 +77,8 @@ En caso que alguien desee usar alguno de estos problemas para un concurso, ***po
  
 &#10004; <span style="color:green;"> **El de la grilla - Distrital OBI** </span><br>
 
-*Este es por mucho, el problema que mas me divirtio redactar.*<br>
-*La dedicacion que le puse es simplemente indescriptible.*<br>
+*Este es por mucho, el problema que más me divirtió redactar. *<br>
+*La dedicación que le puse es simplemente indescriptible. *<br>
  - [PDF](/assets/problems/2022/OBI/grilla/grilla.pdf)
  - **Solution:** 
     - Code: [C++](/assets/problems/2022/OBI/grilla/full.cpp)
