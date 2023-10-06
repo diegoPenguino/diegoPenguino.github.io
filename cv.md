@@ -19,7 +19,8 @@ Currently looking forward to gain experience and knowledge in ***Machine Learnin
 <a href="http://stats.ioinformatics.org/people/5541"> <h3> International Olympiad in Informatics</h3> </a>
 <ul>
     <li> 2015 - <i><b> Contestant </b></i>  </li>
-    <li>2017 - <i><b>Contestant</b></i></li>
+    <li> 2017 - <i><b>Contestant</b></i></li>
+    <li> 2023 - <i><b>Team Leader</b></i></li>
 </ul>
 
 <h3> Iberoamerican Olympiad in Informatics</h3> 
