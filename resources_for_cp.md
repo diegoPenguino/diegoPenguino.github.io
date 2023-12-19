@@ -104,7 +104,7 @@ En el caso de oj.uz, que es el juez que recomendamos para practicar con problema
 Las traducciones, soluciones y comentarios de todos los problemas de IOI hasta el año 2021 se pueden encontrar en [History of the International Olympiad in Informatics by Mārtiņš Opmanis](https://ioi.te.lv/contest/prev.shtml) o en el [sitio oficial de la IOI](https://ioinformatics.org/page/contests/10).
 
 Para compilar y correr los problemas con formato IOI en Codeblocks, pueden leer la siguiente guía: [Compilar y correr problemas IOI en Codeblocks](materials/Compilar%20formato%20IOI%20en%20Codeblocks.pdf).<br>
-Para compilarlos desde consola, solo usar los comandos que vienen en el archivo compile_cpp.sh dentro de la carpeta de cada problema.
+Para compilarlos desde consola, solo usar los comandos que vienen en el archivo *compile_cpp.sh* dentro de la carpeta de cada problema.
 
 ## Listas de problemas
 
