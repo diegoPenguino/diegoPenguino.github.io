@@ -11,6 +11,8 @@ navbar-links:
   Projects: /projects
   CV: "cv"
   Blog: /blog
+  Recursos: 
+  - Olimpiada Informatica: "resources_for_cp"
   What's in here?:
     - Favorite song: "https://www.youtube.com/watch?v=47dtFZ8CFo8"
     - Problems created: "problemlist"
