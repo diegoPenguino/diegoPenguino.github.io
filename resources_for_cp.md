@@ -12,17 +12,18 @@ Sobre todo está dirigida a participantes de la Olimpiada Boliviana de Informát
 ## Tabla de contenidos
 
 - [Lenguajes de programación](#lenguajes-de-programación)
-- [Tutoriales de C++](#tutoriales-de-c)
+- [Tutoriales de C++ para programación competitiva](#tutoriales-de-c-para-programación-competitiva)
+- [Otras guías y recursos](#otras-guías-y-recursos)
+- [Para aprender algoritmos y estructuras de datos](#para-aprender-algoritmos-y-estructuras-de-datos)
 - [Libros](#libros)
   - [Libros de programación competitiva](#libros-de-programación-competitiva)
   - [Libros de matemáticas](#libros-de-matemáticas)
-- [Otras guías y recursos](#otras-guías-y-recursos)
 - [Jueces Online](#jueces-online)
   - [Jueces con competencias periódicas](#jueces-con-competencias-periódicas)
   - [Jueces con problemas en español](#jueces-con-problemas-en-español)
   - [Jueces que todos deberían conocer/usar](#jueces-que-todos-deberían-conocer-usar)
   - [Jueces con problemas de olimpiadas internacionales](#jueces-con-problemas-de-olimpiadas-internacionales)
-- [Listas de problemas](#listas-de-problemas)
+- [Listas de problemas y Roadmaps](#listas-de-problemas-y-roadmaps)
 - [Implementaciones de algoritmos y estructuras de datos](#implementaciones-de-algoritmos-y-estructuras-de-datos)
 - [Recursos en video](#recursos-en-video)
 - [Contribuciones](#contribuciones)
@@ -33,12 +34,27 @@ Sobre todo está dirigida a participantes de la Olimpiada Boliviana de Informát
 Inicialmente es importante entender que es mucho mejor programar en C++ que en otros lenguajes de programación, ya que otros pueden resultar más lentos o complejos al momento de competir y en competencias de programación competitiva el tiempo es muy importante.<br>
 Sobre todo, si uno aspira a competir en [IOI](https://ioinformatics.org), donde C++ es el único lenguaje permitido.
 
-## Tutoriales de C++
+## Tutoriales de C++ para programación competitiva
 
 Un buen lugar con tutoriales y ejercicios para aprender C++ es [Hackerearth CodeMonk](https://www.hackerearth.com/practice/codemonk/), altamente recomendable debido a lo organizado que esta y la facilidad de aprender con sus tutoriales.<br>
 En OmegaUp también hay [distintos cursos que pueden ser de utilidad](https://omegaup.com/course/), la ventaja de estos es que son en español.
 
+Si bien estos enseñan desde lo más básico, no enseñan todo lo necesario para competir en la IOI, por lo que es necesario aprender más sobre C++.<br>
+
+**Para este proposito es mejor aprender usando la** [**USACO guide**](https://usaco.guide), la cual yo personalmente considero ser la mejor guía para aprender programación competitiva, cuenta con tutoriales de todos los temas necesarios para competir en la IOI, además de contar con una lista de problemas recomendados para cada tema.<br> Es indispensable utilizar USACO para ser un buen competidor.<br>
+
 También, más adelante se menciona que en [AIZU OJ](https://onlinejudge.u-aizu.ac.jp/courses/list) hay un curso que contiene problemas, mas no tiene tutoriales.
+
+## Otras guías y recursos
+
+[W3 Schools](https://www.w3schools.com) - Una página con tutoriales y ejemplos de todo lo relacionado a las estructuras de C++. <br>
+[SoloLearn](https://www.sololearn.com) - Cuenta con cursos de distintos lenguajes de programación, incluyendo C++ y Python, cuenta con una aplicación para celular, y en general es muy recomendable para aprender conceptos de estos lenguajes. Ademas de ser recomendado por la guia de USACO.<br>
+[Codecademy](https://www.codecademy.com) - Similar a SoloLearn, ofrece cursos de C++ y Python. <br>
+
+## Para aprender algoritmos y estructuras de datos
+
+[CP Algorithms](https://cp-algorithms.com) - Cuenta con extensas explicaciones e implementaciones muy buenas de casi todo tipo de algoritmo y estructura de datos, además de contar con problemas para practicar.<br>
+[Visual Algo](https://visualgo.net/en) - Una página que explica distintos algoritmos y estructuras de datos de forma visual, muy útil para entender mejor cómo funcionan.
 
 ## Libros
 
@@ -54,12 +70,6 @@ También, más adelante se menciona que en [AIZU OJ](https://onlinejudge.u-aizu.
 ### Libros de matemáticas
 
 > Coming soon
-
-## Otras guías y recursos
-
-[USACO guide](https://usaco.guide) - Una guía muy completa y organizada, que suele garantizar un buen nivel de programación competitiva.<br>
-[CP Algorithms](https://cp-algorithms.com) - Cuenta con extensas explicaciones e implementaciones muy buenas de casi todo tipo de algoritmo y estructura de datos, además de contar con problemas para practicar.<br>
-[Visual Algo](https://visualgo.net/en) - Una página que explica distintos algoritmos y estructuras de datos de forma visual, muy útil para entender mejor cómo funcionan.
 
 ## Jueces Online 
 Los jueces online son páginas que permiten resolver problemas de programación competitiva, y que además califican las soluciones de forma automática.<br>
@@ -106,7 +116,7 @@ Las traducciones, soluciones y comentarios de todos los problemas de IOI hasta e
 Para compilar y correr los problemas con formato IOI en Codeblocks, pueden leer la siguiente guía: [Compilar y correr problemas IOI en Codeblocks](materials/Compilar%20formato%20IOI%20en%20Codeblocks.pdf).<br>
 Para compilarlos desde consola, solo usar los comandos que vienen en el archivo *compile_cpp.sh* dentro de la carpeta de cada problema.
 
-## Listas de problemas
+## Listas de problemas y Roadmaps
 
 | Lista | Comentarios |
 | ----- | ----------- |
@@ -117,6 +127,8 @@ Para compilarlos desde consola, solo usar los comandos que vienen en el archivo 
 | [Las siempre confiables A2OJ ladders, renovadas](https://c2-ladders-juol.onrender.com) | Reconstruida por [codemastercpp](https://codeforces.com/blog/entry/99896) a partir de lo que solían ser las ladders de A2OJ, esta página contiene problemas de Codeforces organizados de una manera extraordinaria, cada problema mencionado es muy recomendable, ya que no fue seleccionado por azar. |
 | [Checklist de problemas](https://docs.google.com/spreadsheets/d/1-kY6uiLOo1AKSBCSjbpGRBZbIldO_3dg6oTRKIJzT-g/edit#gid=0) | Creada por [ko_osaga](https://codeforces.com/profile/ko_osaga) y mencionada en su [blog de Codeforces](https://codeforces.com/blog/entry/59422), tiene problemas de distintas Olimpiadas Internacionales, solo hay que descargar la lista e ir checkeando cuando se resuelve un problema. |
 | [Competitive Programming Roadmap](https://codeforces.com/blog/entry/111099) | Creada por [TheScrasse](https://codeforces.com/profile/TheScrasse), es un roadmap (camino a seguir) para convertirse en un programador competitivo de al menos nivel intermedio. <br>Enfocada a ser azul en Codeforces. |
+| [NeetCode](https://neetcode.io/roadmap) | Página con un roadmap para aprender programación competitiva, además de contar con una lista de problemas recomendados para cada tema. |
+| [ACodedaily](https://acodedaily.com) | Esta página cuenta con problemas organizados por dificultad segun Codeforces, además de contar con una lista de problemas recomendados para cada tema.<br> Muy recomendable para subir de nivel en Codeforces. |
 
 ## Implementaciones de algoritmos y estructuras de datos
 
