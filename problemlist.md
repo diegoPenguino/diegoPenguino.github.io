@@ -23,7 +23,71 @@ En caso que alguien desee usar alguno de estos problemas para un concurso, ***po
 Si te divertiste resolviendo ***alguno de mis problemas***, también ***no dudes en hacérmelo saber*** ;)
 
 ## 2023
- &#10004; <span style="color:green;"> **Joven por siempre - EGOI classification round** </span>
+&#10004; <span style="color:green;"> **La cola de uno - Departamental OBI -  Nivel 2** </span>
+
+ - [PDF](/assets/problems/2023/cola/statement/statement.pdf)
+ - **Solution:** 
+    - Code:
+        - [Python full](/assets/problems/2023/cola/sol/sol.py)
+        - [Subtask1](/assets/problems/2023/cola/sol/subtask1.cpp)
+        - [Subtask2](/assets/problems/2023/cola/sol/subtask2.cpp)
+        - [Subtask3](/assets/problems/2023/cola/sol/subtask3.cpp)
+    - Explanation: ---
+
+&#10004; <span style="color:green;"> **Los PELUCHEs de Briegal - Departamental OBI - Nivel 3** </span>
+
+*Este problema requirio gran ayuda de* ***OscarGauss*** *y PereGil* ***(Gilberto Gosset)****, quienes me dieron sus soluciones para 100 puntos para asegurarme de estar seteando bien los casos*
+
+ - [PDF](/assets/problems/2023/peluche/statement/statement.pdf)
+ - **Solution:** 
+    - Code:
+        - [Solution by Gilberto C++](/assets/problems/2023/peluche/sol/gauss_sol.cpp)
+        - [Solution by Gauss C++](/assets/problems/2023/peluche/sol/gauss_sol.cpp)
+        - [Subtasks 1,4,5 Python](/assets/problems/2023/peluche/sol/subtask1_4_5.py)
+        - [Subtasks 2,5,6 Python](/assets/problems/2023/peluche/sol/subtask2_5_6.py)
+    - Explanation: ---
+
+&#10004; <span style="color:green;"> **El fiboarbol - Departamental OBI - Nivel 2** </span>
+
+ - [PDF](/assets/problems/2023/fiboarbol/statement/statement.pdf)
+ - **Solution:** 
+    - Code:
+        - [Python full](/assets/problems/2023/fiboarbol/sol/sol.py)
+        - [Subtask 1 Python](/assets/problems/2023/fiboarbol/sol/subtask1.py)
+        - [Subtask 2, 3 Python](/assets/problems/2023/fiboarbol/sol/subtask2_3.py)
+        - [Subtask 4 Python](/assets/problems/2023/fiboarbol/sol/subtask4.py)
+        - [Subtask 1 C++](/assets/problems/2023/fiboarbol/sol/subtask1.cpp)
+        - [Subtask 2, 3 C++](/assets/problems/2023/fiboarbol/sol/subtask2_3.cpp)
+        - [Subtask 4 C++](/assets/problems/2023/fiboarbol/sol/subtask4.cpp)
+    - Explanation: ---
+
+&#10004; <span style="color:green;"> **Empatizando con el juez - Distrital OBI** </span>
+
+ - [PDF](/assets/problems/2023/juez/statement/statement.pdf)
+ - **Solution:** 
+    - Code:
+        - [Python full](/assets/problems/2023/juez/sol/sol.py)
+        - [C++ full](/assets/problems/2023/juez/sol/solution.cpp)
+        - [Subtask 1 C++](/assets/problems/2023/juez/sol/subtask1.cpp)
+        - [Subtask 2 C++](/assets/problems/2023/juez/sol/subtask2.cpp)
+        - [Subtask 3 C++](/assets/problems/2023/juez/sol/subtask3.cpp)
+        - [Subtask 4 C++](/assets/problems/2023/juez/sol/subtask4.cpp)
+
+&#10004; <span style="color:green;"> **En busca de Chocolates - Distrital OBI** </span>
+
+*Este problema fue seteado con muchisima ayuda de MickyOr* ***(Miguel Ortiz)****, sin el no tendriamos todas las soluciones ni las grandes ideas para los subtasks.*
+
+ - [PDF](/assets/problems/2023/chocolates/statement/statement.pdf)
+ - **Solution:** 
+    - Code:
+        - [C++ full](/assets/problems/2023/chocolates/sol/sol.cpp)
+        - [Subtask 1 C++](/assets/problems/2023/chocolates/sol/subtask1.cpp)
+        - [Subtask 2 C++](/assets/problems/2023/chocolates/sol/subtask2.cpp)
+        - [Subtask 3 C++](/assets/problems/2023/chocolates/sol/subtask3.cpp)
+        - [Subtask 4 C++](/assets/problems/2023/chocolates/sol/subtask4.cpp)
+        - [Subtask 5 C++](/assets/problems/2023/chocolates/sol/subtask5.cpp)
+
+&#10004; <span style="color:green;"> **Joven por siempre - EGOI classification round** </span>
 
  - [PDF](/assets/problems/2023/EGOI/joven/joven_egoi.pdf)
  - **Solution:** 
@@ -79,7 +143,71 @@ Si te divertiste resolviendo ***alguno de mis problemas***, también ***no dudes
 
 *Este es por mucho, el problema que más me divirtió redactar.*<br>
 *La dedicación que le puse es simplemente indescriptible.*<br>
+***(A pesar de ser bastante facil de resolver).***
+
  - [PDF](/assets/problems/2022/OBI/grilla/grilla.pdf)
  - **Solution:** 
     - Code: [C++](/assets/problems/2022/OBI/grilla/full.cpp)
     - Explanation: ---
+
+## 2021
+*2021 fue el año que menos problemas cree(uno solo), mayormente porque la OBI tuvo solo dos etapas y en la primera etapa solo colabore a crear los problemas, más no agregue uno propio.*
+
+&#10004; <span style="color:green;"> **Comunicación Numérica - Nacional OBI** </span>
+
+ - [PDF](/assets/problems/2021/Numerolandia.pdf)
+ - **Solution:** 
+    - Code: *Coming soon*
+    - Explanation: ---
+
+## 2020
+
+&#10004; <span style="color:green;"> **Una Historia Élfica - Departamental OBI** </span>
+
+ - [PDF](/assets/problems/2020/Elfos.pdf)
+ - **Solution:** 
+    - Code: *Coming soon*
+    - Explanation: ---
+
+&#10004; <span style="color:green;"> **Extremadamente Matemático - Departamental OBI** </span>
+
+ - [PDF](/assets/problems/2020/Elfos.pdf)
+ - **Solution:** 
+    - Code: *Coming soon*
+    - Explanation: ---
+
+&#10004; <span style="color:green;"> **Besconechnaya Matimaticheskaya Piramida - Departamental OBI** </span>
+
+ - [PDF](/assets/problems/2020/Piramides.pdf)
+ - **Solution:** 
+    - Code: *Coming soon*
+    - Explanation: ---
+
+&#10004; <span style="color:green;"> **Una Secuencia Conocida - Distrital OBI** </span>
+
+ - [PDF](/assets/problems/2020/Secuencia.pdf)
+ - **Solution:** 
+    - Code: *Coming soon*
+    - Explanation: ---
+
+## 2019
+
+&#10004; <span style="color:green;"> **El Esquilax - Distrital OBI** </span>
+
+ - [Online Judge](https://jv.umsa.bo/problem.php?id=1835)
+
+&#10004; <span style="color:green;"> **La lista de Diego - Departamental OBI** </span>
+
+ - [Online Judge](https://jv.umsa.bo/problem.php?id=1836) (Facil)
+ - [Online Judge](https://jv.umsa.bo/problem.php?id=1837) (Dificil)
+
+&#10004; <span style="color:green;"> **Perversa Potencia - Departamental OBI** </span>
+
+ - [Online Judge](https://jv.umsa.bo/problem.php?id=1841) (Facil)
+ - [Online Judge](https://jv.umsa.bo/problem.php?id=1842) (Medio)
+ - [Online Judge](https://jv.umsa.bo/problem.php?id=1843) (Dificil)
+
+***El año 2019 cree alrededor de 12 problemas aparte de estos 3, la mayoria de un nivel bajo de dificultad, pero incluido entre estos estaba uno de mis favoritos de toda la vida: "El sumidero de Pascal". <br>***
+
+*Por años pense que eran Lost-Media.<br>*
+*Hasta hoy 05/02/2024 que logre recuperarlos, al no estar disponibles en ningun sitio web actualmente, los guardare por unas semanas hasta poder darles buen uso, de ahi los subire aca ;)*
