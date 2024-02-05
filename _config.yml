@@ -13,9 +13,9 @@ navbar-links:
   Blog: /blog
   Recursos: 
   - Olimpiada Informatica: "resources_for_cp"
+  - Problems created: "problemlist"
   What's in here?:
     - Favorite song: "https://www.youtube.com/watch?v=47dtFZ8CFo8"
-    - Problems created: "problemlist"
   
 collections:
   projects:
