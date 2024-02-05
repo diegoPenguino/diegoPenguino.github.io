@@ -171,7 +171,7 @@ Si te divertiste resolviendo ***alguno de mis problemas***, también ***no dudes
 
 &#10004; <span style="color:green;"> **Extremadamente Matemático - Departamental OBI** </span>
 
- - [PDF](/assets/problems/2020/Elfos.pdf)
+ - [PDF](/assets/problems/2020/Matematico.pdf)
  - **Solution:** 
     - Code: *Coming soon*
     - Explanation: ---
