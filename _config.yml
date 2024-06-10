@@ -11,9 +11,10 @@ navbar-links:
   Projects: /projects
   CV: "cv"
   Blog: /blog
-  Recursos: 
+  Resources: 
   - Olimpiada Informatica: "resources_for_cp"
   - Problems created: "problemlist"
+  - My thesis project: "https://github.com/diegoPenguino/Diabetic-Retinopathy"
   What's in here?:
     - Favorite song: "https://www.youtube.com/watch?v=47dtFZ8CFo8"
   
