@@ -2,6 +2,8 @@
 layout: project
 title: Links utiles
 ---
+[Grupo Whatsapp](https://chat.whatsapp.com/E8kl15FIrNz1l28n48yvBH)
+
 ## Codigos
 - [Binary Search](recursos/binary_search.cpp)
 
