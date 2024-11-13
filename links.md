@@ -24,3 +24,6 @@ title: Links utiles - Entrenamiento Cochabamba 2024
 - [Problema cumpleanero](recursos/cumpleanero.pdf)
 - [Problema laberinto](recursos/laberinto.pdf)
 
+## Problemas dia 2 (Map y Set)
+- [Recount](https://open.kattis.com/problems/recount)
+- [Andy's first dictionary](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=20&page=show_problem&problem=1756)
