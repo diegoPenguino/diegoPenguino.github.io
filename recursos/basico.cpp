@@ -12,5 +12,3 @@ int main() {
     cout << a << " " << b << endl;
     return 0;
 }
-
-2324 3 5
