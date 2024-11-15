@@ -6,6 +6,11 @@ title: Links utiles - Entrenamiento Cochabamba 2024
 [Grupo Whatsapp](https://chat.whatsapp.com/E8kl15FIrNz1l28n48yvBH) <br>
 [Book](recursos/cp4-1.pdf)
 
+## Problemas viernes
+- [ceros](recursos/ceros.pdf)
+- [video](recursos/video.pdf)
+- [joven](recursos/joven.pdf)
+
 ## Codigos
 - [Binary Search](recursos/binary_search.cpp)
 
