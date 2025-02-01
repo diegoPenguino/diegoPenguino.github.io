@@ -64,8 +64,9 @@ A series of things happened, leading to me standing in the middle of the street,
 ***I had lost,*** yet again, and ***all I could remember was Roberto Baggio***.<br>
 
 It wasn't a huge loss, ***it was something I can deal with***, but the fact that it is the n-th consecutive one was just ***devastating***.<br>
+I really felt like I couldn't take it anymore, ***I had done everything right***, and still, ***I had just lost***.<br>
 
-Anyway, a friend of mine saw ***I posted a photo of Baggio on WhatsApp***, and sent me this other one:
+A friend of mine saw ***I posted a photo of Baggio on WhatsApp***, and sent me this other one:
 
 <img src="/assets/img/messi_loss.jpg" width="400" height="300" class="center">
 
