@@ -39,7 +39,7 @@ In game theory, Parrondo's paradox is a ***combination of two losing strategies*
 
 Now, this is very logical when it comes to game theory, but ***in real life we can find a way to apply this paradox.***<br>
 In 2023, I took a series of decisions that were basically 'losing', lost friends, lost opportunities, lost time.<br>
-In that time I was sure that ***all these decisions were necessary in order to eventually win***, to get something greater.<br>
+In that time I was sure that ***all these decisions were necessary in order to eventually win***, to get [something greater](https://www.youtube.com/watch?v=pU6pdNNJM5M).<br>
 
 And in many senses ***I was pretty sure I was going to win***, but almost 2 years later, ***I am just not being lucky***.<br>
 I've been losing, and losing, and losing, and I'm just tired of losing.<br>
