@@ -50,12 +50,15 @@ I've been losing, and losing, and losing, and I'm just tired of losing.<br>
 <img src="/assets/img/baggio.png" width="300" height="350" class="center">
 
 When Roberto Baggio was only 3 years old, he promised his father he would win a world cup for him someday. ***Right after Italy had just lost that one against Brazil***.<br>
+
+Years passed... ***Roberto Baggio became a great footballer,*** and 1994 came.
+
 In 1994 ***Roberto Baggio played an spectacular world cup***, he was almost the best player of the tournament.<br>
 ***The final: again Brazil vs Italy.***<br>
 It all had to be decided in penalties, Baggio was the last one to kick for Italy. ***If he failed, Brazil would win the world cup***.<br>
 
 Baggio took the shot ***and***... missed the goal. He just stood there in the middle of the field, ***hands on his waist, silence***.<br>
-> El silencio invadio todas las casas de Italia. Era una ismple imagen de derrota, nada ni nadie pudieron consolarle por mas de 5 años. <br>
+> El silencio invadio todas las casas de Italia. Era una simple imagen de derrota, nada ni nadie pudieron consolarle por mas de 5 años. <br>
 > ~ elefutbol
 
 A few days ago, ***I was on the verge of achieving something interesting***, something I have worked for, and the universe knows I've wished for it for a long time.<br>
