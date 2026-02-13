@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>San Valentín</title>
+    <style>
+        body {
+            background: linear-gradient(45deg, #00CED1, #87CEEB, #00CED1);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: rgba(255, 105, 180, 0.4);
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkle 3s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .container {
+            text-align: center;
+            max-width: 600px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .message {
+            font-size: 24px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .buttons {
+            display: none;
+            margin-top: 30px;
+        }
+
+        button {
+            font-size: 20px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #btnSi {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #btnNo {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #btnSi:hover {
+            background-color: #45a049;
+        }
+
+        .image-container {
+            display: none;
+            animation: fadeIn 1s;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .final-message {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff1493;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-background" id="heartsContainer"></div>
+    <div class="container">
+        <div id="message1" class="message">
+            Querida Adriana Julieta, se que soy un idiota y se que tengo intereses romanticos contigo, pero tambien te adoro te quiero te amo y quiero ser parte de tu vida
+        </div>
+        <div id="message2" class="message">
+            Mucho mas alla de ese interes romantico quiero ser lo mejor para tu vida, y obviamente quiero ser parte de tu san valentin de alguna forma
+        </div>
+        <div id="message3" class="message">
+            Aceptarias verme unos minutos el dia de san valentin? Te prometo que te hare feliz (ese dia, y siempre &lt;3)
+        </div>
+        
+        <div id="buttonsContainer" class="buttons">
+            <button id="btnSi" onclick="elegirSi()">Sí</button>
+            <button id="btnNo" onclick="intentarNo()">No</button>
+        </div>
+
+        <div id="imageContainer" class="image-container">
+            <img src="snoopy.jpg" alt="Snoopy">
+            <div class="final-message">¡Yay! 💕</div>
+        </div>
+    </div>
+
+    <script>
+        let currentMessage = 0;
+        let siScale = 1;
+        const messages = ['message1', 'message2', 'message3'];
+
+        // Mostrar mensajes en secuencia
+        function showNextMessage() {
+            if (currentMessage < messages.length) {
+                document.getElementById(messages[currentMessage]).style.display = 'block';
+                currentMessage++;
+                
+                if (currentMessage < messages.length) {
+                    setTimeout(showNextMessage, 4000); // 4 segundos entre mensajes
+                } else {
+                    setTimeout(() => {
+                        document.getElementById('buttonsContainer').style.display = 'block';
+                    }, 4000);
+                }
+            }
+        }
+
+        function intentarNo() {
+            // El botón "No" solo hace más grande el botón "Sí"
+            siScale += 0.3;
+            document.getElementById('btnSi').style.transform = `scale(${siScale})`;
+        }
+
+        function elegirSi() {
+            // Ocultar mensajes y botones
+            messages.forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+            document.getElementById('buttonsContainer').style.display = 'none';
+            
+            // Mostrar imagen
+            document.getElementById('imageContainer').style.display = 'block';
+        }
+
+        // Crear corazones flotantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝'];
+            
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                heart.style.animationDuration = (Math.random() * 5 + 8) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+            
+            // Crear estrellas brillantes
+            for (let i = 0; i < 30; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.animationDelay = Math.random() * 3 + 's';
+                heartsContainer.appendChild(sparkle);
+            }
+        }
+
+        // Iniciar la secuencia al cargar la página
+        window.onload = function() {
+            createHearts();
+            showNextMessage();
+        };
+    </script>
+</body>
+</html>
