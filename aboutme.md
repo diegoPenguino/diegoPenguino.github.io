@@ -3,17 +3,19 @@ layout: about
 title: Who is Diego Angulo?
 subtitle: A little about my mission on this planet
 ---
- 
+
 My name is Diego Alejandro Angulo Ramirez, graduate of Applied Mathematics and Computer Science in [MIPT](https://mipt.ru/english/).<br>
 Born in Bolivia, raised for some years in Argentina. Both in my heart.<br>
 I have 4 siblings, I love each one of them with all my heart.<br>
 Ex-competitor of [IOI](https://ioinformatics.org/) and [OBI](https://www.facebook.com/olimpiadabolivianadeinformatica).
 Now part of the team organizing Informatics olympiads for High School students in Bolivia.<br>
 Problemsetter for OBI.<br>
-Team Leader for Bolivia at IOI 2023, 2024.<br>
-Working hard to become a Data Scientist and a great teacher :)<br>
+Team Leader for Bolivia at IOI 2023, 2024, 2025.<br>
+AI Engineer and Backend developer, love Competitive Programming, Data Science and Machine Learning.<br>
 _Agustino de corazón_.
- 
+
+**_Nataly se llama mi dueña <3_**
+
 <img src="/assets/img/WayToIran.jpg" width="470" height="330" class="center"/>
  
 ### Random stuff about me
@@ -30,5 +32,4 @@ _Agustino de corazón_.
 
 ### I do believe in causality.
 
-
-**MBTI**: ***ENTJ***
+**MBTI**: **_ENTJ_**
