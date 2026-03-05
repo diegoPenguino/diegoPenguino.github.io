@@ -50,6 +50,33 @@ layout: base
                 {{ content }}
             </article>
 
+            {% assign repo_url = page.repo-url | default: page.repo_url | strip %}
+            {% assign repo_prefix = repo_url | slice: 0, 2 %}
+            {% assign repo_is_external = false %}
+            {% if repo_url contains '://' or repo_prefix == '//' %}
+            {% assign repo_is_external = true %}
+            {% endif %}
+
+            {% assign demo_url = page.demo-url | default: page.demo_url | default: page.demo-link | default:
+            page.demo_link | default: page.external-url | default: page.external_url | strip %}
+            {% assign demo_prefix = demo_url | slice: 0, 2 %}
+            {% assign demo_is_external = false %}
+            {% if demo_url contains '://' or demo_prefix == '//' %}
+            {% assign demo_is_external = true %}
+            {% endif %}
+            {% if repo_url != "" or demo_url != "" %}
+            <div class="project-actions">
+                {% if repo_url != "" %}
+                <a class="project-action-btn project-action-btn--primary"
+                    href="{% if repo_is_external %}{{ repo_url }}{% else %}{{ repo_url | absolute_url }}{% endif %}" {% if repo_is_external %}target="_blank" rel="noopener noreferrer" {% endif %}>Open Repo</a>
+                {% endif %}
+                {% if demo_url != "" %}
+                <a class="project-action-btn project-action-btn--ghost"
+                    href="{% if demo_is_external %}{{ demo_url }}{% else %}{{ demo_url | absolute_url }}{% endif %}" {% if demo_is_external %}target="_blank" rel="noopener noreferrer" {% endif %}>Open Demo</a>
+                {% endif %}
+            </div>
+            {% endif %}
+
             {% if page.after-content %}
             <div class="after-content">
                 {% for file in page.after-content %}
@@ -67,13 +94,14 @@ layout: base
                 <li class="page-item previous">
                     <a class="page-link" href="{{ page.previous.url | relative_url }}" data-toggle="tooltip"
                         data-placement="top" title="{{page.previous.title | strip_html | xml_escape}}">&larr; Previous
-                        Post</a>
+                        Project</a>
                 </li>
                 {% endif %}
                 {% if page.next.url %}
                 <li class="page-item next">
                     <a class="page-link" href="{{ page.next.url | relative_url }}" data-toggle="tooltip"
-                        data-placement="top" title="{{page.next.title | strip_html | xml_escape}}">Next Post &rarr;</a>
+                        data-placement="top" title="{{page.next.title | strip_html | xml_escape}}">Next Project
+                        &rarr;</a>
                 </li>
                 {% endif %}
             </ul>

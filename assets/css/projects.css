@@ -40,3 +40,71 @@
 .project-post blockquote p:last-child {
     margin-bottom: 0;
 }
+
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.project-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.58rem 1rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-position 0.25s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.post-preview a.project-action-btn,
+.project-post a.project-action-btn {
+    text-decoration: none;
+}
+
+.project-action-btn--primary {
+    color: #24507d;
+    background: linear-gradient(135deg, #ffffff 0%, #f6fbff 55%, #edf6ff 100%);
+    border-color: rgba(36, 80, 125, 0.18);
+    box-shadow: 0 3px 8px rgba(36, 80, 125, 0.04);
+}
+
+.project-action-btn--ghost {
+    color: #1f6feb;
+    background: #f8fbff;
+    border-color: rgba(31, 111, 235, 0.35);
+}
+
+.project-action-btn:hover,
+.project-action-btn:focus {
+    transform: translateY(-1px);
+}
+
+.project-action-btn--primary:hover,
+.project-action-btn--primary:focus {
+    color: #1c446b;
+    background: linear-gradient(135deg, #ffffff 0%, #eef7ff 100%);
+    border-color: rgba(28, 68, 107, 0.28);
+    box-shadow: 0 5px 10px rgba(36, 80, 125, 0.1);
+}
+
+.project-action-btn--ghost:hover,
+.project-action-btn--ghost:focus {
+    color: #0f4ca8;
+    border-color: rgba(15, 76, 168, 0.45);
+    background: #ecf5ff;
+    box-shadow: 0 6px 12px rgba(31, 111, 235, 0.18);
+}
+
+.project-action-btn:focus-visible {
+    outline: 2px solid rgba(31, 111, 235, 0.55);
+    outline-offset: 2px;
+}
