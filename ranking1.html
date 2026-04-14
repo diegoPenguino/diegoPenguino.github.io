@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camp 2026 - IOI Ranking Day 1</title>
+  <style>
+    :root {
+      --bg-deep: #071429;
+      --bg-mid: #102747;
+      --panel: rgba(7, 20, 41, 0.82);
+      --line: rgba(169, 185, 210, 0.25);
+      --text-main: #eef4ff;
+      --text-soft: #bed0ee;
+      --accent: #f3c85f;
+      --gold: #f2cf68;
+      --silver: #c9ced8;
+      --bronze: #c9965f;
+      --rank-pill: #1a3a66;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 8% 12%, rgba(243, 200, 95, 0.22), transparent 26%),
+        radial-gradient(circle at 88% 20%, rgba(128, 176, 255, 0.20), transparent 28%),
+        radial-gradient(circle at 52% 88%, rgba(80, 120, 190, 0.20), transparent 30%),
+        linear-gradient(165deg, var(--bg-deep), var(--bg-mid));
+      padding: 28px 18px 42px;
+    }
+
+    .wrapper {
+      max-width: 1300px;
+      margin: 0 auto;
+      animation: pageReveal 680ms ease-out both;
+    }
+
+    .hero {
+      border: 1px solid var(--line);
+      background: linear-gradient(140deg, rgba(10, 24, 49, 0.95), rgba(14, 36, 70, 0.88));
+      border-radius: 16px;
+      padding: 24px 22px;
+      box-shadow: 0 20px 38px rgba(1, 8, 18, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      top: -110px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(243, 200, 95, 0.25), transparent 68%);
+      pointer-events: none;
+    }
+
+    .kicker {
+      margin: 0;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      font-size: 0.76rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 8px 0 10px;
+      font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+      font-family: Georgia, "Times New Roman", serif;
+      color: #fff7e7;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.98rem;
+      max-width: 780px;
+      line-height: 1.5;
+    }
+
+    .sections {
+      display: grid;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .board {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 18px 32px rgba(2, 10, 25, 0.35);
+      animation: staggerIn 620ms ease both;
+    }
+
+    .board-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(90deg, rgba(13, 29, 57, 0.94), rgba(13, 41, 83, 0.94));
+    }
+
+    .board h2 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: #fff8e8;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .badge {
+      font-size: 0.74rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #162a4b;
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1120px;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #c6d6f3;
+      background: rgba(16, 39, 71, 0.98);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    thead th.player-col,
+    thead th.user-col {
+      text-align: left;
+    }
+
+    tbody td {
+      border-bottom: 1px solid rgba(190, 208, 238, 0.12);
+      padding: 9px 8px;
+      text-align: right;
+      font-size: 0.9rem;
+      color: #eff5ff;
+      white-space: nowrap;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody tr:hover {
+      background: rgba(68, 114, 178, 0.16);
+    }
+
+    td.player-col,
+    td.user-col {
+      text-align: left;
+      font-weight: 600;
+    }
+
+    td.rank-col {
+      text-align: center;
+      width: 64px;
+    }
+
+    .rank-pill {
+      display: inline-block;
+      min-width: 34px;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: var(--rank-pill);
+      color: #dce8ff;
+    }
+
+    tbody tr.medal-gold {
+      background: linear-gradient(90deg, rgba(242, 207, 104, 0.30), rgba(10, 24, 49, 0.15));
+    }
+
+    tbody tr.medal-silver {
+      background: linear-gradient(90deg, rgba(201, 206, 216, 0.24), rgba(10, 24, 49, 0.10));
+    }
+
+    tbody tr.medal-bronze {
+      background: linear-gradient(90deg, rgba(201, 150, 95, 0.26), rgba(10, 24, 49, 0.10));
+    }
+
+    .global {
+      font-weight: 800;
+      color: #fff5d8;
+    }
+
+    .footer-note {
+      margin-top: 14px;
+      color: #aec2e6;
+      font-size: 0.85rem;
+      text-align: right;
+    }
+
+    @keyframes pageReveal {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes staggerIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 16px 10px 28px;
+      }
+
+      .hero {
+        padding: 18px 14px;
+      }
+
+      .board-header {
+        padding: 12px 12px;
+      }
+
+      .badge {
+        font-size: 0.69rem;
+      }
+
+      table {
+        min-width: 980px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrapper">
+    <section class="hero">
+      <p class="kicker">Camp 2026 - Day 1 Scoreboard</p>
+      <h1>Ranking</h1>
+    </section>
+
+    <div class="sections" id="ranking-sections"></div>
+
+    <p class="footer-note">Generated from Rank_adv_dia1.csv and Rank_mid_dia1.csv</p>
+  </main>
+
+  <script>
+    const taskColumns = [
+      "demacia",
+      "pokemon",
+      "terza",
+      "training",
+      "tuncuna",
+      "cholaparque",
+      "pasajes",
+      "pumakatari",
+      "yanacachi",
+      "Friends",
+      "network"
+    ];
+
+    const advancedData = [
+      { username: "user21", user: "Luis Minguel", demacia: 100, pokemon: 0, terza: 0, training: 100, tuncuna: 100, cholaparque: 100, pasajes: 100, pumakatari: 100, yanacachi: 50, Friends: 100, network: 0, Global: 750 },
+      { username: "user25", user: "Santi", demacia: 100, pokemon: 0, terza: 100, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 100, yanacachi: 0, Friends: 0, network: 0, Global: 300 },
+      { username: "user20", user: "Gabriel", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 100, yanacachi: 0, Friends: 100, network: 0, Global: 200 },
+      { username: "user31", user: "Nestor", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 100, yanacachi: 0, Friends: 100, network: 0, Global: 200 },
+      { username: "user30", user: "Nico", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 100, yanacachi: 0, Friends: 0, network: 0, Global: 100 },
+      { username: "user24", user: "Ariel", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 },
+      { username: "user34", user: "Adri", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 }
+    ];
+
+    const intermediateData = [
+      { username: "user18", user: "Wilson", demacia: 100, pokemon: 100, terza: 0, training: 24, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 224 },
+      { username: "user32", user: "Carlos", demacia: 100, pokemon: 0, terza: 0, training: 0, tuncuna: 100, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 200 },
+      { username: "user16", user: "Matilde", demacia: 0, pokemon: 0, terza: 0, training: 100, tuncuna: 40, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 140 },
+      { username: "user14", user: "Noelia", demacia: 100, pokemon: 0, terza: 0, training: 24, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 124 },
+      { username: "user33", user: "Tomas", demacia: 100, pokemon: 0, terza: 0, training: 24, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 124 },
+      { username: "user27", user: "Gabriela", demacia: 0, pokemon: 100, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 100 },
+      { username: "user19", user: "Mia", demacia: 0, pokemon: 0, terza: 0, training: 24, tuncuna: 40, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 64 },
+      { username: "user13", user: "Janine", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 40, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 40 },
+      { username: "user23", user: "Leonel", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 40, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 40 },
+      { username: "user29", user: "Edu", demacia: 0, pokemon: 0, terza: 0, training: 24, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 24 },
+      { username: "user17", user: "Ignacio", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 },
+      { username: "user11", user: "Gonzalo", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 },
+      { username: "user12", user: "Natalia", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 },
+      { username: "user15", user: "Kael", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 },
+      { username: "user22", user: "Caleb", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 },
+      { username: "user28", user: "Adriana", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 },
+      { username: "user26", user: "Antony", demacia: 0, pokemon: 0, terza: 0, training: 0, tuncuna: 0, cholaparque: 0, pasajes: 0, pumakatari: 0, yanacachi: 0, Friends: 0, network: 0, Global: 0 }
+    ];
+
+    function sortRanking(rows) {
+      return [...rows].sort((a, b) => {
+        if (b.Global !== a.Global) return b.Global - a.Global;
+
+        for (const task of taskColumns) {
+          if (b[task] !== a[task]) return b[task] - a[task];
+        }
+
+        return a.username.localeCompare(b.username);
+      });
+    }
+
+    function createBoard(title, data, badgeText) {
+      const sorted = sortRanking(data);
+      const section = document.createElement("section");
+      section.className = "board";
+
+      const header = document.createElement("div");
+      header.className = "board-header";
+      header.innerHTML = `
+        <h2>${title}</h2>
+        <span class="badge">${badgeText}</span>
+      `;
+
+      const tableWrap = document.createElement("div");
+      tableWrap.className = "table-wrap";
+
+      const table = document.createElement("table");
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th class="player-col">Username</th>
+            <th class="user-col">User</th>
+            ${taskColumns.map(task => `<th>${task}</th>`).join("")}
+            <th>Global</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${sorted.map((row, idx) => {
+            const medalClass = idx === 0
+              ? "medal-gold"
+              : idx === 1
+                ? "medal-silver"
+                : idx === 2
+                  ? "medal-bronze"
+                  : "";
+
+            return `
+              <tr class="${medalClass}">
+                <td class="rank-col"><span class="rank-pill">${idx + 1}</span></td>
+                <td class="player-col">${row.username}</td>
+                <td class="user-col">${row.user}</td>
+                ${taskColumns.map(task => `<td>${row[task].toFixed(1)}</td>`).join("")}
+                <td class="global">${row.Global.toFixed(1)}</td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      `;
+
+      tableWrap.appendChild(table);
+      section.appendChild(header);
+      section.appendChild(tableWrap);
+      return section;
+    }
+
+    const container = document.getElementById("ranking-sections");
+    container.appendChild(createBoard("Advanced Ranking", advancedData, "Advanced Group"));
+    container.appendChild(createBoard("Intermediate Ranking", intermediateData, "Intermediate Group"));
+  </script>
+</body>
+</html>
