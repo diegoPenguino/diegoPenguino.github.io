@@ -307,8 +307,8 @@
   <main class="wrapper">
     <section class="hero">
       <p class="kicker">Camp 2026 - Full Scoreboard</p>
-      <h1>IOI Ranking Selector</h1>
-      <p class="subtitle">Select one ranking list to display Day 1 or Day 2 standings for each group.</p>
+      <h1>Rankings Camp OBI 2026</h1>
+      <p class="subtitle">Selecciona el ranking que deseas consultar.</p>
       <div class="controls">
         <label for="ranking-select">Ranking List</label>
         <select id="ranking-select">
@@ -316,13 +316,15 @@
           <option value="day1-mid">Day 1 - Intermediate</option>
           <option value="day2-adv">Day 2 - Advanced</option>
           <option value="day2-mid">Day 2 - Intermediate</option>
+          <option value="day3-adv">Day 3 - Advanced</option>
+          <option value="day3-mid">Day 3 - Intermediate</option>
         </select>
       </div>
     </section>
 
     <div id="board-root"></div>
 
-    <p class="footer-note">Sources: Rank_adv_dia1.csv, Rank_mid_dia1.csv, Rank_adv_dia2.csv, Rank_mid_dia2.csv</p>
+    <p class="footer-note">Sources: Rank_adv_dia1.csv, Rank_mid_dia1.csv, Rank_adv_dia2.csv, Rank_mid_dia2.csv, Rank_adv_dia3.csv, Rank_mid_dia3.csv</p>
   </main>
 
   <script>
@@ -401,6 +403,44 @@
           { username: "user22", user: "Caleb", alasitas: 0, campamento: 0, hipermaxi: 0, dados: 0, digitos: 0, libros: 0, money: 0, stairs: 0, Global: 0 },
           { username: "user26", user: "Antony", alasitas: 0, campamento: 0, hipermaxi: 0, dados: 0, digitos: 0, libros: 0, money: 0, stairs: 0, Global: 0 },
           { username: "user33", user: "Tomas", alasitas: 0, campamento: 0, hipermaxi: 0, dados: 0, digitos: 0, libros: 0, money: 0, stairs: 0, Global: 0 }
+        ]
+      },
+      "day3-adv": {
+        title: "Advanced Ranking",
+        badge: "Day 3 - Advanced",
+        taskColumns: ["torneo", "dragon", "magicians"],
+        data: [
+          { username: "user20", user: "Gabriel", torneo: 10, dragon: 0, magicians: 100, Global: 600 },
+          { username: "user21", user: "Luis Minguel", torneo: 0, dragon: 0, magicians: 100, Global: 600 },
+          { username: "user31", user: "Nestor", torneo: 0, dragon: 0, magicians: 100, Global: 492 },
+          { username: "user30", user: "Nico", torneo: 0, dragon: 0, magicians: 100, Global: 300 },
+          { username: "user25", user: "Santi", torneo: 0, dragon: 13, magicians: 0, Global: 263 },
+          { username: "user34", user: "Adri", torneo: 0, dragon: 0, magicians: 0, Global: 200 },
+          { username: "user24", user: "Ariel", torneo: 0, dragon: 0, magicians: 0, Global: 0 }
+        ]
+      },
+      "day3-mid": {
+        title: "Intermediate Ranking",
+        badge: "Day 3 - Intermediate",
+        taskColumns: ["libross", "potencia", "dibujo", "presupuesto", "frecuencias", "torneo", "dragon", "magicians"],
+        data: [
+          { username: "user32", user: "Carlos", libross: 20, potencia: 0, dibujo: 100, presupuesto: 100, frecuencias: 50, torneo: 0, dragon: 0, magicians: 0, Global: 270 },
+          { username: "user14", user: "Noelia", libross: 0, potencia: 0, dibujo: 100, presupuesto: 100, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 200 },
+          { username: "user27", user: "Gabriela", libross: 0, potencia: 0, dibujo: 55, presupuesto: 100, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 155 },
+          { username: "user28", user: "Adriana", libross: 20, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 100, torneo: 0, dragon: 0, magicians: 0, Global: 120 },
+          { username: "user18", user: "Wilson", libross: 5, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 100, torneo: 0, dragon: 0, magicians: 0, Global: 105 },
+          { username: "user11", user: "Gonzalo", libross: 100, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 100 },
+          { username: "user19", user: "Mia", libross: 20, potencia: 0, dibujo: 0, presupuesto: 54, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 74 },
+          { username: "user16", user: "Matilde", libross: 5, potencia: 0, dibujo: 0, presupuesto: 54, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 59 },
+          { username: "user23", user: "Leonel", libross: 0, potencia: 0, dibujo: 55, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 55 },
+          { username: "user33", user: "Tomas", libross: 0, potencia: 0, dibujo: 55, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 55 },
+          { username: "user17", user: "Ignacio", libross: 0, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 20, torneo: 0, dragon: 0, magicians: 0, Global: 20 },
+          { username: "user29", user: "Edu", libross: 5, potencia: 8, dibujo: 0, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 13 },
+          { username: "user15", user: "Kael", libross: 0, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 0 },
+          { username: "user12", user: "Natalia", libross: 0, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 0 },
+          { username: "user13", user: "Janine", libross: 0, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 0 },
+          { username: "user22", user: "Caleb", libross: 0, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 0 },
+          { username: "user26", user: "Antony", libross: 0, potencia: 0, dibujo: 0, presupuesto: 0, frecuencias: 0, torneo: 0, dragon: 0, magicians: 0, Global: 0 }
         ]
       }
     };
