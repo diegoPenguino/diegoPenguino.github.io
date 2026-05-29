@@ -3,7 +3,7 @@ layout: project
 title: AlgoCritic - Multi-Agent Code Review System
 date: 2026-03-04
 description: AlgoCritic is a multi-agent code review system built for competitive programming solutions.
-thumbnail-img: /assets/img/AlgoCritic.png
+thumbnail-img: /assets/img/projects/AlgoCritic.png
 repo-url: https://github.com/diegoPenguino/AlgoCritic
 ---
 

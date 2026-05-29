@@ -3,7 +3,7 @@ layout: project
 title: Editorial Generator
 date: 2026-03-05
 description: An intelligent LangGraph-based multi-agent system that generates polished competitive programming editorials from a problem statement and accepted solution.
-thumbnail-img: /assets/img/post-contest-edit.png
+thumbnail-img: /assets/img/projects/post-contest-edit.png
 repo-url: https://github.com/diegoPenguino/Post-Contest-Editorial-Generator
 ---
 
