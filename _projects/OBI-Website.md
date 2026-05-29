@@ -7,7 +7,7 @@ thumbnail-img: /assets/img/projects/obi-web.png
 repo-url: https://obi.org.bo/
 ---
 
-I created the official website for the Bolivian Olympiad in Informatics, with a static-first approach designed for speed, reliability, and zero server cost. The site was built to serve as the public face of the OBI, while staying lightweight enough to deploy cleanly on Cloudflare Pages.
+I created the official website for the Bolivian Olympiad in Informatics, with a static-first approach designed for speed, reliability, and zero server cost. The site was built to serve as the public face of the OBI, while staying lightweight enough to deploy cleanly on Cloudflare Pages. The live website is available at [obi.org.bo](https://obi.org.bo/).
 
 <p align="center">
   <img src="/assets/img/projects/obi-web.png" alt="OBI official website preview" />
