@@ -14,7 +14,7 @@ Team Leader for Bolivia at IOI 2023, 2024, 2025.<br>
 AI Engineer and Backend developer, love Competitive Programming, Data Science and Machine Learning.<br>
 _Agustino de corazón_.
 
-**_Nataly se llama mi dueña <3 (Nacida un 5 de Noviembre)_**
+**_Nataly se llama mi dueña <3 (Nacida un 5 de Noviembre - 511)_**
 
 <img src="/assets/img/WayToIran.jpg" width="470" height="330" class="center"/>
  
