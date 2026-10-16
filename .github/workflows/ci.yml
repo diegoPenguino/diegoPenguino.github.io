@@ -16,7 +16,7 @@ jobs:
       LANG: en_US.UTF-8
       LC_ALL: C.UTF-8
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
           # Ruby version comes from .ruby-version (matches GitHub Pages)
