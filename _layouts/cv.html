@@ -12,6 +12,16 @@ layout: base
 
 <div class="wrap cv-cols">
   <div class="cv-main">
+    <section aria-labelledby="exp">
+      <h2 class="cv-h2" id="exp">Experience</h2>
+      {% include cv-roles.html roles=page.experience %}
+    </section>
+
+    <section aria-labelledby="lead">
+      <h2 class="cv-h2" id="lead">Volunteering and leadership</h2>
+      {% include cv-roles.html roles=page.leadership %}
+    </section>
+
     <section aria-labelledby="edu">
       <h2 class="cv-h2" id="edu">Education</h2>
       {%- for e in page.education %}
@@ -22,20 +32,16 @@ layout: base
           <span class="title">{{ e.title }}</span>
           <span class="place">{{ e.place | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>
           {% if e.note %}<span class="note">{{ e.note }}</span>{% endif %}
+          {%- if e.bullets %}
+          <ul>{% for b in e.bullets %}<li>{{ b | markdownify | remove: '<p>' | remove: '</p>' | strip }}</li>{% endfor %}</ul>
+          {%- endif %}
         </div>
       </div>
       {%- endfor %}
     </section>
 
-    <section aria-labelledby="work">
-      <h2 class="cv-h2" id="work">I've been working on…</h2>
-      {%- for w in page.work %}
-      <div class="work"><span class="when">{{ w.when }}</span><span class="text">{{ w.text }}</span></div>
-      {%- endfor %}
-    </section>
-
     <details class="collapse">
-      <summary>Achievements</summary>
+      <summary>Achievements and awards</summary>
       {%- for a in page.achievements %}
       <div class="ach">
         <i class="fa-solid fa-trophy" aria-hidden="true"></i>
@@ -50,14 +56,21 @@ layout: base
       </div>
       {%- endfor %}
     </details>
+
+    <section class="callout" aria-labelledby="proj">
+      <span class="title" id="proj">Projects</span>
+      <p>LLM agents, RAG systems, automation bots and tools for competitive programming. See them on the <a href="{{ '/projects' | relative_url }}">projects page →</a></p>
+    </section>
   </div>
 
   <aside class="cv-side">
-    <section class="card side-card" aria-labelledby="skills">
-      <h2 id="skills">Skills</h2>
-      {%- for s in page.skills %}
-      <div class="skill-group"><span class="mono">{{ s.group }}</span><div class="chips">{% for i in s.items %}<span class="skill">{{ i }}</span>{% endfor %}</div></div>
-      {%- endfor %}
+    <section class="contact-card" aria-labelledby="contact">
+      <h2 id="contact">Contact</h2>
+      {% if page.location %}<span><i class="fa-solid fa-location-dot" aria-hidden="true"></i>{{ page.location }}</span>{% endif %}
+      <a href="mailto:{{ site.social-network-links.email }}"><i class="fa-solid fa-envelope" aria-hidden="true"></i>{{ site.social-network-links.email }}</a>
+      {% if page.phone %}<a href="tel:{{ page.phone }}"><i class="fa-solid fa-phone" aria-hidden="true"></i>{{ page.phone-display | default: page.phone }}</a>{% endif %}
+      {% if page.linkedin %}<a href="{{ page.linkedin }}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i>LinkedIn</a>{% endif %}
+      <a href="https://github.com/{{ site.social-network-links.github }}" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-hidden="true"></i>github.com/{{ site.social-network-links.github }}</a>
     </section>
     <section class="card side-card langs" aria-labelledby="langs">
       <h2 id="langs">Languages</h2>
@@ -65,10 +78,11 @@ layout: base
       <div><span class="name">{{ l[0] }}</span><span class="level">{{ l[1] }}</span></div>
       {%- endfor %}
     </section>
-    <section class="contact-card" aria-labelledby="contact">
-      <h2 id="contact">Contact</h2>
-      <a href="mailto:{{ site.social-network-links.email }}"><i class="fa-solid fa-envelope" aria-hidden="true"></i>{{ site.social-network-links.email }}</a>
-      {% if page.phone %}<a href="tel:{{ page.phone }}"><i class="fa-solid fa-phone" aria-hidden="true"></i>{{ page.phone-display | default: page.phone }}</a>{% endif %}
+    <section class="card side-card" aria-labelledby="skills">
+      <h2 id="skills">Skills</h2>
+      {%- for s in page.skills %}
+      <div class="skill-group"><span class="mono">{{ s.group }}</span><div class="chips">{% for i in s.items %}<span class="skill">{{ i }}</span>{% endfor %}</div></div>
+      {%- endfor %}
     </section>
   </aside>
 </div>

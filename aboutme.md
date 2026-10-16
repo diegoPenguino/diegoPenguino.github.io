@@ -14,10 +14,10 @@ olympiad:
   - when: 2015 · 2017
     title: IOI competitor
     text: Represented Bolivia at the International Olympiad in Informatics.
-  - when: 2018 → now
+  - when: July 2019 → now
     title: OBI problemsetter
     text: Writing and testing problems for the Bolivian Olympiad in Informatics.
-  - when: 2019 → now
+  - when: July 2019 → now
     title: OBI organizer
     text: Part of the team organizing Informatics olympiads for high school students in Bolivia.
   - when: 2023 → now

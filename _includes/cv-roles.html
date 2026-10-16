@@ -1,0 +1,9 @@
+{%- for r in include.roles %}
+<div class="job">
+  <div class="job__top"><span class="job__role">{{ r.role }}</span><span class="job__when">{{ r.when }}</span></div>
+  <div class="job__org">{{ r.org }}{% if r.where %} · <span>{{ r.where }}</span>{% endif %}</div>
+  {%- if r.bullets %}
+  <ul>{% for b in r.bullets %}<li>{{ b | markdownify | remove: '<p>' | remove: '</p>' | strip }}</li>{% endfor %}</ul>
+  {%- endif %}
+</div>
+{%- endfor %}

@@ -74,5 +74,5 @@ Posts and pages mix English and Spanish; keep each piece in the language it was 
 - Reuse the CSS variables and existing components (`.card`, `.btn`, `.chip`, `.filter`,
   `.rule-head`, `.kicker`, `.h1`) before adding new styles. Keep touch targets at least 44px.
 - Add new top-level files that should not be published to `exclude:` in `_config.yml`.
-- Large PDFs at the repo root (`CV.pdf`, etc.) are linked from pages; do not rename them
+- Large PDFs at the repo root are linked from pages; do not rename them
   without updating the links.
