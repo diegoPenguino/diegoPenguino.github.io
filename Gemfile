@@ -2,12 +2,23 @@
 
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.3"
-gem "webrick", "~> 1.7"
-gem "logger"
-gem "jekyll-paginate"
-gem "jekyll-sitemap"
+# The site is deployed by GitHub Pages' built-in builder, which ignores this
+# Gemfile and uses the pinned versions of the `github-pages` gem
+# (https://pages.github.com/versions/). Using the same gem locally and in CI
+# keeps local builds identical to production.
+gem "github-pages", group: :jekyll_plugins
 
-platforms :mingw, :x64_mingw, :mswin do
+# Ruby 3.x no longer bundles these; `jekyll serve` and Jekyll 3.10 need them.
+gem "webrick", "~> 1.8"
+gem "csv"
+gem "base64"
+gem "bigdecimal"
+gem "logger"
+
+platforms :windows, :jruby do
+  gem "tzinfo", ">= 1", "< 3"
   gem "tzinfo-data"
 end
+
+gem "wdm", "~> 0.1", platforms: :windows
+gem "faraday-retry"
