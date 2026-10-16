@@ -23,6 +23,7 @@ layout: base
     <a href="https://www.facebook.com/sharer/sharer.php?u={{ url | url_encode }}" target="_blank" rel="noopener" aria-label="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
     <button type="button" aria-label="Copy link" data-copy-link="{{ url }}"><i class="fa-solid fa-link"></i></button>
   </div>
+  {% include comments.html %}
   {%- if page.previous or page.next %}
   <nav class="post-pager" aria-label="More posts">
     {%- if page.previous %}

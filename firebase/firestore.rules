@@ -1,0 +1,75 @@
+rules_version = '2';
+
+// Blog comments for penguino.space.
+// Paste this into Firebase console -> Firestore -> Rules, or deploy with
+// `firebase deploy --only firestore:rules` from the firebase/ folder.
+//
+// Data model:
+//   posts/{postId}/comments/{commentId}  { uid, name, photo?, text, parent, createdAt }
+//   users/{uid}                          { lastCommentAt }  (rate limit, never readable)
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    // The site owner can delete any comment.
+    function isAdmin() {
+      return signedIn()
+        && request.auth.token.email == 'diegoangulo5@gmail.com'
+        && request.auth.token.email_verified == true;
+    }
+
+    function userDoc() {
+      return /databases/$(database)/documents/users/$(request.auth.uid);
+    }
+
+    match /posts/{postId}/comments/{commentId} {
+      allow read: if true;
+
+      allow create: if signedIn()
+        && postId.matches('^[A-Za-z0-9_-]{1,120}$')
+        && request.resource.data.keys().hasOnly(['uid', 'name', 'photo', 'text', 'parent', 'createdAt'])
+        && request.resource.data.keys().hasAll(['uid', 'name', 'text', 'parent', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.name is string
+        && request.resource.data.name.size() >= 1
+        && request.resource.data.name.size() <= 80
+        && (!('photo' in request.resource.data)
+            || (request.resource.data.photo is string
+                && request.resource.data.photo.size() <= 500
+                && request.resource.data.photo.matches('^https://.*')))
+        && request.resource.data.text is string
+        && request.resource.data.text.trim().size() >= 1
+        && request.resource.data.text.size() <= 2000
+        && request.resource.data.createdAt == request.time
+        // Replies go one level deep: the parent must exist and be a top-level comment.
+        && (request.resource.data.parent == null
+            || (request.resource.data.parent is string
+                && exists(/databases/$(database)/documents/posts/$(postId)/comments/$(request.resource.data.parent))
+                && get(/databases/$(database)/documents/posts/$(postId)/comments/$(request.resource.data.parent)).data.parent == null))
+        // Rate limit: the same batch must stamp users/{uid}.lastCommentAt, and the
+        // previous comment from this user must be at least 30 seconds old.
+        && getAfter(userDoc()).data.lastCommentAt == request.time
+        && (!exists(userDoc())
+            || get(userDoc()).data.lastCommentAt < request.time - duration.value(30, 's'));
+
+      allow delete: if signedIn() && (resource.data.uid == request.auth.uid || isAdmin());
+      allow update: if false;
+    }
+
+    match /users/{uid} {
+      allow read: if false;
+      allow create, update: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['lastCommentAt'])
+        && request.resource.data.lastCommentAt == request.time;
+      allow delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
