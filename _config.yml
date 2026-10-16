@@ -24,6 +24,17 @@ baseurl: ""
 # Needed by jekyll-github-metadata (bundled with github-pages) for local and CI builds
 repository: diegoPenguino/diegoPenguino.github.io
 
+# Blog comments (Firebase Authentication + Firestore). These values are public by design;
+# Firestore security rules in firebase/firestore.rules protect the data. Leave projectId
+# empty to hide comments. recaptchaSiteKey is optional (App Check).
+firebase:
+  apiKey: "AIzaSyCx6kz6L01-roRK4Co_qIbDoqa8OCbMwIg"
+  authDomain: "penguin-blog-6526c.firebaseapp.com"
+  projectId: "penguin-blog-6526c"
+  appId: "1:728883874771:web:b168c3193682639fc4fd26"
+  recaptchaSiteKey: ""
+  admin-email: diegoangulo5@gmail.com
+
 collections:
   projects:
     output: true
@@ -64,6 +75,7 @@ exclude:
   - CLAUDE.md
   - beautiful-jekyll-theme.gemspec
   - run_jekyll.bat
+  - firebase/
 
 plugins:
   - jekyll-sitemap

@@ -60,12 +60,31 @@ browser at desktop and mobile widths.
 | CV | `cv.md` (`layout: cv`) | All content is front matter |
 | CP resources | `resources_for_cp.md` (`layout: cp-resources`) | Content in `_data/cp_resources.yml` |
 | Problem list | `problemlist.md` (`layout: problemlist`) | Intros in front matter, problems in `_data/problems.yml` |
+| Blog comments | `_includes/comments.html`, `assets/js/comments.js`, `firebase/firestore.rules` | See "Comments" below |
 | Story | `story.md` (`layout: story`) | `---` in the text renders as the three-dot section break |
 | Other pages | `links.md`, `something.md`, `404.html` | Generic `page` layout |
 | Standalone pages | `full_rank.html`, `ranking1.html` | Own HTML and styles; not part of the design |
 | Images | `assets/img/` (project thumbnails in `assets/img/projects/`) | |
 
 Posts and pages mix English and Spanish; keep each piece in the language it was written in.
+
+## Comments
+
+Posts have comments through Firebase on the free Spark plan: Google sign-in (Authentication) and
+Cloud Firestore, called straight from the browser (no server). Nothing renders until
+`firebase.projectId` is set in `_config.yml`; a post can opt out with `comments: false`.
+
+- Data: `posts/{postId}/comments/{id}` with `{uid, name, photo, text, parent, createdAt}`, where
+  `postId` is the post file name without `.md`. `users/{uid}.lastCommentAt` backs the rate limit.
+- `firebase/firestore.rules` is the only protection (the config in `_config.yml` is public by
+  design). Anyone reads; signed-in users create their own comment (max 2000 chars, one reply level,
+  one comment per 30 s); author or `admin-email` deletes; nobody edits.
+- Test rule changes against the emulators before publishing them:
+  `cd firebase && npx -y firebase-tools@15.32.1 emulators:start --only auth,firestore --project demo-penguino`
+  (needs Java: `brew install openjdk@21`). A `demo-` project id in a config overlay makes the site
+  talk to the emulators.
+- Rules must be published by hand in the Firebase console (Firestore > Rules) or with
+  `firebase deploy --only firestore:rules`; changing the file in the repo alone does nothing.
 
 ## Conventions
 
