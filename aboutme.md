@@ -20,9 +20,9 @@ olympiad:
   - when: 2019 → now
     title: OBI organizer
     text: Part of the team organizing Informatics olympiads for high school students in Bolivia.
-  - when: 2023 · 24 · 25
+  - when: 2023 → now
     title: IOI Team Leader
-    text: Leading Bolivia's team at the IOI, including 2025, hosted at home.
+    text: Leading Bolivia's team at the IOI every year since 2023, including 2025, hosted at home.
 random-facts:
   - I love making friends, I just don't love any person as my friend...
   - I really enjoy sharing thoughts and perspectives of life, without the need of starting a discussion about who is right.

@@ -32,7 +32,7 @@ achievements:
     items:
       - [2015, Contestant]
       - [2017, Contestant]
-      - [2023, Team Leader]
+      - [2023 → present, Team Leader]
   - title: Iberoamerican Olympiad in Informatics
     items:
       - [2014, Contestant]
@@ -76,6 +76,6 @@ languages:
   - [Spanish, Native]
   - [English, Fluent]
   - [Russian, Intermediate - Basic]
-phone: "+79939224098"
-phone-display: +7 993 922 4098
+phone: "+59167766721"
+phone-display: +591 67766721
 ---
