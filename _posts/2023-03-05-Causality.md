@@ -4,6 +4,9 @@ title: I believe in causality
 subtitle: Quizá me llamen loco por este...
 comments: true
 lang: EN
+slug: "i-believe-in-causality"
+redirect_from:
+  - /2023/03/05/Causality.html
 ---
 
 Domingo, Sunday.<br>

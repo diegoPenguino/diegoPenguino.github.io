@@ -14,7 +14,7 @@ layout: base
   {% if page.subtitle and page.subtitle != '' %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
 </div>
 <article class="narrow prose post-body">
-  {{ content }}
+  {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
 </article>
 <div class="narrow">
   <div class="share">

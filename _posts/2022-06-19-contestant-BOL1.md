@@ -4,6 +4,9 @@ title: Contestant BOL-1
 subtitle: Like a rollercoaster...
 comments: true
 lang: EN
+slug: "contestant-bol-1-rollercoaster"
+redirect_from:
+  - /2022/06/19/contestant-BOL1.html
 ---
  
 #### IOI: International Olympiad in Informatics

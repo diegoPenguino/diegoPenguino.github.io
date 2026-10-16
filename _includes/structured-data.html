@@ -1,0 +1,12 @@
+{%- comment -%}
+schema.org JSON-LD so search engines know who wrote what: a BlogPosting for posts, a
+Person + WebSite on the home page. Params: img, description (already computed in head.html).
+{%- endcomment -%}
+{%- assign s = site.social-network-links -%}
+{%- capture same_as -%}["https://github.com/{{ s.github }}","https://www.instagram.com/{{ s.instagram }}","https://www.facebook.com/{{ s.facebook }}","https://t.me/{{ s.telegram }}","https://www.linkedin.com/in/diego-angulo-ramirez"]{%- endcapture -%}
+{%- capture person -%}{"@type":"Person","name":{{ site.author | jsonify }},"url":{{ '/' | absolute_url | jsonify }},"image":{{ site.avatar | absolute_url | jsonify }},"jobTitle":"AI Engineer","alumniOf":{"@type":"CollegeOrUniversity","name":"Moscow Institute of Physics and Technology"},"sameAs":{{ same_as }}}{%- endcapture -%}
+{%- if page.collection == 'posts' %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":{{ page.title | append: '' | jsonify }},"description":{{ include.description | strip | jsonify }},"image":{{ include.img | absolute_url | jsonify }},"datePublished":{{ page.date | date_to_xmlschema | jsonify }},"dateModified":{{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},"inLanguage":{{ page.lang | default: 'en' | downcase | jsonify }},"url":{{ page.url | absolute_url | jsonify }},"mainEntityOfPage":{{ page.url | absolute_url | jsonify }},"author":{{ person }},"publisher":{{ person }}}</script>
+{%- elsif page.url == '/' %}
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":{{ site.title | jsonify }},"url":{{ '/' | absolute_url | jsonify }},"inLanguage":"en"},{{ person }}]}</script>
+{%- endif -%}

@@ -1,6 +1,14 @@
-MIT License
+Copyright (c) 2022-2026 Diego Alejandro Angulo Ramírez
 
-Copyright (c) 2020 Dean Attali
+CONTENT
+The written content, photos and other media of this site (blog posts, stories,
+projects, CV, problem statements and solutions, and everything under assets/img,
+assets/problems, materials and recursos) are © Diego Alejandro Angulo Ramírez,
+all rights reserved, unless a file says otherwise.
+
+CODE
+The site's code (layouts, includes, stylesheets and scripts) is released under
+the MIT License:
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +27,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+ACKNOWLEDGEMENT
+This repository started in 2022 as a fork of the Beautiful Jekyll theme by Dean Attali
+(https://github.com/daattali/beautiful-jekyll), MIT License,
+Copyright (c) 2020 Dean Attali. Small parts may still derive from it
+(for example the RSS feed template and the code highlighting styles).

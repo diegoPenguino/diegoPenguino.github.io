@@ -22,7 +22,7 @@ layout: base
   </aside>
   {%- endif %}
   <article class="prose">
-    {{ content }}
+    {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
   </article>
 </div>
 {%- if page.collection == 'projects' -%}

@@ -4,6 +4,9 @@ title: Carta abierta al equipo IOI
 subtitle: 
 comments: true  
 lang: ES
+slug: "carta-abierta-al-equipo-ioi"
+redirect_from:
+  - /2025/06/08/carta-abierta.html
 ---
 Hola chic@s.<br>
 Lamento que esto deba ser escrito acá, y no pueda ser algo que podamos discutir en persona o por llamada, pero analizando los posibles métodos que tenía disponibles, me pareció que la opción más 'impactante' era hacerlo de esta manera.
