@@ -3,6 +3,7 @@ layout: post
 title: So, what's this about?
 subtitle: Let's find out!
 comments: true
+lang: EN
 ---
 Hi, this is my first post here.
  

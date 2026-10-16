@@ -1,0 +1,5 @@
+{%- assign c = include.c -%}
+<div class="card card--link res-card{% if c.top %} is-top{% endif %}">
+  <span class="name"><a href="{{ c.url }}" target="_blank" rel="noopener">{{ c.name }}</a>{% if c.top %}<span class="top">top</span>{% else %}<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>{% endif %}</span>
+  {{ c.note | markdownify }}
+</div>

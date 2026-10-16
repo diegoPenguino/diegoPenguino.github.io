@@ -3,6 +3,7 @@ layout: post
 title: Carta abierta al equipo IOI
 subtitle: 
 comments: true  
+lang: ES
 ---
 Hola chic@s.<br>
 Lamento que esto deba ser escrito acá, y no pueda ser algo que podamos discutir en persona o por llamada, pero analizando los posibles métodos que tenía disponibles, me pareció que la opción más 'impactante' era hacerlo de esta manera.

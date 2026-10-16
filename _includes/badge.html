@@ -1,0 +1,15 @@
+{%- comment -%}
+Round 108px badge. Params: id, title, sub, ring (optional text on the top arc),
+bg, fg, border (optional stroke color), class.
+{%- endcomment -%}
+<div class="badge {{ include.class }}" aria-hidden="true">
+  <svg width="108" height="108" viewBox="0 0 108 108">
+    <defs><path id="{{ include.id }}" d="M14,54 A40,40 0 0,1 94,54"/></defs>
+    <circle cx="54" cy="54" r="53" fill="{{ include.bg }}"{% if include.border %} stroke="{{ include.border }}" stroke-width="2"{% endif %}/>
+    {%- if include.ring %}
+    <text fill="{{ include.fg }}" text-anchor="middle" style="font:700 10px 'Open Sans',sans-serif;letter-spacing:3px"><textPath href="#{{ include.id }}" startOffset="50%">{{ include.ring }}</textPath></text>
+    {%- endif %}
+    <text x="54" y="{% if include.ring %}62{% else %}54{% endif %}" fill="{{ include.fg }}" text-anchor="middle" style="font:800 22px 'Open Sans',sans-serif;letter-spacing:-.02em">{{ include.title }}</text>
+    <text x="54" y="{% if include.ring %}76{% else %}68{% endif %}" fill="{{ include.fg }}" text-anchor="middle" style="font:700 10px 'Open Sans',sans-serif;letter-spacing:.04em">{{ include.sub }}</text>
+  </svg>
+</div>

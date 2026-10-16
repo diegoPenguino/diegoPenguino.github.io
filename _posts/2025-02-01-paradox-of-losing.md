@@ -3,6 +3,7 @@ layout: post
 title: The paradox of Losing
 subtitle: Trying to find a logic to my life
 comments: true  
+lang: EN
 ---
 
 > "Why do we fall, sir? So that we can learn to pick ourselves up."

@@ -5,13 +5,15 @@ date: 2026-04-09
 description: A Chrome extension that downloads all CSES test cases from submission result pages as a ZIP archive, making contest debugging and review faster.
 thumbnail-img: /assets/img/projects/cses.png
 repo-url: https://github.com/diegoPenguino/CSES-Test-Downloader
+role: Design & development
+stack: [JavaScript, Chrome Extensions]
+hosting: Chrome extension
+name: "CSES Test Downloader"
+tagline: "Chrome extension for competitive programming"
 ---
 
 CSES Test Downloader is a Chrome extension that adds a button to CSES submission result pages and lets you extract every test case as a ZIP archive. It is a very practical tool for competitive programmers who want to inspect inputs and outputs without doing the same manual steps over and over.
 
-<p align="center">
-  <img src="/assets/img/projects/cses.png" alt="CSES Test Downloader preview" />
-</p>
 
 Beyond downloading the raw test cases, the extension can also bundle them in the Italian format used by Contest Management System. That matters a lot in olympiad-style contests, since CMS is the judge used in IOI and in many competitions with the same workflow. In our case, it is especially useful for the Bolivian Olympiad in Informatics, where packaging tests in a CMS-friendly format helps the whole problem preparation process feel much smoother for when we need to create custom test sets for training and practice.
 

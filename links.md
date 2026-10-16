@@ -1,5 +1,5 @@
 --- 
-layout: project
+layout: page
 title: Links utiles - Entrenamiento Cochabamba 2024
 ---
 

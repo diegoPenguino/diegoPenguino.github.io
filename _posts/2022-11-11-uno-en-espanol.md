@@ -3,6 +3,7 @@ layout: post
 title: Uno en español
 subtitle: Aprendan inglés, en pocas.
 comments: true
+lang: ES
 ---
 
 **Hola, ¿cómo estamos?**<br>

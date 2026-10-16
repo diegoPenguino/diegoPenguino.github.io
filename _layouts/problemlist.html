@@ -1,0 +1,56 @@
+---
+layout: base
+---
+{%- assign years = site.data.problems -%}
+{%- assign total = 0 -%}{%- for y in years -%}{%- assign total = total | plus: y.problems.size -%}{%- endfor -%}
+<div data-problems>
+  <div class="wrap page-head pl-intro show-en" data-i18n>
+    {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+    <h1 class="h1" lang="en">{{ page.title }}</h1>
+    <h1 class="h1" lang="es">{{ page.title-es }}</h1>
+    <div class="lede" lang="en">{{ page.intro-en | markdownify }}</div>
+    <div class="lede" lang="es">{{ page.intro-es | markdownify }}</div>
+  </div>
+  <div class="wrap pl-tools">
+    <div class="segmented" role="group" aria-label="Language" data-filter-group="pl-lang">
+      <button type="button" data-filter-value="en" aria-pressed="true">EN</button>
+      <button type="button" data-filter-value="es" aria-pressed="false">ES</button>
+    </div>
+    <div class="chips" role="group" aria-label="Year" data-filter-group="year">
+      <button class="filter" type="button" data-filter-value="all" aria-pressed="true">All <span class="n">{{ total }}</span></button>
+      {%- for y in years %}
+      <button class="filter" type="button" data-filter-value="{{ y.year }}" aria-pressed="false">{{ y.year }} <span class="n">{{ y.problems.size }}</span></button>
+      {%- endfor %}
+    </div>
+  </div>
+
+  {%- for y in years %}
+  <section class="wrap year" data-year="{{ y.year }}" aria-labelledby="y{{ y.year }}">
+    <div class="rule-head"><h2 id="y{{ y.year }}">{{ y.year }}</h2><span class="count">{{ y.problems.size }} problem{% if y.problems.size != 1 %}s{% endif %}</span></div>
+    {%- if y.note_es %}
+    <div class="year-note pl-intro show-en" data-i18n>
+      <div lang="en">{{ y.note_en | markdownify }}</div>
+      <div lang="es">{{ y.note_es | markdownify }}</div>
+    </div>
+    {%- endif %}
+    {%- for p in y.problems %}
+    <div class="problem">
+      <div class="info">
+        <span class="name"><i class="fa-solid fa-check" aria-label="Solved"></i>{{ p.name }}</span>
+        {% if p.contest != '' %}<span class="contest">{{ p.contest }}</span>{% endif %}
+        {% if p.note %}<div class="note">{{ p.note | markdownify }}</div>{% endif %}
+      </div>
+      <div class="links">
+        {%- for l in p.links %}
+        <a class="plink plink--primary" href="{{ l.url | relative_url }}"{% if l.kind == 'judge' %} target="_blank" rel="noopener"{% endif %}><i class="fa-solid {% if l.kind == 'pdf' %}fa-file-pdf{% else %}fa-globe{% endif %}" aria-hidden="true"></i>{{ l.label }}</a>
+        {%- endfor %}
+        {%- for s in p.solutions %}
+        <a class="plink" href="{{ s.url | relative_url }}"><i class="fa-solid fa-code" aria-hidden="true"></i>{{ s.label }}</a>
+        {%- endfor %}
+        {%- if p.soon and p.solutions == nil %}<span class="plink plink--soon">Code coming soon</span>{% endif %}
+      </div>
+    </div>
+    {%- endfor %}
+  </section>
+  {%- endfor %}
+</div>

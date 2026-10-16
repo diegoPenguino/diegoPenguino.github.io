@@ -5,13 +5,15 @@ date: 2026-05-17
 description: OBIA-ChatBot is a contest-focused chatbot for AI competitions, with organizer-defined limits and admin controls for managing users, tokens, and activity.
 thumbnail-img: /assets/img/projects/obia-chat.png
 repo-url: https://github.com/diegoPenguino/OBIA-ChatBot
+role: Design & development
+stack: [Python, FastAPI, Postgres, OpenAI, Next.js, Docker]
+hosting: Docker
+name: "OBIA-ChatBot"
+tagline: "Domain-specific conversational assistant"
 ---
 
 OBIA-ChatBot is a chatbot built for contestants in AI competitions, where the organizers define the model, the limits, and the way it can be used. The idea is to give participants a tool they can consult when they need help, but with enough guardrails that they do not rely too heavily on the AI during the competition.
 
-<p align="center">
-  <img src="/assets/img/projects/obia-chat.png" alt="OBIA ChatBot interface preview" />
-</p>
 
 That balance was the interesting part for me. The bot is useful because it is constrained: the competition can allow guidance, but still avoid turning the system into a shortcut that replaces the contestant's own work. In practice, that makes the chatbot feel much more like a controlled competition service than a generic assistant.
 

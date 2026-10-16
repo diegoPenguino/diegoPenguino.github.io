@@ -5,6 +5,11 @@ date: 2026-03-04
 description: AlgoCritic is a multi-agent code review system built for competitive programming solutions.
 thumbnail-img: /assets/img/projects/AlgoCritic.png
 repo-url: https://github.com/diegoPenguino/AlgoCritic
+role: Design & development
+stack: [Python, LangChain, OpenAI]
+hosting: Runs locally (CLI)
+name: "AlgoCritic"
+tagline: "Multi-agent code review system"
 ---
 
 AlgoCritic is a multi-agent code review system built for competitive programming solutions. It uses a Good Cop / Bad Cop / Judge architecture to generate balanced feedback: one agent highlights strengths, another challenges correctness and efficiency, and a final judge synthesizes both perspectives into a clear verdict.

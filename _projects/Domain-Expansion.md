@@ -5,6 +5,11 @@ date: 2026-04-15
 description: Domain Expansion is a turn-based territory conquest game where four Python bots compete to dominate the board through movement, enclosure, and survival.
 thumbnail-img: /assets/img/projects/game_preview.png
 repo-url: https://github.com/diegoPenguino/Domain-Expansion
+role: Design & development
+stack: [Python, pygame]
+hosting: Runs locally
+name: "Domain Expansion"
+tagline: "Territory war strategy game"
 ---
 
 Domain Expansion is a turn-based territory war game for four players, where each participant controls a Python bot and competes on a two-dimensional grid to claim as much territory as possible. What starts as a simple movement game quickly becomes a strategy problem about space, timing, and survival.
@@ -15,5 +20,3 @@ What makes the project especially interesting is that the real competition comes
 
 The project also includes a graphical simulation built with `pygame`, plus a competition mode that runs multiple board permutations so bots can be evaluated more fairly from different starting positions. That combination of simulation, strategy, and tournament-style evaluation gives the project a nice balance between playability and technical depth.
 
-Image of how the game looks:
-![Game Preview](/assets/img/projects/game_preview.png)

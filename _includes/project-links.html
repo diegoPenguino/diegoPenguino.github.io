@@ -1,0 +1,16 @@
+{%- comment -%} Buttons for a project: live site, repo, demo. Param: project, size ("sm" for cards). {%- endcomment -%}
+{%- assign p = include.project -%}
+{%- assign live = p.live-url | default: '' -%}
+{%- assign repo = p.repo-url | default: p.repo_url | default: '' -%}
+{%- assign demo = p.demo-url | default: p.demo_url | default: '' -%}
+{%- capture sm -%}{% if include.size == 'sm' %} btn--sm{% endif %}{%- endcapture -%}
+{%- if live != '' -%}
+  {%- assign host = live | remove: 'https://' | remove: 'http://' | split: '/' | first -%}
+  <a class="btn{{ sm }}" href="{{ live }}" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i>{{ host }}</a>
+{%- endif -%}
+{%- if repo != '' -%}
+  <a class="btn{% if live != '' %} btn--ghost{% endif %}{{ sm }}" href="{{ repo }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i>Open repo</a>
+{%- endif -%}
+{%- if demo != '' -%}
+  <a class="btn btn--ghost{{ sm }}" href="{{ demo }}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>Open demo</a>
+{%- endif -%}

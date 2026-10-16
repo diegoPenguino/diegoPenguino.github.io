@@ -6,6 +6,11 @@ description: An intelligent LangGraph-based multi-agent system that generates po
 thumbnail-img: /assets/img/projects/post-contest-edit.png
 repo-url: https://github.com/diegoPenguino/Post-Contest-Editorial-Generator
 demo-url: https://editorial.penguino.space/
+role: Design & development
+stack: [Python, LangGraph, Streamlit, Docker]
+hosting: editorial.penguino.space
+name: "Editorial Generator"
+tagline: "LangGraph multi-agent system"
 ---
 
 Editorial Generator is an intelligent multi-agent system that automatically writes comprehensive editorials for competitive programming problems. Given a problem statement and an accepted solution, it orchestrates analysis, explanation, and composition steps to produce a clean Markdown editorial suitable for learning and post-contest review.

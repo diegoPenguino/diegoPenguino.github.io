@@ -1,0 +1,6 @@
+{%- assign s = site.social-network-links -%}
+{%- if s.email -%}<a class="social" href="mailto:{{ s.email }}" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>{%- endif -%}
+{%- if s.facebook -%}<a class="social" href="https://www.facebook.com/{{ s.facebook | uri_escape }}" aria-label="Facebook" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>{%- endif -%}
+{%- if s.telegram -%}<a class="social" href="https://t.me/{{ s.telegram }}" aria-label="Telegram" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i></a>{%- endif -%}
+{%- if s.github -%}<a class="social" href="https://github.com/{{ s.github }}" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>{%- endif -%}
+{%- if s.instagram -%}<a class="social" href="https://www.instagram.com/{{ s.instagram }}" aria-label="Instagram" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>{%- endif -%}

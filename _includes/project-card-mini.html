@@ -1,0 +1,6 @@
+{%- assign p = include.project -%}
+<a class="card mini-project" href="{{ p.url | relative_url }}">
+  <img src="{{ p.thumbnail-img | relative_url }}" alt="" loading="lazy">
+  <span class="mini-project__name">{{ p.name | default: p.title }}</span>
+  <span class="mini-project__desc">{{ p.description }}</span>
+</a>

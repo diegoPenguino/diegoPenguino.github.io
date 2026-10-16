@@ -1,126 +1,22 @@
 ---
-layout: page
+layout: base
 ---
-
-{{ content }}
-
-
-<div class="posts-list">
-    {% assign projects_with_date = site.projects | where_exp: "item", "item.date" | sort: "date" | reverse %}
-    {% assign projects_without_date = site.projects | where_exp: "item", "item.date == nil" %}
-    {% assign sorted_projects = projects_with_date | concat: projects_without_date %}
-    {% for post in sorted_projects %}
-    <article class="post-preview">
-
-        {% assign project_url = post.url | absolute_url %}
-        {% assign repo_url = post.repo-url | default: post.repo_url | strip %}
-        {% assign repo_prefix = repo_url | slice: 0, 2 %}
-        {% assign repo_is_external = false %}
-        {% if repo_url contains '://' or repo_prefix == '//' %}
-        {% assign repo_is_external = true %}
-        {% endif %}
-        {% assign demo_url = post.demo-url | default: post.demo_url | default: post.demo-link | default: post.demo_link
-        | default: post.external-url | default: post.external_url | strip %}
-        {% assign demo_prefix = demo_url | slice: 0, 2 %}
-        {% assign demo_is_external = false %}
-        {% if demo_url contains '://' or demo_prefix == '//' %}
-        {% assign demo_is_external = true %}
-        {% endif %}
-
-        {%- capture thumbnail -%}
-        {% if post.thumbnail-img %}
-        {{ post.thumbnail-img }}
-        {% elsif post.cover-img %}
-        {% if post.cover-img.first %}
-        {{ post.cover-img[0].first.first }}
-        {% else %}
-        {{ post.cover-img }}
-        {% endif %}
-        {% else %}
-        {% endif %}
-        {% endcapture %}
-        {% assign thumbnail=thumbnail | strip %}
-
-        {% if site.feed_show_excerpt == false %}
-        {% if thumbnail != "" %}
-        <div class="post-image post-image-normal">
-            <a href="{{ project_url }}" aria-label="Thumbnail">
-                <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-            </a>
-        </div>
-        {% endif %}
-        {% endif %}
-
-        <a href="{{ project_url }}">
-            <h2 class="post-title">{{ post.title | strip_html }}</h2>
-        </a>
-        {% if thumbnail != "" %}
-        <div class="post-image post-image-small">
-            <a href="{{ project_url }}" aria-label="Thumbnail">
-                <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-            </a>
-        </div>
-        {% endif %}
-
-        {% unless site.feed_show_excerpt == false %}
-        {% if thumbnail != "" %}
-        <div class="post-image post-image-short">
-            <a href="{{ project_url }}" aria-label="Thumbnail">
-                <img src="{{ thumbnail | absolute_url }}" alt="Post thumbnail">
-            </a>
-        </div>
-        {% endif %}
-
-        <div class="post-entry">
-            {% assign excerpt_length = site.excerpt_length | default: 50 %}
-            {% assign project_description = post.description | default: '' | strip %}
-            {% if project_description != '' %}
-            {{ project_description | strip_html | truncatewords: excerpt_length }}
-            {% else %}
-            {{ post.excerpt | strip_html | truncatewords: excerpt_length }}
-            {% assign excerpt_word_count = post.excerpt | number_of_words %}
-            {% if post.content != post.excerpt or excerpt_word_count > excerpt_length %}
-            <a href="{{ project_url }}" class="post-read-more">[Read&nbsp;More]</a>
-            {% endif %}
-            {% endif %}
-        </div>
-        {% endunless %}
-
-        <div class="project-actions">
-            {% if repo_url != '' %}
-            <a href="{% if repo_is_external %}{{ repo_url }}{% else %}{{ repo_url | absolute_url }}{% endif %}" class="project-action-btn project-action-btn--primary" {% if repo_is_external %}target="_blank" rel="noopener noreferrer"{% endif %}>Open Repo</a>
-            {% endif %}
-            {% if demo_url != "" %}
-            <a href="{% if demo_is_external %}{{ demo_url }}{% else %}{{ demo_url | absolute_url }}{% endif %}"
-                class="project-action-btn project-action-btn--ghost" {% if demo_is_external %}target="_blank"
-                rel="noopener noreferrer" {% endif %}>Open Demo</a>
-            {% endif %}
-        </div>
-
-        {% if site.feed_show_tags != false and post.tags.size > 0 %}
-        <div class="blog-tags">
-            <span>Tags:</span>
-            {% for tag in post.tags %}
-            <a href="{{ '/tags' | absolute_url }}#{{- tag -}}">{{- tag -}}</a>
-            {% endfor %}
-        </div>
-        {% endif %}
-
-    </article>
-    {% endfor %}
+<div class="wrap page-head">
+  {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+  <h1 class="h1">{{ page.heading | default: page.title }}</h1>
+  {% if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
 </div>
-
-{% if paginator.total_pages > 1 %}
-<ul class="pagination main-pager">
-    {% if paginator.previous_page %}
-    <li class="page-item previous">
-        <a class="page-link" href="{{ paginator.previous_page_path | absolute_url }}">&larr; Newer Projects</a>
-    </li>
-    {% endif %}
-    {% if paginator.next_page %}
-    <li class="page-item next">
-        <a class="page-link" href="{{ paginator.next_page_path | absolute_url }}">Older Projects &rarr;</a>
-    </li>
-    {% endif %}
-</ul>
-{% endif %}
+{%- assign dated = site.projects | where_exp: "p", "p.date" | sort: "date" | reverse -%}
+<div class="wrap project-grid">
+  {%- for p in dated %}
+  <article class="card project-card">
+    <div class="project-card__img"><img src="{{ p.thumbnail-img | relative_url }}" alt="" loading="lazy"></div>
+    <div class="project-card__body">
+      <a class="project-card__name" href="{{ p.url | relative_url }}">{{ p.name | default: p.title }}</a>
+      {% if p.tagline %}<span class="project-card__sub">{{ p.tagline }}</span>{% endif %}
+      <span class="project-card__desc">{{ p.description }}</span>
+      <div class="project-card__actions">{% include project-links.html project=p size="sm" %}</div>
+    </div>
+  </article>
+  {%- endfor %}
+</div>

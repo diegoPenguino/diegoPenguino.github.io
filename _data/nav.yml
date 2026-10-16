@@ -1,0 +1,31 @@
+# Main navigation. Items with `children` render as a dropdown on desktop and
+# are flattened into the list in the mobile menu.
+- label: Home
+  url: /
+- label: About
+  url: /aboutme
+- label: Projects
+  url: /projects
+- label: Blog
+  url: /blog/
+- label: CV
+  url: /cv
+- label: Resources
+  children:
+    - label: CP Resources
+      hint: guía
+      url: /resources_for_cp
+    - label: Problem list
+      hint: OBI
+      url: /problemlist
+    - label: My thesis
+      hint: github
+      url: https://github.com/diegoPenguino/Diabetic-Retinopathy
+- label: What's in here?
+  children:
+    - label: Stories
+      hint: fiction
+      url: /story
+    - label: Favorite song
+      hint: youtube
+      url: https://www.youtube.com/watch?v=47dtFZ8CFo8

@@ -1,0 +1,63 @@
+---
+layout: base
+---
+{%- assign d = site.data.cp_resources -%}
+<div class="wrap page-head">
+  {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+  <h1 class="h1 res-title">{{ page.title }}</h1>
+  <div class="lede res-lede">{{ page.lede | markdownify }}</div>
+</div>
+
+<div class="wrap res-layout">
+  <details class="card toc" open>
+    <summary>Tabla de contenidos</summary>
+    <nav aria-label="Tabla de contenidos">
+      {%- for s in d.sections %}
+      <a href="#{{ s.id }}"><span class="mono">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>{{ s.title }}</a>
+      {%- endfor %}
+      <a href="#contribuir"><span class="mono">{% assign n = d.sections.size | plus: 1 %}{% if n < 10 %}0{% endif %}{{ n }}</span>Contribuciones</a>
+    </nav>
+  </details>
+
+  <div class="res-main">
+    {%- for s in d.sections %}
+    {%- capture num -%}{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}{%- endcapture -%}
+    <section id="{{ s.id }}" aria-labelledby="{{ s.id }}-h">
+      <h2 id="{{ s.id }}-h">{{ num }} · {{ s.title }}</h2>
+      {% if s.text %}<div class="res-text">{{ s.text | markdownify }}</div>{% endif %}
+
+      {%- if s.cards %}
+      <div class="res-cards">{% for c in s.cards %}{% include res-card.html c=c %}{% endfor %}</div>
+      {%- endif %}
+
+      {%- if s.rows %}{% include res-rows.html rows=s.rows %}{% endif %}
+
+      {%- for g in s.groups %}
+      <h3>{{ g.label }}</h3>
+      {%- if g.rows %}{% include res-rows.html rows=g.rows %}{% else %}<p class="res-text"><em>{{ g.empty }}</em></p>{% endif %}
+      {%- endfor %}
+
+      {%- if s.tabs %}
+      <div data-tabs>
+        <div class="chips tabs" role="tablist" aria-label="{{ s.title }}">
+          {%- for t in s.tabs %}
+          <button class="filter" type="button" role="tab" id="tab-{{ s.id }}-{{ forloop.index }}" aria-controls="panel-{{ s.id }}-{{ forloop.index }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}">{{ t.label }}</button>
+          {%- endfor %}
+        </div>
+        {%- for t in s.tabs %}
+        <div class="tab-panel" role="tabpanel" id="panel-{{ s.id }}-{{ forloop.index }}" aria-labelledby="tab-{{ s.id }}-{{ forloop.index }}"{% unless forloop.first %} hidden{% endunless %}>
+          <div class="res-cards">{% for c in t.cards %}{% include res-card.html c=c %}{% endfor %}</div>
+          {% if t.after %}<div class="tab-after">{{ t.after | markdownify }}</div>{% endif %}
+        </div>
+        {%- endfor %}
+      </div>
+      {%- endif %}
+    </section>
+    {%- endfor %}
+
+    <section class="callout" id="contribuir">
+      <span class="title">¿Quieres contribuir?</span>
+      {{ d.contribute | markdownify }}
+    </section>
+  </div>
+</div>

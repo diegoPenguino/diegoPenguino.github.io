@@ -1,31 +1,47 @@
 ---
 layout: base
 ---
+<section class="wrap about-hero">
+  <div>
+    {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+    <h1 class="h1">{{ page.heading | default: page.title }}</h1>
+    {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+    {%- for para in page.intro %}
+    <p class="body">{{ para | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
+    {%- endfor %}
+  </div>
+  {%- if page.photo %}
+  <figure class="photo-tag">
+    <img src="{{ page.photo | relative_url }}" alt="{{ page.photo-alt }}">
+    {% if page.photo-label %}<span>{{ page.photo-label | escape }}</span>{% endif %}
+  </figure>
+  {%- endif %}
+</section>
 
-{% include header.html type="page" %}
-
-<div class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %}" role="main">
-    <div class="row">
-        <div class="{% if page.full-width %} col {% else %} col-xl-8 offset-xl-2 col-lg-10 offset-lg-1 {% endif %}">
-            {% if page.before-content %}
-            <div class="before-content">
-                {% for file in page.before-content %}
-                {% include {{ file }} %}
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            {{ content }}
-
-            {% if page.after-content %}
-            <div class="after-content">
-                {% for file in page.after-content %}
-                {% include {{ file }} %}
-                {% endfor %}
-            </div>
-            {% endif %}
-
-            {% include comments.html %}
-        </div>
+<section class="wrap section" aria-labelledby="olympiad">
+  <div class="rule-head"><h2 id="olympiad">The olympiad side</h2></div>
+  <div class="grid-cards">
+    {%- for t in page.olympiad %}
+    <div class="card tl-card">
+      <span class="when">{{ t.when }}</span>
+      <span class="title">{{ t.title }}</span>
+      <span class="text">{{ t.text }}</span>
     </div>
-</div>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="wrap section" aria-labelledby="random">
+  <div class="rule-head"><h2 id="random">Random stuff about me</h2><span class="count">{{ page.random-facts.size }} facts</span></div>
+  <ol class="num-list">
+    {%- for f in page.random-facts %}
+    <li><span class="n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><span class="t">{{ f | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span></li>
+    {%- endfor %}
+  </ol>
+</section>
+
+<section class="wrap tiles">
+  {%- for t in page.tiles %}
+  <div class="tile{% if t.accent %} tile--accent{% endif %}"><span class="label">{{ t.label }}</span><span class="big">{{ t.text }}</span></div>
+  {%- endfor %}
+</section>

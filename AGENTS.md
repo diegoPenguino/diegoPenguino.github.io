@@ -1,8 +1,8 @@
 # AGENTS.md
 
 Personal site of Diego Angulo Ramirez, served at https://penguino.space (see `CNAME`).
-It is a Jekyll site based on the [Beautiful Jekyll](https://github.com/daattali/beautiful-jekyll)
-theme, with the theme files vendored into this repo (`_layouts/`, `_includes/`, `assets/`).
+It is a plain Jekyll site with its own layouts (no theme gem, no CSS framework). It started
+from Beautiful Jekyll and was redesigned from a Claude Design handoff in October 2026.
 
 ## How it is deployed
 
@@ -28,6 +28,8 @@ bundle exec jekyll serve --future --livereload   # http://localhost:4000
 - A UTF-8 locale is required: without `LANG`/`LC_ALL` the Sass converter fails with
   `Invalid US-ASCII character`.
 - The `GitHub Metadata: No GitHub API authentication` warning is harmless locally.
+- `url` and `baseurl` are pinned in `_config.yml`. Without them, a build with no GitHub token
+  prefixes every link with `/pages/diegoPenguino`.
 - Gems live in `vendor/bundle` (git-ignored and excluded from the Jekyll build).
 
 ## Checks
@@ -45,22 +47,32 @@ browser at desktop and mobile widths.
 
 | What | Where | Notes |
 |---|---|---|
-| Site settings, navbar, colors, social links | `_config.yml` | Restart `jekyll serve` after editing |
-| Home page | `index.html` (`layout: about`) | |
-| Blog posts | `_posts/YYYY-MM-DD-slug.md` | URL is `/YYYY/MM/DD/slug.html`; drafts go in `_drafts/` |
-| Blog index | `blog/index.html` (`layout: home`) | Paginated (5 per page) |
-| Projects | `_projects/*.md` (`layout: project`) | Front matter: `title`, `date`, `description`, `thumbnail-img`, `repo-url`, optional `demo-url` |
-| Projects index | `projects.md` (`layout: projects`), styles in `assets/css/projects.css` | |
-| Other pages | `aboutme.md`, `cv.md`, `resources_for_cp.md`, `problemlist.md`, `story.md`, `links.md` | |
+| Site settings, social links | `_config.yml` | Restart `jekyll serve` after editing |
+| Navigation menu | `_data/nav.yml` | Items with `children` become dropdowns |
+| Design tokens and all styles | `assets/css/site.css` | One stylesheet; colors and fonts are CSS variables in `:root` |
+| Interactions | `assets/js/site.js` | Menu, dropdowns, rotating word, facts, filters, tabs, copy link. Pages work without it |
+| Home | `index.html` (`layout: home`) | Bio, rotating words, facts and featured projects are front matter |
+| About | `aboutme.md` (`layout: about`) | All content is front matter |
+| Blog posts | `_posts/YYYY-MM-DD-slug.md` | Front matter needs `lang: EN` or `lang: ES` (blog filter). URL is `/YYYY/MM/DD/slug.html`; drafts go in `_drafts/` |
+| Blog index | `blog/index.html` (`layout: blog`) | Newest post is featured; its image is `thumbnail-img` or the first image in the post |
+| Projects | `_projects/*.md` (`layout: project`) | Front matter: `title`, `name`, `tagline`, `date`, `description`, `thumbnail-img`, `repo-url`, optional `live-url` / `demo-url`, and `role`, `stack`, `hosting` for the "At a glance" card |
+| Projects index | `projects.md` (`layout: projects`) | Sorted by `date`, newest first |
+| CV | `cv.md` (`layout: cv`) | All content is front matter |
+| CP resources | `resources_for_cp.md` (`layout: cp-resources`) | Content in `_data/cp_resources.yml` |
+| Problem list | `problemlist.md` (`layout: problemlist`) | Intros in front matter, problems in `_data/problems.yml` |
+| Story | `story.md` (`layout: story`) | `---` in the text renders as the three-dot section break |
+| Other pages | `links.md`, `something.md`, `404.html` | Generic `page` layout |
+| Standalone pages | `full_rank.html`, `ranking1.html` | Own HTML and styles; not part of the design |
 | Images | `assets/img/` (project thumbnails in `assets/img/projects/`) | |
-| Theme layouts and partials | `_layouts/`, `_includes/` | Vendored theme; edit carefully |
 
 Posts and pages mix English and Spanish; keep each piece in the language it was written in.
 
 ## Conventions
 
-- Keep the `upstream` remote (daattali/beautiful-jekyll) for reference only; do not merge it
-  wholesale, the theme here has local changes.
+- The `upstream` remote (daattali/beautiful-jekyll) is history only; never merge it, the
+  layouts no longer share code with the theme.
+- Reuse the CSS variables and existing components (`.card`, `.btn`, `.chip`, `.filter`,
+  `.rule-head`, `.kicker`, `.h1`) before adding new styles. Keep touch targets at least 44px.
 - Add new top-level files that should not be published to `exclude:` in `_config.yml`.
 - Large PDFs at the repo root (`CV.pdf`, etc.) are linked from pages; do not rename them
   without updating the links.

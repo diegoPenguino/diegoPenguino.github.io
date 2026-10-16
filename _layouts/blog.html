@@ -1,0 +1,50 @@
+---
+layout: base
+---
+<div data-blog>
+  <div class="wrap page-head">
+    {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+    <h1 class="h1">{{ page.heading | default: page.title }}</h1>
+    {% if page.lede %}<p class="lede">{{ page.lede }}</p>{% endif %}
+    <div class="blog-tools">
+      <label class="search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="sr-only">Search posts</span><input type="search" placeholder="Search posts…" data-search autocomplete="off"></label>
+      <div class="segmented" role="group" aria-label="Language" data-filter-group="lang">
+        <button type="button" data-filter-value="all" aria-pressed="true">All</button>
+        <button type="button" data-filter-value="EN" aria-pressed="false">EN</button>
+        <button type="button" data-filter-value="ES" aria-pressed="false">ES</button>
+      </div>
+    </div>
+  </div>
+
+  {%- for post in site.posts -%}
+    {%- capture text -%}{{ post.title }} {{ post.subtitle }} {{ post.excerpt | strip_html }}{%- endcapture -%}
+    {%- assign text = text | strip_newlines | downcase | escape -%}
+    {%- assign excerpt = post.excerpt | strip_html | normalize_whitespace | truncatewords: 32 -%}
+    {%- if forloop.first %}
+    {%- include post-image.html post=post %}
+  <div class="wrap featured" data-featured data-lang="{{ post.lang }}" data-text="{{ text }}">
+    <a href="{{ post.url | relative_url }}">
+      {% if post_img != '' %}<img src="{{ post_img | relative_url }}" alt="">{% endif %}
+      <div class="featured__text">
+        <span class="meta">latest · {{ post.date | date: '%b %-d, %Y' }} · {{ post.lang }}</span>
+        <span class="title">{{ post.title }}</span>
+        <span class="excerpt">{{ excerpt }}</span>
+        <span class="read">Read post →</span>
+      </div>
+    </a>
+  </div>
+  <div class="wrap post-list">
+    {%- else %}
+    <a class="post-item" href="{{ post.url | relative_url }}" data-post data-lang="{{ post.lang }}" data-text="{{ text }}">
+      <div class="meta"><span class="date">{{ post.date | date: '%b %-d, %Y' }}</span><span class="lang">{{ post.lang }}</span></div>
+      <div class="main">
+        <span class="title">{{ post.title }}</span>
+        {% if post.subtitle and post.subtitle != '' %}<span class="sub">{{ post.subtitle }}</span>{% endif %}
+        <span class="excerpt">{{ excerpt }}</span>
+      </div>
+    </a>
+    {%- endif -%}
+  {%- endfor %}
+    <p class="empty" data-empty hidden>No posts match your search.</p>
+  </div>
+</div>

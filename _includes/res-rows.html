@@ -1,0 +1,11 @@
+<div class="res-rows">
+  {%- for r in include.rows %}
+  <div>
+    <div class="what">
+      <a href="{{ r.url }}" target="_blank" rel="noopener">{{ r.name }}</a>
+      {% if r.author %}<div class="by">{{ r.author | markdownify | remove: '<p>' | remove: '</p>' | strip }}</div>{% endif %}
+    </div>
+    {% if r.note %}<div class="note">{{ r.note | markdownify }}</div>{% endif %}
+  </div>
+  {%- endfor %}
+</div>

@@ -5,6 +5,11 @@ date: 2026-04-18
 description: A technical price tracking system that combines CoinGecko ingestion, anomaly detection, and RAG-powered explanations for market events.
 thumbnail-img: /assets/img/projects/coingecko.svg
 repo-url: https://github.com/diegoPenguino/CoinGecko-price-tracker
+role: Design & development
+stack: [Python, FastAPI, Postgres, Alembic, Docker]
+hosting: Docker
+name: "CoinGecko Price Tracker"
+tagline: "Anomaly detection and RAG alerts"
 ---
 
 CoinGecko Price Tracker is a technical price tracking system that combines CoinGecko ingestion, anomaly detection, and RAG-powered explanations. It was built for a technical challenge and focuses on turning raw market movement into something easier to inspect and understand.

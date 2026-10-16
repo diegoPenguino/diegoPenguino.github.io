@@ -1,0 +1,6 @@
+{%- comment -%} Sets `post_img` to the post's thumbnail, cover, or first image in its content. {%- endcomment -%}
+{%- assign p = include.post -%}
+{%- assign post_img = p.thumbnail-img | default: p.cover-img | default: '' -%}
+{%- if post_img == '' and p.content contains '<img' -%}
+  {%- assign post_img = p.content | split: '<img' | slice: 1 | first | split: 'src="' | slice: 1 | first | split: '"' | first -%}
+{%- endif -%}

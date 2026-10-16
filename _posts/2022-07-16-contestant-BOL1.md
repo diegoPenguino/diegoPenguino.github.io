@@ -3,6 +3,7 @@ layout: post
 title: Contestant BOL-1
 subtitle: The task failed succesfully
 comments: true
+lang: EN
 ---
  
 #### IOI: International Olympiad in Informatics

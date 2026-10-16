@@ -3,6 +3,7 @@ layout: post
 title: Contestant BOL-1
 subtitle: Like a rollercoaster...
 comments: true
+lang: EN
 ---
  
 #### IOI: International Olympiad in Informatics

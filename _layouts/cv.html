@@ -1,0 +1,74 @@
+---
+layout: base
+---
+<div class="wrap cv-head">
+  <div>
+    {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+    <h1 class="h1">{{ page.heading | default: page.title }}</h1>
+    <p class="lede">{{ page.summary | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
+  </div>
+  {% if page.pdf %}<a class="btn" href="{{ page.pdf | relative_url }}" download><i class="fa-solid fa-file-arrow-down"></i>Download PDF</a>{% endif %}
+</div>
+
+<div class="wrap cv-cols">
+  <div class="cv-main">
+    <section aria-labelledby="edu">
+      <h2 class="cv-h2" id="edu">Education</h2>
+      {%- for e in page.education %}
+      <div class="edu">
+        <span class="dot" aria-hidden="true"></span>
+        <div class="body">
+          <span class="when">{{ e.when }}</span>
+          <span class="title">{{ e.title }}</span>
+          <span class="place">{{ e.place | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span>
+          {% if e.note %}<span class="note">{{ e.note }}</span>{% endif %}
+        </div>
+      </div>
+      {%- endfor %}
+    </section>
+
+    <section aria-labelledby="work">
+      <h2 class="cv-h2" id="work">I've been working on…</h2>
+      {%- for w in page.work %}
+      <div class="work"><span class="when">{{ w.when }}</span><span class="text">{{ w.text }}</span></div>
+      {%- endfor %}
+    </section>
+
+    <details class="collapse">
+      <summary>Achievements</summary>
+      {%- for a in page.achievements %}
+      <div class="ach">
+        <i class="fa-solid fa-trophy" aria-hidden="true"></i>
+        <div>
+          {% if a.url %}<a class="title" href="{{ a.url }}" target="_blank" rel="noopener">{{ a.title }}</a>{% else %}<span class="title">{{ a.title }}</span>{% endif %}
+          <ul>
+            {%- for it in a.items %}
+            <li><span class="yr">{{ it[0] }}</span>{{ it[1] }}</li>
+            {%- endfor %}
+          </ul>
+        </div>
+      </div>
+      {%- endfor %}
+    </details>
+  </div>
+
+  <aside class="cv-side">
+    <section class="card side-card" aria-labelledby="skills">
+      <h2 id="skills">Skills</h2>
+      {%- for s in page.skills %}
+      <div class="skill-group"><span class="mono">{{ s.group }}</span><div class="chips">{% for i in s.items %}<span class="skill">{{ i }}</span>{% endfor %}</div></div>
+      {%- endfor %}
+    </section>
+    <section class="card side-card langs" aria-labelledby="langs">
+      <h2 id="langs">Languages</h2>
+      {%- for l in page.languages %}
+      <div><span class="name">{{ l[0] }}</span><span class="level">{{ l[1] }}</span></div>
+      {%- endfor %}
+    </section>
+    <section class="contact-card" aria-labelledby="contact">
+      <h2 id="contact">Contact</h2>
+      <a href="mailto:{{ site.social-network-links.email }}"><i class="fa-solid fa-envelope" aria-hidden="true"></i>{{ site.social-network-links.email }}</a>
+      {% if page.phone %}<a href="tel:{{ page.phone }}"><i class="fa-solid fa-phone" aria-hidden="true"></i>{{ page.phone-display | default: page.phone }}</a>{% endif %}
+    </section>
+  </aside>
+</div>

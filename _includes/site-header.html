@@ -1,0 +1,45 @@
+{%- comment -%} The active item is the one whose url (or a child's url) matches the page. {%- endcomment -%}
+{%- assign cur = page.url | remove: '.html' -%}
+{%- if page.collection == 'projects' -%}{%- assign cur = '/projects' -%}{%- endif -%}
+{%- if page.collection == 'posts' or cur contains '/blog' -%}{%- assign cur = '/blog/' -%}{%- endif -%}
+<header class="site-header">
+  <div class="site-header__inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      <img src="{{ site.avatar | relative_url }}" alt="" width="42" height="42">
+      <span>{{ site.title }}</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      {%- for item in site.data.nav -%}
+        {%- if item.children -%}
+          {%- assign active = false -%}
+          {%- for c in item.children -%}{%- if c.url == cur -%}{%- assign active = true -%}{%- endif -%}{%- endfor -%}
+          <div class="nav__group">
+            <button class="nav__item{% if active %} is-active{% endif %}" type="button" aria-expanded="false" data-dropdown>{{ item.label }} <i class="fa-solid fa-caret-down"></i></button>
+            <div class="nav__menu">
+              {%- for c in item.children -%}
+                <a href="{{ c.url | relative_url }}"{% if c.url contains '://' %} target="_blank" rel="noopener"{% endif %}><span>{{ c.label }}</span><span class="mono">{{ c.hint }}</span></a>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- else -%}
+          <a class="nav__item{% if item.url == cur %} is-active{% endif %}" href="{{ item.url | relative_url }}"{% if item.url == cur %} aria-current="page"{% endif %}>{{ item.label }}</a>
+        {%- endif -%}
+      {%- endfor -%}
+    </nav>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle><i class="fa-solid fa-bars"></i></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="mobile-menu__links">
+      {%- for item in site.data.nav -%}
+        {%- if item.children -%}
+          {%- for c in item.children -%}
+            <a class="is-sub{% if c.url == cur %} is-active{% endif %}" href="{{ c.url | relative_url }}"{% if c.url contains '://' %} target="_blank" rel="noopener"{% endif %}><span>{{ c.label }}</span><span class="mono">{{ item.label }}</span></a>
+          {%- endfor -%}
+        {%- else -%}
+          <a class="{% if item.url == cur %}is-active{% endif %}" href="{{ item.url | relative_url }}"><span>{{ item.label }}</span></a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="socials">{% include socials.html %}</div>
+  </div>
+</header>

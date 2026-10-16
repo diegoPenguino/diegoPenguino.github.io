@@ -4,14 +4,16 @@ title: OBI - Official Website
 date: 2026-05-26
 description: The official website for the Bolivian Olympiad in Informatics, built as a static Astro site for Cloudflare Pages.
 thumbnail-img: /assets/img/projects/obi-web.png
-repo-url: https://obi.org.bo/
+live-url: https://obi.org.bo/
+role: Design & development
+stack: [Astro, Tailwind CSS, TypeScript, Zod]
+hosting: Cloudflare Pages
+name: "OBI — Official Website"
+tagline: "The public face of the Bolivian Olympiad in Informatics."
 ---
 
 I created the official website for the Bolivian Olympiad in Informatics, with a static-first approach designed for speed, reliability, and zero server cost. The site was built to serve as the public face of the OBI, while staying lightweight enough to deploy cleanly on Cloudflare Pages. The live website is available at [obi.org.bo](https://obi.org.bo/).
 
-<p align="center">
-  <img src="/assets/img/projects/obi-web.png" alt="OBI official website preview" />
-</p>
 
 The project uses Astro with SSR disabled, Tailwind CSS, TypeScript, and Zod-backed content collections. That combination made it possible to keep the codebase modular while still letting the content live in a structured way through Markdown and JSON files for news, resources, calendar entries, editions, and sponsors.
 

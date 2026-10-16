@@ -1,6 +1,7 @@
 ---
-layout: project
+layout: story
 title: Nightmare
+subtitle: It had been a good day.
 ---
 
 **It had been a good day.** Marcus walked home in the afternoon sun, jacket over his shoulder, feeling lighter than usual. Things went well.

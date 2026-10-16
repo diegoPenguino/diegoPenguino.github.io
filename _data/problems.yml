@@ -1,0 +1,160 @@
+# Problems I wrote and set. Rendered by _layouts/problemlist.html.
+# kind: pdf | judge. `soon: true` shows "Code coming soon" when there are no solutions.
+- year: 2023
+  problems:
+    - name: "La cola de uno"
+      contest: "Departamental OBI · Nivel 2"
+      links:
+        - { label: "PDF", url: "/assets/problems/2023/cola/statement/statement.pdf", kind: pdf }
+      solutions:
+        - { label: "Python full", url: "/assets/problems/2023/cola/sol/sol.py" }
+        - { label: "Subtask1", url: "/assets/problems/2023/cola/sol/subtask1.cpp" }
+        - { label: "Subtask2", url: "/assets/problems/2023/cola/sol/subtask2.cpp" }
+        - { label: "Subtask3", url: "/assets/problems/2023/cola/sol/subtask3.cpp" }
+    - name: "Los PELUCHEs de Briegal"
+      contest: "Departamental OBI · Nivel 3"
+      note: "*Este problema requirio gran ayuda de* ***OscarGauss*** *y PereGil* ***(Gilberto Gosset)****, quienes me dieron sus soluciones para 100 puntos para asegurarme de estar seteando bien los casos*"
+      links:
+        - { label: "PDF", url: "/assets/problems/2023/peluche/statement/statement.pdf", kind: pdf }
+      solutions:
+        - { label: "Solution by Gilberto C++", url: "/assets/problems/2023/peluche/sol/gauss_sol.cpp" }
+        - { label: "Solution by Gauss C++", url: "/assets/problems/2023/peluche/sol/gauss_sol.cpp" }
+        - { label: "Subtasks 1,4,5 Python", url: "/assets/problems/2023/peluche/sol/subtask1_4_5.py" }
+        - { label: "Subtasks 2,5,6 Python", url: "/assets/problems/2023/peluche/sol/subtask2_5_6.py" }
+    - name: "El fiboarbol"
+      contest: "Departamental OBI · Nivel 2"
+      links:
+        - { label: "PDF", url: "/assets/problems/2023/fiboarbol/statement/statement.pdf", kind: pdf }
+      solutions:
+        - { label: "Python full", url: "/assets/problems/2023/fiboarbol/sol/sol.py" }
+        - { label: "Subtask 1 Python", url: "/assets/problems/2023/fiboarbol/sol/subtask1.py" }
+        - { label: "Subtask 2, 3 Python", url: "/assets/problems/2023/fiboarbol/sol/subtask2_3.py" }
+        - { label: "Subtask 4 Python", url: "/assets/problems/2023/fiboarbol/sol/subtask4.py" }
+        - { label: "Subtask 1 C++", url: "/assets/problems/2023/fiboarbol/sol/subtask1.cpp" }
+        - { label: "Subtask 2, 3 C++", url: "/assets/problems/2023/fiboarbol/sol/subtask2_3.cpp" }
+        - { label: "Subtask 4 C++", url: "/assets/problems/2023/fiboarbol/sol/subtask4.cpp" }
+    - name: "Empatizando con el juez"
+      contest: "Distrital OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2023/juez/statement/statement.pdf", kind: pdf }
+      solutions:
+        - { label: "Python full", url: "/assets/problems/2023/juez/sol/sol.py" }
+        - { label: "C++ full", url: "/assets/problems/2023/juez/sol/solution.cpp" }
+        - { label: "Subtask 1 C++", url: "/assets/problems/2023/juez/sol/subtask1.cpp" }
+        - { label: "Subtask 2 C++", url: "/assets/problems/2023/juez/sol/subtask2.cpp" }
+        - { label: "Subtask 3 C++", url: "/assets/problems/2023/juez/sol/subtask3.cpp" }
+        - { label: "Subtask 4 C++", url: "/assets/problems/2023/juez/sol/subtask4.cpp" }
+    - name: "En busca de Chocolates"
+      contest: "Distrital OBI"
+      note: "*Este problema fue seteado con muchisima ayuda de MickyOr* ***(Miguel Ortiz)****, sin el no tendriamos todas las soluciones ni las grandes ideas para los subtasks.*"
+      links:
+        - { label: "PDF", url: "/assets/problems/2023/chocolates/statement/statement.pdf", kind: pdf }
+      solutions:
+        - { label: "C++ full", url: "/assets/problems/2023/chocolates/sol/sol.cpp" }
+        - { label: "Subtask 1 C++", url: "/assets/problems/2023/chocolates/sol/subtask1.cpp" }
+        - { label: "Subtask 2 C++", url: "/assets/problems/2023/chocolates/sol/subtask2.cpp" }
+        - { label: "Subtask 3 C++", url: "/assets/problems/2023/chocolates/sol/subtask3.cpp" }
+        - { label: "Subtask 4 C++", url: "/assets/problems/2023/chocolates/sol/subtask4.cpp" }
+        - { label: "Subtask 5 C++", url: "/assets/problems/2023/chocolates/sol/subtask5.cpp" }
+    - name: "Joven por siempre"
+      contest: "EGOI classification round"
+      links:
+        - { label: "PDF", url: "/assets/problems/2023/EGOI/joven/joven_egoi.pdf", kind: pdf }
+      solutions:
+        - { label: "Python", url: "/assets/problems/2023/EGOI/joven/sol.py" }
+- year: 2022
+  problems:
+    - name: "La tarea de Bort"
+      contest: "Nacional OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2022/OBI/bort/bort.pdf", kind: pdf }
+      solutions:
+        - { label: "Python", url: "/assets/problems/2022/OBI/bort/sol.py" }
+    - name: "En el parque Vedeneje"
+      contest: "Nacional OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2022/OBI/vedeneje/vedeneje.pdf", kind: pdf }
+      solutions:
+        - { label: "C++", url: "/assets/problems/2022/OBI/vedeneje/sol.cpp" }
+    - name: "La tarea de Nately"
+      contest: "Departamental OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2022/OBI/tarea/tarea_de_nately.pdf", kind: pdf }
+        - { label: "Online judge", url: "https://judge.juki.app/contest/view/OBI-2022-departamental-nivel-2/problem/C", kind: judge }
+      solutions:
+        - { label: "Python", url: "/assets/problems/2022/OBI/tarea/sol.py" }
+        - { label: "Python - Some points", url: "/assets/problems/2022/OBI/tarea/sol_brute.py" }
+    - name: "El juego de Bender"
+      contest: "Departamental OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2022/OBI/juego/juego_de_bender.pdf", kind: pdf }
+        - { label: "Online judge", url: "https://judge.juki.app/contest/view/OBI-2022-departamental-nivel-3/problem/C", kind: judge }
+      solutions:
+        - { label: "Python", url: "/assets/problems/2022/OBI/juego/sol.py" }
+    - name: "El chocolate Moskita"
+      contest: "Distrital OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2022/OBI/chocolate/chocolate.pdf", kind: pdf }
+      solutions:
+        - { label: "C++ full", url: "/assets/problems/2022/OBI/chocolate/full_sol.cpp" }
+        - { label: "Subtask1", url: "/assets/problems/2022/OBI/chocolate/subtask1.cpp" }
+        - { label: "Subtask2", url: "/assets/problems/2022/OBI/chocolate/subtask2.cpp" }
+        - { label: "Subtask3", url: "/assets/problems/2022/OBI/chocolate/subtask3.cpp" }
+        - { label: "Subtask4", url: "/assets/problems/2022/OBI/chocolate/subtask4.cpp" }
+    - name: "El de la grilla"
+      contest: "Distrital OBI"
+      note: "*Este es por mucho, el problema que más me divirtió redactar.*<br> *La dedicación que le puse es simplemente indescriptible.*<br> ***(A pesar de ser bastante facil de resolver).***"
+      links:
+        - { label: "PDF", url: "/assets/problems/2022/OBI/grilla/grilla.pdf", kind: pdf }
+      solutions:
+        - { label: "C++", url: "/assets/problems/2022/OBI/grilla/full.cpp" }
+- year: 2021
+  note_es: "*2021 fue el año que menos problemas cree(uno solo), mayormente porque la OBI tuvo solo dos etapas y en la primera etapa solo colabore a crear los problemas, más no agregue uno propio.*"
+  note_en: "2021 was the year I created the fewest problems (just one), mostly because the OBI had only two stages, and in the first one I only helped create the problems without adding one of my own."
+  problems:
+    - name: "Comunicación Numérica"
+      contest: "Nacional OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2021/Numerolandia.pdf", kind: pdf }
+      soon: true
+- year: 2020
+  problems:
+    - name: "Una Historia Élfica"
+      contest: "Departamental OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2020/Elfos.pdf", kind: pdf }
+      soon: true
+    - name: "Extremadamente Matemático"
+      contest: "Departamental OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2020/Matematico.pdf", kind: pdf }
+      soon: true
+    - name: "Besconechnaya Matimaticheskaya Piramida"
+      contest: "Departamental OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2020/Piramides.pdf", kind: pdf }
+      soon: true
+    - name: "Una Secuencia Conocida"
+      contest: "Distrital OBI"
+      links:
+        - { label: "PDF", url: "/assets/problems/2020/Secuencia.pdf", kind: pdf }
+      soon: true
+- year: 2019
+  note_es: "***El año 2019 cree alrededor de 12 problemas aparte de estos 3, la mayoria de un nivel bajo de dificultad, pero incluido entre estos estaba uno de mis favoritos de toda la vida: \"El sumidero de Pascal\". <br>***\n*Por años pense que eran Lost-Media.<br>*\n*Hasta hoy 05/02/2024 que logre recuperarlos, al no estar disponibles en ningun sitio web actualmente, los guardare por unas semanas hasta poder darles buen uso, de ahi los subire aca ;)*"
+  note_en: "In 2019 I created around 12 problems besides these 3, most of them easy, but among them was one of my all-time favorites: \"El sumidero de Pascal\". For years I thought they were lost media, until 05/02/2024, when I managed to recover them. They are not available on any website right now; I'll keep them for a few weeks until I can put them to good use, and then I'll upload them here ;)"
+  problems:
+    - name: "El Esquilax"
+      contest: "Distrital OBI"
+      links:
+        - { label: "Online judge", url: "https://jv.umsa.bo/problem.php?id=1835", kind: judge }
+    - name: "La lista de Diego"
+      contest: "Departamental OBI"
+      links:
+        - { label: "Online judge (Facil)", url: "https://jv.umsa.bo/problem.php?id=1836", kind: judge }
+        - { label: "Online judge (Dificil)", url: "https://jv.umsa.bo/problem.php?id=1837", kind: judge }
+    - name: "Perversa Potencia"
+      contest: "Departamental OBI"
+      links:
+        - { label: "Online judge (Facil)", url: "https://jv.umsa.bo/problem.php?id=1841", kind: judge }
+        - { label: "Online judge (Medio)", url: "https://jv.umsa.bo/problem.php?id=1842", kind: judge }
+        - { label: "Online judge (Dificil)", url: "https://jv.umsa.bo/problem.php?id=1843", kind: judge }
