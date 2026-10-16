@@ -4,6 +4,9 @@ title: Contestant BOL-1
 subtitle: The task failed succesfully
 comments: true
 lang: EN
+slug: "contestant-bol-1-task-failed-successfully"
+redirect_from:
+  - /2022/07/16/contestant-BOL1.html
 ---
  
 #### IOI: International Olympiad in Informatics
@@ -15,7 +18,7 @@ I personally have some kind of social battery, so when it discharges it's really
  
 I am also thinking about traveling somewhere, I just can't find the motivation to decide the final details.
  
-<img src="/assets/img/cat.gif" width="300" height="400" class="center">
+<img src="/assets/img/cat.webp" width="300" height="400" class="center">
  
 But well, enough about the present me, and let's talk about the past me.
  

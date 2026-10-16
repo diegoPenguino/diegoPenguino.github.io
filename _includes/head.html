@@ -8,7 +8,16 @@
     {%- capture title -%}{{ site.title }}{%- endcapture -%}
   {%- endif -%}
   {%- capture description -%}{{ page.share-description | default: page.description | default: page.subtitle | default: page.excerpt | default: site.description | strip_html | normalize_whitespace | truncatewords: 40 }}{%- endcapture -%}
-  {%- assign img = page.share-img | default: page.thumbnail-img | default: site.avatar -%}
+  {%- comment -%} Share image: explicit share-img, a project thumbnail, the first image of a post, or the avatar. {%- endcomment -%}
+  {%- assign img = page.share-img | default: page.thumbnail-img | default: '' -%}
+  {%- if img == '' and page.collection == 'posts' -%}
+    {%- assign article = content | split: '<section class="comments"' | first -%}
+    {%- if article contains '<img' -%}
+      {%- assign img = article | split: '<img' | slice: 1 | first | split: 'src="' | slice: 1 | first | split: '"' | first -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign large_img = true -%}
+  {%- if img == '' -%}{%- assign img = site.avatar -%}{%- assign large_img = false -%}{%- endif -%}
   <title>{{ title | xml_escape }}</title>
   <meta name="author" content="{{ site.author }}">
   <meta name="description" content="{{ description | xml_escape }}">
@@ -24,11 +33,16 @@
   <meta property="og:image" content="{{ img | absolute_url }}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:type" content="{% if page.collection == 'posts' %}article{% else %}website{% endif %}">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="{% if large_img %}summary_large_image{% else %}summary{% endif %}">
+  {%- if page.collection == 'posts' %}
+  <meta property="article:published_time" content="{{ page.date | date_to_xmlschema }}">
+  <meta property="article:author" content="{{ site.author }}">
+  {%- endif %}
+  {% include structured-data.html img=img description=description %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <!-- ?v= busts browser caches on every deploy (Pages serves assets with max-age=14400) -->
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}?v={{ site.time | date: '%s' }}">

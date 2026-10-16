@@ -4,6 +4,9 @@ title: The paradox of Losing
 subtitle: Trying to find a logic to my life
 comments: true  
 lang: EN
+slug: "the-paradox-of-losing"
+redirect_from:
+  - /2025/02/01/paradox-of-losing.html
 ---
 
 > "Why do we fall, sir? So that we can learn to pick ourselves up."

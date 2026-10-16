@@ -4,6 +4,9 @@ title: So, what's this about?
 subtitle: Let's find out!
 comments: true
 lang: EN
+slug: "so-whats-this-about"
+redirect_from:
+  - /2022/04/17/first_entry.html
 ---
 Hi, this is my first post here.
  

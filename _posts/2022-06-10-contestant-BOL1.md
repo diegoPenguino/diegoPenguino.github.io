@@ -4,6 +4,9 @@ title: Contestant BOL-1
 subtitle: 3 new beginnings
 comments: true
 lang: EN
+slug: "contestant-bol-1-new-beginnings"
+redirect_from:
+  - /2022/06/10/contestant-BOL1.html
 ---
 
 #### IOI: International Olympiad in Informatics
@@ -15,7 +18,7 @@ OK, so this is like the fifth time I try to write this introductory paragraph an
 It's been more than a month I've been away from writing, because it's been more than a month I've been busy with final exams and projects. It went great, actually, so I can be proud of myself for that. <br/>
 Anyway, let's start with our story.
 
-<img src="/assets/img/pharmexam-pastudent.gif" width="400" height="280" class="center"/>
+<img src="/assets/img/pharmexam-pastudent.webp" width="400" height="280" class="center"/>
 
 When I was 13, I participated in a mathematics olympiad for the first time in my life. It was a small olympiad in my city, I spent like a week or two preparing. I remember almost everyone in my grade participated, so for me it was as if I was just one participant out of many. <br/>
 I didn't expect anything, I actually was hoping to get some 5th place recognition in the best of the cases.

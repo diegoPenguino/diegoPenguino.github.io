@@ -91,7 +91,7 @@ sections:
       url: https://www.beecrowd.com.br/judge/es/
       note: Juez online brasileño. <br> Muy buen recurso para problemas en español, además ordenados en categorías.
     - name: JukiJudge
-      url: https://judge.juki.app/es
+      url: https://judge.juki.app/
       note: Juez con problemas en español, que cuenta con una gran cantidad de problemas de la OBI.
     - name: OIAJ
       url: https://juez.oia.unsam.edu.ar
@@ -140,9 +140,6 @@ sections:
   - name: CSES problemset
     url: https://cses.fi/problemset/list/
     note: Como ya se mencionó, esta lista contiene categorías muy bien organizadas, muy recomendado para aprender lo básico sobre cada tema.
-  - name: The Ultimate Topic List
-    url: https://blog.shahjalalshohag.com/topic-list/
-    note: Creada por [Shahjalal Shohag](https://shahjalalshohag.com), es una lista impecable para aprender los temas mencionados, la ventaja que tiene sobre CSES es que esta lista también tiene implementaciones de cada tema.<br> Además su blog tiene contenido muy interesante, otro post suyo muy destacable es [List of useful equations in Competitive Programming](https://blog.shahjalalshohag.com/equation-list/).
   - name: Las siempre confiables A2OJ ladders, renovadas
     url: https://c2-ladders-juol.onrender.com
     note: Reconstruida por [codemastercpp](https://codeforces.com/blog/entry/99896) a partir de lo que solían ser las ladders de A2OJ, esta página contiene problemas de Codeforces organizados de una manera extraordinaria, cada problema mencionado es muy recomendable, ya que no fue seleccionado por azar.

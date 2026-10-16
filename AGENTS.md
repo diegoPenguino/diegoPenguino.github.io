@@ -53,7 +53,7 @@ browser at desktop and mobile widths.
 | Interactions | `assets/js/site.js` | Menu, dropdowns, rotating word, facts, filters, tabs, copy link. Pages work without it |
 | Home | `index.html` (`layout: home`) | Bio, rotating words, facts and featured projects are front matter |
 | About | `aboutme.md` (`layout: about`) | All content is front matter |
-| Blog posts | `_posts/YYYY-MM-DD-slug.md` | Front matter needs `lang: EN` or `lang: ES` (blog filter). URL is `/YYYY/MM/DD/slug.html`; drafts go in `_drafts/` |
+| Blog posts | `_posts/YYYY-MM-DD-slug.md` | Front matter needs `lang: EN` or `lang: ES` (blog filter) and a unique `slug` (lowercase, dashes). URL is `/blog/<slug>/`; never change a published slug without adding the old URL to `redirect_from`. Drafts go in `_drafts/` |
 | Blog index | `blog/index.html` (`layout: blog`) | Newest post is featured; its image is `thumbnail-img` or the first image in the post |
 | Projects | `_projects/*.md` (`layout: project`) | Front matter: `title`, `name`, `tagline`, `date`, `description`, `thumbnail-img`, `repo-url`, optional `live-url` / `demo-url`, and `role`, `stack`, `hosting` for the "At a glance" card |
 | Projects index | `projects.md` (`layout: projects`) | Sorted by `date`, newest first |
@@ -64,14 +64,15 @@ browser at desktop and mobile widths.
 | Story | `story.md` (`layout: story`) | `---` in the text renders as the three-dot section break |
 | Other pages | `links.md`, `something.md`, `404.html` | Generic `page` layout |
 | Standalone pages | `full_rank.html`, `ranking1.html` | Own HTML and styles; not part of the design |
-| Images | `assets/img/` (project thumbnails in `assets/img/projects/`) | |
+| Images | `assets/img/` (project thumbnails in `assets/img/projects/`) | Content images get `loading="lazy"` automatically. Prefer WebP over GIF |
+| SEO | `_includes/head.html`, `_includes/structured-data.html` | Share image = `share-img`, project thumbnail, or a post's first image; JSON-LD BlogPosting/Person |
 
 Posts and pages mix English and Spanish; keep each piece in the language it was written in.
 
 ## Comments
 
 Posts have comments through Firebase on the free Spark plan: Google sign-in (Authentication) and
-Cloud Firestore, called straight from the browser (no server). Nothing renders until
+Cloud Firestore, called straight from the browser (no server). The SDK loads only when the reader nears the comment section. Nothing renders until
 `firebase.projectId` is set in `_config.yml`; a post can opt out with `comments: false`.
 
 - Data: `posts/{postId}/comments/{id}` with `{uid, name, photo, text, parent, createdAt}`, where
@@ -88,8 +89,6 @@ Cloud Firestore, called straight from the browser (no server). Nothing renders u
 
 ## Conventions
 
-- The `upstream` remote (daattali/beautiful-jekyll) is history only; never merge it, the
-  layouts no longer share code with the theme.
 - Reuse the CSS variables and existing components (`.card`, `.btn`, `.chip`, `.filter`,
   `.rule-head`, `.kicker`, `.h1`) before adding new styles. Keep touch targets at least 44px.
 - Add new top-level files that should not be published to `exclude:` in `_config.yml`.

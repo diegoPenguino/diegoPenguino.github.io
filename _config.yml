@@ -12,7 +12,7 @@ avatar: "/assets/img/ChillyWilly.jpg"
 # Footer, mobile menu and CV contact links
 social-network-links:
   email: "diegoangulo5@gmail.com"
-  facebook: Diego Angulo Ramirez
+  facebook: diego.anguloramirez
   github: diegoPenguino
   instagram: diegopenguino
   telegram: diegopenguino
@@ -43,7 +43,7 @@ collections:
 # Words in each post excerpt in the RSS feed
 excerpt_length: 50
 
-timezone: "Europe/Moscow"
+timezone: "America/La_Paz"
 markdown: kramdown
 highlighter: rouge
 kramdown:
@@ -55,27 +55,26 @@ defaults:
       type: "posts"
     values:
       layout: "post"
+      # Each post sets `slug`; old /YYYY/MM/DD/name.html URLs live in its `redirect_from`
+      permalink: /blog/:slug/
   - scope:
       path: ""
     values:
       layout: "page"
 
 exclude:
-  - CHANGELOG.md
   - CNAME
   - Gemfile
   - Gemfile.lock
   - LICENSE
   - README.md
-  - docs/
   - vendor/
   - .bundle/
   - .ruby-version
   - AGENTS.md
   - CLAUDE.md
-  - beautiful-jekyll-theme.gemspec
-  - run_jekyll.bat
   - firebase/
 
 plugins:
   - jekyll-sitemap
+  - jekyll-redirect-from

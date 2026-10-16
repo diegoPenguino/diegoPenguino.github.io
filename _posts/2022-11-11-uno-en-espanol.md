@@ -4,6 +4,9 @@ title: Uno en español
 subtitle: Aprendan inglés, en pocas.
 comments: true
 lang: ES
+slug: "uno-en-espanol"
+redirect_from:
+  - /2022/11/11/uno-en-espanol.html
 ---
 
 **Hola, ¿cómo estamos?**<br>

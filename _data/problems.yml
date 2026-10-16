@@ -80,7 +80,6 @@
       contest: "Departamental OBI"
       links:
         - { label: "PDF", url: "/assets/problems/2022/OBI/tarea/tarea_de_nately.pdf", kind: pdf }
-        - { label: "Online judge", url: "https://judge.juki.app/contest/view/OBI-2022-departamental-nivel-2/problem/C", kind: judge }
       solutions:
         - { label: "Python", url: "/assets/problems/2022/OBI/tarea/sol.py" }
         - { label: "Python - Some points", url: "/assets/problems/2022/OBI/tarea/sol_brute.py" }
@@ -88,7 +87,6 @@
       contest: "Departamental OBI"
       links:
         - { label: "PDF", url: "/assets/problems/2022/OBI/juego/juego_de_bender.pdf", kind: pdf }
-        - { label: "Online judge", url: "https://judge.juki.app/contest/view/OBI-2022-departamental-nivel-3/problem/C", kind: judge }
       solutions:
         - { label: "Python", url: "/assets/problems/2022/OBI/juego/sol.py" }
     - name: "El chocolate Moskita"
