@@ -61,6 +61,9 @@ share-links-active:
 # Remove this if you don't want a link in the footer
 url-pretty: "diegoPenguino.github.io"
 
+# Needed by jekyll-github-metadata (bundled with github-pages) for local and CI builds
+repository: diegoPenguino/diegoPenguino.github.io
+
 # Excerpt word length - Truncate the excerpt of each post on the feed page to the specified number of words
 excerpt_length: 50
 
@@ -227,6 +230,13 @@ exclude:
   - LICENSE
   - README.md
   - docs/
+  - vendor/
+  - .bundle/
+  - .ruby-version
+  - AGENTS.md
+  - CLAUDE.md
+  - beautiful-jekyll-theme.gemspec
+  - run_jekyll.bat
 
 plugins:
   - jekyll-paginate
