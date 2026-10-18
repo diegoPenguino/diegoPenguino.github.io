@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option D · Problem D, editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&display=swap">
+<style>
+:root {
+  --ground: #fafaf8;
+  --surface: #efeeea;
+  --field: #191716;        /* the dark statement header */
+  --field-ink: #f4f2ee;
+  --field-muted: #b9b4ac;
+  --ink: #1a1a1a;
+  --muted: #5b5954;
+  --accent: #8c1d2f;       /* oxblood */
+  --accent-ink: #fbf7f5;
+  --ok: #0b7a36;           /* Accepted */
+  --font: "Newsreader", Georgia, "Times New Roman", serif;
+  --code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --gutter: clamp(16px, 4vw, 56px);
+  --max: 1360px;
+  --gap: clamp(88px, 11vw, 168px);
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 400 clamp(18px, 1rem + .3vw, 21px)/1.55 var(--font); font-optical-sizing: auto; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-underline-offset: .18em; text-decoration-thickness: .06em; transition: color .2s; }
+img { display: block; max-width: 100%; height: auto; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+h2.sec { font-weight: 300; font-size: clamp(44px, 1rem + 4.6vw, 104px); line-height: .95; letter-spacing: -.035em; margin: 0 0 0 -.04em; }
+.sec-lead { font-size: clamp(22px, 1rem + 1vw, 30px); line-height: 1.3; max-width: 34ch; margin: 18px 0 0; }
+
+/* ---------- Header field ---------- */
+.field { background: var(--field); color: var(--field-ink); }
+.bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 24px; padding-top: 16px; padding-bottom: 16px; }
+.bar__name { font-weight: 500; font-size: 21px; text-decoration: none; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 0 22px; }
+.bar nav a { text-decoration: none; color: var(--field-muted); min-height: 44px; display: inline-flex; align-items: center; }
+.bar nav a:hover { color: var(--field-ink); }
+
+.hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(32px, 5vw, 88px); padding-top: clamp(48px, 7vw, 104px); padding-bottom: clamp(56px, 8vw, 120px); align-items: end; }
+.hero h1 { font-weight: 300; font-size: clamp(64px, 1rem + 10vw, 184px); line-height: .88; letter-spacing: -.045em; margin: 0 0 0 -.05em; }
+.limits { display: grid; grid-template-columns: auto 1fr; gap: 2px 18px; margin: clamp(28px, 4vw, 48px) 0 0; color: var(--field-muted); font-size: clamp(17px, 1rem + .3vw, 21px); }
+.limits dt { color: var(--field-ink); }
+.limits dd { margin: 0; }
+.hero__lead { font-size: clamp(26px, 1rem + 1.8vw, 44px); line-height: 1.18; letter-spacing: -.015em; margin: clamp(36px, 5vw, 64px) 0 0; max-width: 22ch; }
+.rot { font-style: italic; }
+.hero figure { margin: 0; }
+.hero figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 28%; }
+.hero figcaption { color: var(--field-muted); font-size: 16px; font-style: italic; padding-top: 10px; }
+
+/* ---------- Legend with figures ---------- */
+.legend { display: grid; grid-template-columns: .85fr 1.3fr; gap: clamp(32px, 5vw, 88px); padding-top: var(--gap); align-items: start; }
+.legend .text p { margin: 0 0 1em; max-width: 54ch; }
+.legend .text p:first-of-type { font-size: clamp(22px, 1rem + 1vw, 30px); line-height: 1.3; }
+.figs { display: grid; grid-template-columns: 1fr 1.45fr; gap: 16px; align-items: end; margin-top: clamp(0px, 4vw, 64px); }
+.figs figure { margin: 0; }
+.figs img { width: 100%; object-fit: cover; }
+.figs figure:first-child img { aspect-ratio: 3 / 4; }
+.figs figure:last-child img { aspect-ratio: 1 / 1; object-position: 50% 40%; }
+.figs figcaption { color: var(--muted); font-size: 16px; padding-top: 10px; line-height: 1.4; }
+.figs figcaption i { color: var(--ink); }
+
+/* ---------- Constraints: real milestones ---------- */
+.constraints { background: var(--surface); margin-top: var(--gap); padding: clamp(64px, 8vw, 120px) 0; }
+.cons { list-style: none; margin: clamp(32px, 4vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(32px, 4vw, 56px) clamp(24px, 4vw, 64px); }
+.cons li { display: flex; flex-direction: column; gap: 6px; }
+.cons .math { font-size: clamp(30px, 1rem + 2vw, 52px); line-height: 1.05; letter-spacing: -.02em; font-variant-numeric: lining-nums; }
+.cons .math i { font-style: italic; }
+.cons .what { color: var(--muted); max-width: 30ch; }
+
+/* ---------- Input: where to go ---------- */
+.input { display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(32px, 5vw, 88px); padding-top: var(--gap); align-items: start; }
+.doors { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 clamp(24px, 3vw, 48px); }
+.doors a { display: block; text-decoration: none; padding: 14px 0 18px; }
+.doors b { display: block; font-weight: 500; font-size: clamp(24px, 1rem + 1.1vw, 34px); letter-spacing: -.02em; line-height: 1.1; }
+.doors span { color: var(--muted); }
+.doors a:hover b { color: var(--accent); }
+
+/* ---------- Output: posts ---------- */
+.output { padding-top: var(--gap); }
+.posts { list-style: none; margin: clamp(32px, 4vw, 56px) 0 0; padding: 0; columns: 2; column-gap: clamp(32px, 5vw, 88px); }
+.posts li { break-inside: avoid; padding-bottom: clamp(28px, 3vw, 44px); }
+.posts a { text-decoration: none; display: block; }
+.posts strong { font-weight: 500; font-size: clamp(28px, 1rem + 1.6vw, 44px); line-height: 1.05; letter-spacing: -.025em; display: block; transition: color .2s; }
+.posts a:hover strong { color: var(--accent); }
+.posts .sub { display: block; font-style: italic; margin-top: 8px; font-size: clamp(19px, 1rem + .4vw, 23px); }
+.posts .meta { display: block; color: var(--muted); font-size: 16px; margin-top: 8px; }
+.more { color: var(--accent); }
+
+/* ---------- Examples: the live thing ---------- */
+.examples { background: var(--field); color: var(--field-ink); margin-top: var(--gap); padding: clamp(64px, 8vw, 120px) 0; }
+.examples .sec-lead { color: var(--field-muted); }
+.samples { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: clamp(32px, 4vw, 56px); }
+.samples > div { background: #262321; padding: clamp(18px, 2.4vw, 32px); min-height: 180px; }
+.samples > div + div { background: #2f2b28; }
+.samples b { display: block; font-weight: 400; font-style: italic; color: var(--field-muted); margin-bottom: 12px; }
+.samples pre { margin: 0; font: clamp(16px, .9rem + .4vw, 21px)/1.5 var(--code); white-space: pre-wrap; }
+.run { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 24px; }
+.run button { font: inherit; font-weight: 500; background: var(--field-ink); color: var(--field); border: 0; border-radius: 0; padding: 0 26px; min-height: 52px; cursor: pointer; transition: transform .15s var(--ease), background .2s; }
+.run button:hover { background: #fff; }
+.run button:active { transform: translateY(1px); }
+.verdict { color: #4fd17f; font-weight: 600; }
+.verdict.flash { animation: flash .5s var(--ease); }
+@keyframes flash { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Subtasks: projects ---------- */
+.subtasks { padding-top: var(--gap); }
+.sub-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(40px, 5vw, 72px) clamp(20px, 3vw, 40px); margin-top: clamp(32px, 4vw, 56px); }
+.task { text-decoration: none; display: block; }
+.task .pts { color: var(--accent); font-style: italic; }
+.task h3 { font-weight: 400; font-size: clamp(28px, 1rem + 2vw, 52px); letter-spacing: -.03em; line-height: 1; margin: 4px 0 12px; transition: color .2s; }
+.task:hover h3 { color: var(--accent); }
+.task p { margin: 0; max-width: 46ch; }
+.task .shot { background: var(--surface); overflow: hidden; margin-bottom: 20px; }
+.task .shot img { width: 100%; object-fit: cover; object-position: top; transition: transform .6s var(--ease); }
+.task:hover .shot img { transform: scale(1.025); }
+.t1 { grid-column: 1 / 8; } .t1 .shot img { aspect-ratio: 16 / 10; }
+.t2 { grid-column: 8 / 13; align-self: end; } .t2 .shot img { aspect-ratio: 1 / 1; }
+.t3 { grid-column: 1 / 6; } .t3 .shot img { aspect-ratio: 1 / 1; }
+.t4 { grid-column: 6 / 13; align-self: center; }
+.t4 ul { list-style: none; padding: 0; margin: 8px 0 0; }
+.t4 li a { display: flex; justify-content: space-between; gap: 16px; text-decoration: none; padding: 10px 0; font-size: clamp(20px, 1rem + .6vw, 26px); }
+.t4 li a span { color: var(--muted); font-size: 17px; text-align: right; }
+.t4 li a:hover { color: var(--accent); }
+
+/* ---------- Clarifications ---------- */
+.close { background: var(--accent); color: var(--accent-ink); margin-top: var(--gap); padding: clamp(64px, 9vw, 128px) 0 32px; }
+.close h2 { font-weight: 300; font-size: clamp(48px, 1rem + 7vw, 150px); line-height: .9; letter-spacing: -.045em; margin: 0 0 0 -.04em; }
+.close p { font-size: clamp(22px, 1rem + 1vw, 30px); line-height: 1.3; max-width: 30ch; margin: 24px 0 0; }
+.close .mail { display: inline-block; margin-top: 28px; font-size: clamp(24px, 1rem + 2vw, 48px); letter-spacing: -.02em; }
+.close ul { list-style: none; padding: 0; margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 0 28px; }
+.close ul a { display: inline-flex; min-height: 44px; align-items: center; }
+.close small { display: block; margin-top: 64px; opacity: .8; font-size: 15px; }
+
+/* ---------- Entrances (content stays visible without script) ---------- */
+.js [data-in] { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.js [data-in].on { opacity: 1; transform: none; }
+
+@media (max-width: 900px) {
+  .hero, .legend, .input { grid-template-columns: 1fr; }
+  .hero figure { max-width: 340px; }
+  .cons { grid-template-columns: 1fr 1fr; }
+  .posts { columns: 1; }
+  .t1, .t2, .t3, .t4 { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .cons, .doors, .samples { grid-template-columns: 1fr; }
+  .limits { grid-template-columns: 1fr; }
+  .limits dd { margin-bottom: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  .js [data-in] { opacity: 1; transform: none; }
+}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<div class="field">
+  <header class="wrap bar">
+    <a class="bar__name" href="#">penguino.space</a>
+    <nav aria-label="Main"><a href="#">About</a><a href="#">Projects</a><a href="#">Blog</a><a href="#">CV</a><a href="#">Resources</a></nav>
+  </header>
+
+  <section class="wrap hero" aria-labelledby="title">
+    <div>
+      <h1 id="title">Problem D.<br>Diego</h1>
+      <dl class="limits">
+        <dt>time limit per visit</dt><dd>as long as you like</dd>
+        <dt>memory limit</dt><dd>one bag of popcorn</dd>
+        <dt>input / output</dt><dd>English and Spanish</dd>
+      </dl>
+      <p class="hero__lead">Programmer, problemsetter and teacher from Cochabamba. This is my little portion of <span class="rot" data-rotate='["Internet.","Bolivia.","olympiads.","thoughts.","pizza."]'>Internet.</span></p>
+    </div>
+    <figure><img src="../assets/img/diego_prime.jpg" alt="Diego in Moscow at night" width="960" height="1280"><figcaption>The author, Moscow.</figcaption></figure>
+  </section>
+</div>
+
+<main>
+  <section class="wrap legend" aria-labelledby="h-legend">
+    <div class="text" data-in>
+      <h2 class="sec" id="h-legend">Legend</h2>
+      <p style="margin-top: 28px">Diego was born in Bolivia and raised for some years in Argentina. He studied Applied Mathematics and Computer Science at MIPT, in Moscow, and is now on an AI master's there.</p>
+      <p>He competed at the IOI in 2015 and 2017. Since 2019 he writes problems for the Bolivian Olympiad in Informatics, and since 2023 he leads Bolivia's team at the IOI, including 2025, when Bolivia hosted it. By day he is an AI engineer and backend developer.</p>
+      <p>Your task is to find out what else he has been up to.</p>
+    </div>
+    <div class="figs" data-in>
+      <figure><img src="../assets/img/3medals.jpg" alt="Diego as a student wearing three olympiad medals" width="720" height="960" loading="lazy"><figcaption><i>Figure 1.</i> Then: a contestant with three medals.</figcaption></figure>
+      <figure><img src="../assets/img/bolivia-ioi-team-2025.jpg" alt="Bolivia's IOI 2025 delegation on a rooftop" width="1280" height="980" loading="lazy"><figcaption><i>Figure 2.</i> Now: the team he led at IOI 2025, at home.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="constraints" aria-labelledby="h-cons">
+    <div class="wrap">
+      <h2 class="sec" id="h-cons" data-in>Constraints</h2>
+      <ul class="cons">
+        <li data-in><span class="math"><i>IOI</i> ∈ {2015, 2017}</span><span class="what">Years he competed at the International Olympiad in Informatics.</span></li>
+        <li data-in><span class="math">2023 ≤ <i>leader</i></span><span class="what">Bolivia's IOI team leader every year since 2023.</span></li>
+        <li data-in><span class="math">2019 ≤ <i>problemsetter</i></span><span class="what">Writing problems, tests and checkers for the OBI.</span></li>
+        <li data-in><span class="math"><i>bronze</i> = 2</span><span class="what">Iberoamerican Olympiad in Informatics, 2015 and 2017.</span></li>
+        <li data-in><span class="math"><i>OBI</i><sub>2016</sub> = gold</span><span class="what">National olympiad, level 3, after bronze, silver and bronze in 2013 to 2015.</span></li>
+        <li data-in><span class="math"><i>AI olympiad</i> ≥ 2025</span><span class="what">Founded and directs the Bolivian Olympiad in AI.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap input" aria-labelledby="h-input">
+    <div data-in>
+      <h2 class="sec" id="h-input">Input</h2>
+      <p class="sec-lead">One curious visitor, looking for one of these.</p>
+    </div>
+    <ul class="doors" data-in>
+      <li><a href="#"><b>About me</b><span>Who he is, and the facts nobody asked for.</span></a></li>
+      <li><a href="#"><b>CV</b><span>Experience, olympiads, talks and skills.</span></a></li>
+      <li><a href="#"><b>CP resources</b><span>A guide for starting competitive programming, in Spanish.</span></a></li>
+      <li><a href="#"><b>Problem list</b><span>The problems he uses to train OBI students.</span></a></li>
+      <li><a href="#"><b>Thesis</b><span>Federated learning for diabetic retinopathy.</span></a></li>
+      <li><a href="#"><b>Stories</b><span>Fiction, when the mind wanders.</span></a></li>
+    </ul>
+  </section>
+
+  <section class="wrap output" aria-labelledby="h-output">
+    <h2 class="sec" id="h-output" data-in>Output</h2>
+    <p class="sec-lead" data-in>The five latest things he wrote, newest first. <a class="more" href="#">All posts</a></p>
+    <ul class="posts">
+      <li data-in><a href="#"><strong>Thank you team</strong><span class="meta">January 6, 2026</span></a></li>
+      <li data-in><a href="#"><strong>Carta abierta al equipo IOI</strong><span class="meta">June 8, 2025, en español</span></a></li>
+      <li data-in><a href="#"><strong>The paradox of Losing</strong><span class="sub">Trying to find a logic to my life</span><span class="meta">February 1, 2025</span></a></li>
+      <li data-in><a href="#"><strong>Fear Of Missing Out</strong><span class="sub">Every other life is better than mine.</span><span class="meta">April 6, 2024</span></a></li>
+      <li data-in><a href="#"><strong>2023</strong><span class="sub">About letting go, and growing up</span><span class="meta">January 28, 2024</span></a></li>
+    </ul>
+  </section>
+
+  <section class="examples" aria-labelledby="h-ex">
+    <div class="wrap">
+      <h2 class="sec" id="h-ex" data-in>Examples</h2>
+      <p class="sec-lead" data-in>Every test asks for a fact about Diego. The judge has six.</p>
+      <div class="samples" data-in>
+        <div><b>input</b><pre>tell me a fact about diego</pre></div>
+        <div><b>output</b><pre data-fact aria-live="polite">I have a serious addiction to popcorn.</pre></div>
+      </div>
+      <div class="run"><button type="button" data-fact-next>Run the next test</button><span class="verdict" data-verdict>Accepted on test 1</span></div>
+    </div>
+  </section>
+
+  <section class="wrap subtasks" aria-labelledby="h-sub">
+    <h2 class="sec" id="h-sub" data-in>Subtasks</h2>
+    <p class="sec-lead" data-in>Things he has built, worth 100 points in total.</p>
+    <div class="sub-grid">
+      <a class="task t1" href="#" data-in>
+        <div class="shot"><img src="../assets/img/projects/obi-web.png" alt="Screenshot of the OBI website" width="1600" height="875" loading="lazy"></div>
+        <span class="pts">Subtask 1, 40 points</span>
+        <h3>OBI website</h3>
+        <p>The official site of the Bolivian Olympiad in Informatics, a static Astro site on Cloudflare Pages.</p>
+      </a>
+      <a class="task t2" href="#" data-in>
+        <div class="shot"><img src="../assets/img/projects/obia-chat.png" alt="Screenshot of OBIA-ChatBot" width="997" height="933" loading="lazy"></div>
+        <span class="pts">Subtask 2, 25 points</span>
+        <h3>OBIA-ChatBot</h3>
+        <p>A chatbot for AI contests, with limits set by the organizers and admin controls for users and tokens.</p>
+      </a>
+      <a class="task t3" href="#" data-in>
+        <div class="shot"><img src="../assets/img/projects/post-contest-edit.png" alt="Diagram of the editorial generator agents" width="725" height="730" loading="lazy"></div>
+        <span class="pts">Subtask 3, 20 points</span>
+        <h3>Editorial Generator</h3>
+        <p>Give it a statement and an accepted solution; LangGraph agents write the editorial.</p>
+      </a>
+      <div class="task t4" data-in>
+        <span class="pts">Subtask 4, 15 points</span>
+        <h3>Five more</h3>
+        <ul>
+          <li><a href="#">AlgoCritic <span>multi-agent code review</span></a></li>
+          <li><a href="#">CSES Test Downloader <span>Chrome extension</span></a></li>
+          <li><a href="#">Domain Expansion <span>territory war game</span></a></li>
+          <li><a href="#">CoinGecko Price Tracker <span>anomalies and RAG alerts</span></a></li>
+          <li><a href="#">LinkedBot <span>GitHub activity to LinkedIn</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="close">
+  <div class="wrap">
+    <h2>Clarifications</h2>
+    <p>Questions about the problem go to the author. He answers faster than most juries.</p>
+    <a class="mail" href="mailto:diegoangulo5@gmail.com">diegoangulo5@gmail.com</a>
+    <ul>
+      <li><a href="https://github.com/diegoPenguino">GitHub</a></li>
+      <li><a href="https://t.me/diegopenguino">Telegram</a></li>
+      <li><a href="https://instagram.com/diegopenguino">Instagram</a></li>
+      <li><a href="https://facebook.com/diego.anguloramirez">Facebook</a></li>
+    </ul>
+    <small>Diego Angulo Ramírez, 2026.</small>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const rot = document.querySelector('[data-rotate]');
+  if (rot && !calm) {
+    const words = JSON.parse(rot.dataset.rotate); let i = 0;
+    setInterval(() => { i = (i + 1) % words.length; rot.textContent = words[i]; }, 2200);
+  }
+  const facts = ["I have a serious addiction to popcorn.", "Liverpool FC and FC Barcelona fan.", "Best fried chicken in the world: KFC, Terminal F, Miami Int Airport.", "The Chainsmokers got me through 2017 and 2018. I owe them.", "I did a lot of interesting things, but I might be close to a prime…", "Sometimes I get lost inside my mind. Not ignoring you, promise."];
+  let f = 0; const out = document.querySelector('[data-fact]'), v = document.querySelector('[data-verdict]');
+  document.querySelector('[data-fact-next]').addEventListener('click', () => {
+    f = (f + 1) % facts.length; out.textContent = facts[f];
+    v.textContent = 'Accepted on test ' + (f + 1); v.classList.remove('flash'); void v.offsetWidth; v.classList.add('flash');
+  });
+  const items = document.querySelectorAll('[data-in]');
+  if (!('IntersectionObserver' in window) || calm) { items.forEach(el => el.classList.add('on')); return; }
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    const sib = [...e.target.parentElement.querySelectorAll(':scope > [data-in]')];
+    e.target.style.transitionDelay = Math.max(0, sib.indexOf(e.target)) * 70 + 'ms';
+    e.target.classList.add('on'); io.unobserve(e.target);
+  }), { rootMargin: '0px 0px -8% 0px' });
+  items.forEach(el => {
+    if (el.getBoundingClientRect().top < innerHeight) el.classList.add('on');
+    else io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>

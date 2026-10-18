@@ -35,6 +35,24 @@ projects, contact) and drop those devices.
 | B, editorial | Newsreader (light display, text) | Off-white, black, oxblood | Keeps "My little portion of Internet." with the rotating word; posts in two columns; a then/now photo pair (medals, IOI 2025 team) |
 | C, problem statement | STIX Two Text | White paper, black, judge blue, Accepted green | The page is an olympiad statement: Legend, Input, Output (the posts), Examples (the facts, with a "Run the next test" button that answers "Accepted on test N"), Clarifications (contact) |
 
+## Chosen direction: D (`d-olimpiada.html`)
+
+Diego preferred a mix of B and C (A was rejected). D keeps C's olympiad-statement structure,
+B's Newsreader type, oxblood accent and then/now photo pair, and fills the page with real
+content from the CV and About page:
+
+- Dark header field: "Problem D. Diego", time/memory/language limits, rotating word, portrait.
+- Legend: short bio with Figure 1 (medals, then) and Figure 2 (IOI 2025 team, now).
+- Constraints: real milestones written as inequalities (IOI 2015 and 2017, team leader since
+  2023, problemsetter since 2019, two Iberoamerican bronzes, OBI gold 2016, AI olympiad 2025).
+- Input: the six places a visitor can go (About, CV, CP resources, problem list, thesis, stories).
+- Output: latest posts in two columns.
+- Examples: the facts as sample tests, with "Run the next test" and an Accepted verdict.
+- Subtasks: projects worth 100 points (40/25/20 and 15 for the other five).
+- Clarifications: oxblood footer with the email large.
+
+Feedback so far: B and C liked, A disliked, C alone felt too empty and plain.
+
 ## Next steps
 
 1. Pick one direction (or mix: for example A's type with C's examples block).
