@@ -7,30 +7,28 @@ layout: base
 {%- assign url = page.url | absolute_url -%}
 <div class="narrow post-head">
   <a class="back-link" href="{{ '/blog/' | relative_url }}">← All posts</a>
-  <div class="post-meta">
-    <span class="date">{{ page.date | date: '%B %-d, %Y' }}</span><span aria-hidden="true">·</span><span>{{ minutes }} min read</span>{% if page.lang %}<span class="lang">{{ page.lang }}</span>{% endif %}
-  </div>
-  <h1 class="h1">{{ page.title }}</h1>
+  <h1 class="post-title">{{ page.title }}</h1>
   {% if page.subtitle and page.subtitle != '' %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+  <p class="post-meta"><span>{{ page.date | date: '%B %-d, %Y' }}</span><span aria-hidden="true">·</span><span>{{ minutes }} min read</span>{% if page.lang == 'ES' %}<span aria-hidden="true">·</span><span>en español</span>{% endif %}</p>
 </div>
 <article class="narrow prose post-body">
   {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
 </article>
 <div class="narrow">
   <div class="share">
-    <span class="label">Share this post</span>
-    <a href="https://twitter.com/intent/tweet?url={{ url | url_encode }}&amp;text={{ page.title | append: '' | url_encode }}" target="_blank" rel="noopener" aria-label="Share on X"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url | url_encode }}" target="_blank" rel="noopener" aria-label="Share on Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-    <button type="button" aria-label="Copy link" data-copy-link="{{ url }}"><i class="fa-solid fa-link"></i></button>
+    <span class="label">Share this post:</span>
+    <a href="https://twitter.com/intent/tweet?url={{ url | url_encode }}&amp;text={{ page.title | append: '' | url_encode }}" target="_blank" rel="noopener">X</a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ url | url_encode }}" target="_blank" rel="noopener">Facebook</a>
+    <button type="button" data-copy-link="{{ url }}">Copy link</button>
   </div>
   {% include comments.html %}
   {%- if page.previous or page.next %}
   <nav class="post-pager" aria-label="More posts">
     {%- if page.previous %}
-    <a class="card" href="{{ page.previous.url | relative_url }}"><span class="label">← Previous post</span><span class="title">{{ page.previous.title }}</span></a>
+    <a href="{{ page.previous.url | relative_url }}"><span class="label">← Previous post</span><span class="title">{{ page.previous.title }}</span></a>
     {%- endif %}
     {%- if page.next %}
-    <a class="card next" href="{{ page.next.url | relative_url }}"><span class="label">Next post →</span><span class="title">{{ page.next.title }}</span></a>
+    <a class="next" href="{{ page.next.url | relative_url }}"><span class="label">Next post →</span><span class="title">{{ page.next.title }}</span></a>
     {%- endif %}
   </nav>
   {%- endif %}

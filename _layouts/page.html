@@ -1,10 +1,11 @@
 ---
 layout: base
 ---
-<div class="wrap page-head">
-  {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
-  <h1 class="h1">{{ page.title }}</h1>
-  {% if page.subtitle and page.subtitle != '' %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+<div class="field">
+  <div class="wrap page-head page-head--dark">
+    <h1 class="h1">{{ page.title }}</h1>
+    {% if page.subtitle and page.subtitle != '' %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+  </div>
 </div>
 <div class="wrap">
   <div class="prose page-body">

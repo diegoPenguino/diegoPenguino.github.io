@@ -2,11 +2,12 @@
 {%- assign cur = page.url | remove: '.html' -%}
 {%- if page.collection == 'projects' -%}{%- assign cur = '/projects' -%}{%- endif -%}
 {%- if page.collection == 'posts' or cur contains '/blog' -%}{%- assign cur = '/blog/' -%}{%- endif -%}
+{%- capture caret -%}<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>{%- endcapture -%}
 <header class="site-header">
-  <div class="site-header__inner">
+  <div class="wrap site-header__inner">
     <a class="brand" href="{{ '/' | relative_url }}">
-      <img src="{{ site.avatar | relative_url }}" alt="" width="42" height="42">
-      <span>{{ site.title }}</span>
+      <img class="brand__img" src="{{ site.avatar | relative_url }}" alt="" width="46" height="46">
+      <span><b>{{ site.author | split: ' ' | slice: 0, 2 | join: ' ' }}</b><small>penguino.space</small></span>
     </a>
     <nav class="nav" aria-label="Main">
       {%- for item in site.data.nav -%}
@@ -14,10 +15,10 @@
           {%- assign active = false -%}
           {%- for c in item.children -%}{%- if c.url == cur -%}{%- assign active = true -%}{%- endif -%}{%- endfor -%}
           <div class="nav__group">
-            <button class="nav__item{% if active %} is-active{% endif %}" type="button" aria-expanded="false" data-dropdown>{{ item.label }} <i class="fa-solid fa-caret-down"></i></button>
+            <button class="nav__item{% if active %} is-active{% endif %}" type="button" aria-expanded="false" data-dropdown>{{ item.label }} {{ caret }}</button>
             <div class="nav__menu">
               {%- for c in item.children -%}
-                <a href="{{ c.url | relative_url }}"{% if c.url contains '://' %} target="_blank" rel="noopener"{% endif %}><span>{{ c.label }}</span><span class="mono">{{ c.hint }}</span></a>
+                <a href="{{ c.url | relative_url }}"{% if c.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ c.label }} <span>{{ c.hint }}</span></a>
               {%- endfor -%}
             </div>
           </div>
@@ -26,20 +27,20 @@
         {%- endif -%}
       {%- endfor -%}
     </nav>
-    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle><i class="fa-solid fa-bars"></i></button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>Menu</button>
   </div>
-  <div class="mobile-menu" id="mobile-menu" hidden>
+  <div class="wrap mobile-menu" id="mobile-menu" hidden>
     <div class="mobile-menu__links">
       {%- for item in site.data.nav -%}
         {%- if item.children -%}
+          <span class="mobile-menu__group">{{ item.label }}</span>
           {%- for c in item.children -%}
-            <a class="is-sub{% if c.url == cur %} is-active{% endif %}" href="{{ c.url | relative_url }}"{% if c.url contains '://' %} target="_blank" rel="noopener"{% endif %}><span>{{ c.label }}</span><span class="mono">{{ item.label }}</span></a>
+            <a class="is-sub{% if c.url == cur %} is-active{% endif %}" href="{{ c.url | relative_url }}"{% if c.url contains '://' %} target="_blank" rel="noopener"{% endif %}>{{ c.label }} <span>{{ c.hint }}</span></a>
           {%- endfor -%}
         {%- else -%}
-          <a class="{% if item.url == cur %}is-active{% endif %}" href="{{ item.url | relative_url }}"><span>{{ item.label }}</span></a>
+          <a class="{% if item.url == cur %}is-active{% endif %}" href="{{ item.url | relative_url }}"{% if item.url == cur %} aria-current="page"{% endif %}>{{ item.label }}</a>
         {%- endif -%}
       {%- endfor -%}
     </div>
-    <div class="socials">{% include socials.html %}</div>
   </div>
 </header>

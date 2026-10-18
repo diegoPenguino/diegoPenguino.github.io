@@ -1,6 +1,7 @@
 // Small progressive enhancements. Every page works without this file.
 (function () {
   'use strict';
+  document.documentElement.classList.add('js');
   var $ = function (sel, root) { return (root || document).querySelector(sel); };
   var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -35,52 +36,110 @@
     if (!e.target.closest('.nav__group')) closeDropdowns();
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeDropdowns(); setMenu(false); }
+    if (e.key !== 'Escape') return;
+    closeDropdowns();
+    if (menu && !menu.hidden) {
+      var inside = menu.contains(document.activeElement);
+      setMenu(false);
+      if (inside) menuBtn.focus();
+    }
   });
 
   // ----- Header: mobile menu -----
-  var header = $('.site-header');
   var menuBtn = $('[data-menu-toggle]');
   var menu = $('#mobile-menu');
+  var closeTimer;
   function setMenu(open) {
     if (!menu) return;
-    menu.hidden = !open;
-    header.classList.toggle('is-menu-open', open);
-    document.body.classList.toggle('menu-open', open);
+    var isOpen = !menu.hidden && !menu.classList.contains('is-closing');
+    if (open === isOpen) return;
+    clearTimeout(closeTimer);
+    if (open) {
+      menu.classList.remove('is-closing');
+      menu.hidden = false;
+    } else if (reduceMotion) {
+      menu.hidden = true;
+    } else {
+      // Let the closing animation play before hiding the menu.
+      menu.classList.add('is-closing');
+      closeTimer = setTimeout(function () { menu.hidden = true; menu.classList.remove('is-closing'); }, 220);
+    }
     menuBtn.setAttribute('aria-expanded', String(open));
-    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
-    $('i', menuBtn).className = open ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    menuBtn.textContent = open ? 'Close' : 'Menu';
   }
   if (menuBtn) {
-    menuBtn.addEventListener('click', function () { setMenu(menu.hidden); });
-    window.addEventListener('resize', function () { if (window.innerWidth >= 1024) setMenu(false); });
+    menuBtn.addEventListener('click', function () { setMenu(menu.hidden || menu.classList.contains('is-closing')); });
+    window.addEventListener('resize', function () { if (window.innerWidth > 900) setMenu(false); });
   }
 
-  // ----- Home: rotating word -----
+  // ----- Home: rotating word, rolled letter by letter -----
+  // The heading keeps a fixed accessible name; the word pauses on hover, focus or a hidden tab.
   var rot = $('[data-rotate]');
   if (rot && !reduceMotion) {
     var words = JSON.parse(rot.getAttribute('data-rotate'));
+    var title = rot.closest('h1');
     var w = 0;
+    var paused = false;
+    if (title) {
+      title.setAttribute('aria-label', title.innerText.replace(/\s+/g, ' ').trim());
+      title.tabIndex = 0;
+      ['mouseenter', 'focus'].forEach(function (ev) { title.addEventListener(ev, function () { paused = true; }); });
+      ['mouseleave', 'blur'].forEach(function (ev) { title.addEventListener(ev, function () { paused = false; }); });
+    }
+    var paint = function (word, cls) {
+      rot.textContent = '';
+      word.split('').forEach(function (c, k) {
+        var span = document.createElement('span');
+        span.className = 'ch ' + cls;
+        span.style.setProperty('--i', k);
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = c;
+        rot.appendChild(span);
+      });
+    };
     setInterval(function () {
+      if (paused || document.hidden) return;
+      var prev = words[w];
       w = (w + 1) % words.length;
-      rot.textContent = words[w];
-      replay(rot, 'is-in');
-    }, 2400);
+      paint(prev, 'out');
+      setTimeout(function () { paint(words[w], 'in'); }, 380 + prev.length * 28);
+    }, 2600);
   }
 
-  // ----- Home: random facts -----
+  // ----- Home: facts as sample tests -----
   var factBtn = $('[data-fact-next]');
   if (factBtn) {
     var facts = JSON.parse(factBtn.getAttribute('data-facts'));
     var fText = $('[data-fact-text]');
-    var fNum = $('[data-fact-num]');
+    var verdict = $('[data-verdict]');
     var f = 0;
     factBtn.addEventListener('click', function () {
       f = (f + 1) % facts.length;
       fText.textContent = facts[f];
-      fNum.textContent = f + 1;
-      replay(fText, 'is-in');
+      if (verdict) { verdict.textContent = 'Accepted on test ' + (f + 1); replay(verdict, 'flash'); }
     });
+  }
+
+  // ----- Home: entrances as sections scroll in (anything already on screen shows at once) -----
+  var ins = $$('[data-in]');
+  if (ins.length) {
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      ins.forEach(function (el) { el.classList.add('on'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var sib = $$(':scope > [data-in]', e.target.parentElement);
+          e.target.style.transitionDelay = Math.max(0, sib.indexOf(e.target)) * 70 + 'ms';
+          e.target.classList.add('on');
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      ins.forEach(function (el) {
+        if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('on');
+        else io.observe(el);
+      });
+    }
   }
 
   // ----- Generic toggle groups: buttons with data-filter-value inside [data-filter-group] -----
@@ -174,6 +233,20 @@
       });
     });
   });
+
+  // ----- Back to top -----
+  var toTop = $('[data-to-top]');
+  if (toTop) {
+    var onScroll = function () { toTop.classList.toggle('is-shown', window.scrollY > window.innerHeight * 0.8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    toTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      var brand = $('.brand');
+      if (brand) brand.focus({ preventScroll: true });
+    });
+  }
 
   // ----- Copy link button -----
   $$('[data-copy-link]').forEach(function (b) {

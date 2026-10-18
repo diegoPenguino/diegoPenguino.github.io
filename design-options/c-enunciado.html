@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option C · Problem statement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<style>
+:root {
+  --ground: #ffffff;
+  --surface: #f1f2f4;
+  --ink: #111214;
+  --muted: #55585e;
+  --accent: #1747c2;      /* links, like a judge's blue */
+  --ok: #0b7a36;          /* the Accepted green, used once */
+  --font: "STIX Two Text", "Times New Roman", serif;
+  --code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --gutter: clamp(16px, 4vw, 48px);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 400 clamp(18px, 1rem + .25vw, 20px)/1.55 var(--font); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-underline-offset: .16em; text-decoration-thickness: .06em; }
+img { display: block; max-width: 100%; height: auto; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter); }
+.col { max-width: 780px; }
+
+.bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px; padding-top: 16px; padding-bottom: 16px; background: var(--surface); }
+.bar-outer { background: var(--surface); }
+.bar__name { font-weight: 700; color: var(--ink); text-decoration: none; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 0 22px; }
+.bar nav a { text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+
+/* Statement header: the one centred moment */
+.head { text-align: center; padding-top: clamp(48px, 8vw, 112px); }
+.head h1 { font-weight: 600; font-size: clamp(40px, 1rem + 5.4vw, 96px); line-height: 1; letter-spacing: -.025em; margin: 0; }
+.head .limits { color: var(--muted); margin: 18px 0 0; font-size: clamp(17px, 1rem + .2vw, 19px); }
+
+.statement { display: grid; grid-template-columns: minmax(0, 780px) minmax(0, 1fr); gap: clamp(32px, 5vw, 80px); margin-top: clamp(48px, 7vw, 96px); align-items: start; }
+.statement h2 { font-weight: 700; font-size: clamp(24px, 1rem + .9vw, 30px); margin: 1.6em 0 .4em; letter-spacing: -.01em; }
+.statement h2:first-child { margin-top: 0; }
+.statement p { margin: 0 0 .9em; max-width: 64ch; }
+.legend-lead { font-size: clamp(22px, 1rem + .9vw, 28px); line-height: 1.35; }
+.statement figure { margin: 0; position: sticky; top: 24px; }
+.statement figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
+.statement figcaption { color: var(--muted); font-size: 16px; padding-top: 10px; font-style: italic; }
+
+/* Sample tests: real input/output blocks, the one place for monospace */
+.sample { display: grid; grid-template-columns: 1fr 1fr; background: var(--surface); margin: 8px 0 12px; }
+.sample > div { padding: 14px 18px; }
+.sample > div + div { background: #e6e8eb; }
+.sample b { display: block; font-size: 16px; margin-bottom: 6px; }
+.sample pre { margin: 0; font: 15px/1.5 var(--code); white-space: pre-wrap; }
+.run { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.run button { font: inherit; font-weight: 600; background: var(--ink); color: #fff; border: 0; border-radius: 0; padding: 0 20px; min-height: 48px; cursor: pointer; transition: transform .15s; }
+.run button:active { transform: translateY(1px); }
+.verdict { color: var(--ok); font-weight: 700; }
+
+.posts { list-style: none; padding: 0; margin: 0; }
+.posts li { padding: 10px 0; }
+.posts a { font-size: clamp(22px, 1rem + .8vw, 28px); line-height: 1.2; }
+.posts .sub { font-style: italic; }
+.posts .meta { display: block; color: var(--muted); font-size: 16px; font-variant-numeric: tabular-nums; }
+
+.notes { display: grid; grid-template-columns: repeat(12, 1fr); gap: clamp(20px, 3vw, 40px); margin-top: 16px; }
+.notes a { text-decoration: none; color: var(--ink); }
+.notes a:hover h3 { color: var(--accent); }
+.notes .shot { background: var(--surface); overflow: hidden; }
+.notes img { width: 100%; object-fit: cover; object-position: top; }
+.notes a:nth-child(1) { grid-column: 1 / 8; }
+.notes a:nth-child(1) img { aspect-ratio: 16 / 10; }
+.notes a:nth-child(2) { grid-column: 8 / 13; }
+.notes a:nth-child(2) img { aspect-ratio: 1 / 1; }
+.notes a:nth-child(3) { grid-column: 1 / 6; }
+.notes a:nth-child(3) img { aspect-ratio: 1 / 1; }
+.notes .wide-text { grid-column: 6 / 13; align-self: center; }
+.notes h3 { font-weight: 700; font-size: clamp(22px, 1rem + .8vw, 28px); margin: 14px 0 4px; }
+.notes p { margin: 0; color: var(--muted); max-width: 48ch; }
+
+.wide { margin-top: clamp(80px, 10vw, 140px); }
+.wide img { width: 100%; aspect-ratio: 21 / 8; object-fit: cover; object-position: 50% 60%; }
+.wide figcaption { color: var(--muted); font-style: italic; font-size: 16px; padding-top: 10px; }
+
+.close { background: var(--ink); color: #fff; margin-top: clamp(80px, 10vw, 140px); padding: clamp(48px, 7vw, 96px) 0 28px; }
+.close h2 { font-weight: 600; font-size: clamp(40px, 1rem + 5vw, 96px); letter-spacing: -.025em; line-height: 1; margin: 0; }
+.close p { max-width: 52ch; margin: 18px 0 0; color: #c9ccd2; }
+.close a { color: #fff; }
+.close ul { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-wrap: wrap; gap: 0 28px; }
+.close ul a { display: inline-flex; min-height: 44px; align-items: center; }
+.close small { display: block; margin-top: 48px; color: #9a9ea6; font-size: 15px; }
+
+@media (max-width: 880px) {
+  .statement { grid-template-columns: 1fr; }
+  .statement figure { position: static; max-width: 300px; }
+  .sample { grid-template-columns: 1fr; }
+  .notes a:nth-child(n), .notes .wide-text { grid-column: 1 / -1; }
+  .wide img { aspect-ratio: 4 / 3; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="bar-outer"><header class="wrap bar">
+  <a class="bar__name" href="#">penguino.space</a>
+  <nav aria-label="Main"><a href="#">About</a><a href="#">Projects</a><a href="#">Blog</a><a href="#">CV</a><a href="#">Resources</a></nav>
+</header></div>
+
+<main>
+  <header class="wrap head">
+    <h1>Problem D. Diego</h1>
+    <p class="limits">time limit per visit: as long as you like · memory limit: one bag of popcorn</p>
+  </header>
+
+  <div class="wrap statement">
+    <div class="col">
+      <h2>Legend</h2>
+      <p class="legend-lead">Diego Angulo Ramírez is a programmer, problemsetter, teacher and student from Cochabamba, Bolivia.</p>
+      <p>He graduated from MIPT and is now on an AI master's. He competed at the IOI in 2015 and 2017, and today he leads Bolivia's team there. This page is his little portion of the Internet.</p>
+
+      <h2>Input</h2>
+      <p>One curious visitor. You may want his <a href="#">CV</a>, his <a href="#">resources for competitive programming</a>, or the <a href="#">problem list</a> he uses to train students for the OBI.</p>
+
+      <h2>Output</h2>
+      <p>Print the latest things he wrote, newest first.</p>
+      <ul class="posts">
+        <li><a href="#">Thank you team</a><span class="meta">January 6, 2026</span></li>
+        <li><a href="#">Carta abierta al equipo IOI</a><span class="meta">June 8, 2025, en español</span></li>
+        <li><a href="#">The paradox of Losing</a> <span class="sub">Trying to find a logic to my life</span><span class="meta">February 1, 2025</span></li>
+        <li><a href="#">Fear Of Missing Out</a> <span class="sub">Every other life is better than mine.</span><span class="meta">April 6, 2024</span></li>
+        <li><a href="#">2023</a> <span class="sub">About letting go, and growing up</span><span class="meta">January 28, 2024</span></li>
+      </ul>
+      <p><a href="#">All posts</a></p>
+
+      <h2>Examples</h2>
+      <div class="sample">
+        <div><b>input</b><pre data-in>tell me a fact about diego</pre></div>
+        <div><b>output</b><pre data-fact aria-live="polite">I have a serious addiction to popcorn.</pre></div>
+      </div>
+      <div class="run"><button type="button" data-fact-next>Run the next test</button><span class="verdict" data-verdict>Accepted on test 1</span></div>
+    </div>
+    <figure><img src="../assets/img/diego_prime.jpg" alt="Diego in Moscow at night" width="960" height="1280"><figcaption>The author, Moscow.</figcaption></figure>
+  </div>
+
+  <section class="wrap" aria-labelledby="h-notes" style="padding-top: clamp(80px, 10vw, 140px)">
+    <h2 id="h-notes" style="font-weight:700;font-size:clamp(28px,1rem + 1.6vw,44px);margin:0">Note: things he has built</h2>
+    <div class="notes">
+      <a href="#"><div class="shot"><img src="../assets/img/projects/obi-web.png" alt="Screenshot of the OBI website" width="1600" height="875" loading="lazy"></div><h3>OBI website</h3><p>The official site of the Bolivian Olympiad in Informatics. Static Astro on Cloudflare Pages.</p></a>
+      <a href="#"><div class="shot"><img src="../assets/img/projects/obia-chat.png" alt="Screenshot of OBIA-ChatBot" width="997" height="933" loading="lazy"></div><h3>OBIA-ChatBot</h3><p>A chatbot for AI contests, with per-contest limits and admin controls.</p></a>
+      <a href="#"><div class="shot"><img src="../assets/img/projects/post-contest-edit.png" alt="Diagram of the editorial generator agents" width="725" height="730" loading="lazy"></div><h3>Editorial Generator</h3><p>Statement plus accepted solution in, editorial out. LangGraph agents.</p></a>
+      <p class="wide-text">Five more in <a href="#">all projects</a>: AlgoCritic, a CSES test downloader, a territory war game, a CoinGecko anomaly tracker and LinkedBot.</p>
+    </div>
+  </section>
+
+  <figure class="wrap wide">
+    <img src="../assets/img/Szeged.jpg" alt="Bolivian students sitting on the SZEGED letters" width="1280" height="720" loading="lazy">
+    <figcaption>Szeged, Hungary.</figcaption>
+  </figure>
+</main>
+
+<footer class="close">
+  <div class="wrap">
+    <h2>Clarifications</h2>
+    <p>Questions about the problem go to the author. He answers faster than most juries.</p>
+    <ul>
+      <li><a href="mailto:diegoangulo5@gmail.com">diegoangulo5@gmail.com</a></li>
+      <li><a href="https://github.com/diegoPenguino">GitHub</a></li>
+      <li><a href="https://t.me/diegopenguino">Telegram</a></li>
+      <li><a href="https://instagram.com/diegopenguino">Instagram</a></li>
+      <li><a href="https://facebook.com/diego.anguloramirez">Facebook</a></li>
+    </ul>
+    <small>Diego Angulo Ramírez, 2026.</small>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const facts = ["I have a serious addiction to popcorn.", "Liverpool FC and FC Barcelona fan.", "Best fried chicken in the world: KFC, Terminal F, Miami Int Airport.", "The Chainsmokers got me through 2017 and 2018. I owe them.", "I did a lot of interesting things, but I might be close to a prime…", "Sometimes I get lost inside my mind. Not ignoring you, promise."];
+  let f = 0; const out = document.querySelector('[data-fact]'), v = document.querySelector('[data-verdict]');
+  document.querySelector('[data-fact-next]').addEventListener('click', () => {
+    f = (f + 1) % facts.length; out.textContent = facts[f]; v.textContent = 'Accepted on test ' + (f + 1);
+  });
+})();
+</script>
+</body>
+</html>

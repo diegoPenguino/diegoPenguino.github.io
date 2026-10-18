@@ -74,6 +74,7 @@ exclude:
   - AGENTS.md
   - CLAUDE.md
   - firebase/
+  - design-options/
 
 plugins:
   - jekyll-sitemap

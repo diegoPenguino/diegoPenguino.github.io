@@ -2,9 +2,52 @@
 layout: home
 title: My little portion of Internet
 description: Diego Angulo Ramírez's personal site. Programmer, problemsetter, teacher and student from Cochabamba, Bolivia.
-bio: "I'm **Diego Angulo Ramírez**: programmer, problemsetter, teacher and student from Cochabamba. MIPT graduate, now on an AI masters."
+body-class: home
+lead: "I'm Diego Angulo Ramírez: programmer, problemsetter, teacher and student from Cochabamba."
+bio: MIPT graduate, now on an AI master's. I lead Bolivia's team at the International Olympiad in Informatics.
 portrait: /assets/img/diego_prime.jpg
+portrait-alt: Diego in Moscow at night
+portrait-caption: "Me - Moscow, 2023"
 rotating-words: [Internet., Bolivia., olympiads., thoughts., pizza.]
+
+# The page below the header reads as an olympiad statement.
+problem-title: Problem D. Diego
+limits:
+  - [time limit per visit, as long as you like]
+  - [memory limit, as much as Cloudflare allows me]
+  - [input / output, English and Spanish]
+legend:
+  - Diego was born in Bolivia and raised for some years in Argentina. He studied Applied Mathematics and Computer Science at MIPT, in Moscow, and is now on an AI master's there.
+  - He competed at the IOI in 2015 and 2017. Since 2019 he writes problems for the Bolivian Olympiad in Informatics, and since 2023 he leads Bolivia's team at the IOI, including 2025, when Bolivia hosted it. By day he is an AI engineer and backend developer.
+  - Your task is to find out what else he has been up to.
+figures:
+  - src: /assets/img/3medals.jpg
+    alt: Diego as a student wearing three olympiad medals
+    caption: "Then: a contestant with three medals."
+  - src: /assets/img/bolivia-ioi-team-2025.jpg
+    alt: Bolivia's IOI 2025 delegation on a rooftop
+    caption: "Now: the team he led at IOI 2025, at home."
+# Each constraint: math (HTML allowed) and what it means.
+constraints:
+  - math: "<i>IOI</i> ∈ {2015, 2017}"
+    what: Years he competed at the International Olympiad in Informatics.
+  - math: "2023 ≤ <i>leader</i>"
+    what: Bolivia's IOI team leader every year since 2023.
+  - math: "2019 ≤ <i>problemsetter</i>"
+    what: Writing problems, tests and checkers for the OBI.
+  - math: "<i>bronze</i> = 2"
+    what: Iberoamerican Olympiad in Informatics, 2015 and 2017.
+  - math: "<i>OBI</i><sub>2016</sub> = gold"
+    what: National olympiad, level 3, after bronze, silver and bronze in 2013 to 2015.
+  - math: "<i>AI olympiad</i> ≥ 2025"
+    what: Founded and directs the Bolivian Olympiad in AI.
+doors:
+  - [About me, /aboutme, "Who he is, and the facts nobody asked for."]
+  - [CV, /cv, "Experience, olympiads, talks and skills."]
+  - [CP resources, /resources_for_cp, "A guide for starting competitive programming, in Spanish."]
+  - [Problem list, /problemlist, The problems he uses to train OBI students.]
+  - [Thesis, "https://github.com/diegoPenguino/Diabetic-Retinopathy", Federated learning for diabetic retinopathy.]
+  - [Stories, /story, "Fiction, when the mind wanders."]
 facts:
   - I have a serious addiction to popcorn.
   - Liverpool FC and FC Barcelona fan.
@@ -12,6 +55,10 @@ facts:
   - The Chainsmokers got me through 2017 and 2018. I owe them.
   - I did a lot of interesting things, but I might be close to a prime…
   - Sometimes I get lost inside my mind. Not ignoring you, promise.
-# Project file names (in _projects/) shown under "Things I've built"
-featured-projects: [OBI-Website, OBIA-ChatBot, Post-Contest-Editorial-Generator]
+# Project file names (in _projects/) shown as subtasks, with their points.
+# Every other project is listed under the last subtask with the remaining points.
+subtasks:
+  - [OBI-Website, 40]
+  - [OBIA-ChatBot, 25]
+  - [Post-Contest-Editorial-Generator, 20]
 ---

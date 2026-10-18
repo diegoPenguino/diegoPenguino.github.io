@@ -1,47 +1,52 @@
 ---
 layout: base
 ---
-<section class="wrap about-hero">
-  <div>
-    {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
+<div class="field">
+  <div class="wrap page-head page-head--dark">
     <h1 class="h1">{{ page.heading | default: page.title }}</h1>
     {% if page.subtitle %}<p class="subtitle">{{ page.subtitle }}</p>{% endif %}
+  </div>
+</div>
+
+<section class="wrap about-intro">
+  <div class="about-intro__text">
     {%- for para in page.intro %}
-    <p class="body">{{ para | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
+    <p>{{ para | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
     {%- endfor %}
   </div>
   {%- if page.photo %}
-  <figure class="photo-tag">
+  <figure class="about-intro__fig">
     <img src="{{ page.photo | relative_url }}" alt="{{ page.photo-alt }}">
-    {% if page.photo-label %}<span>{{ page.photo-label | escape }}</span>{% endif %}
+    {% if page.photo-label %}<figcaption>{{ page.photo-label | escape }}</figcaption>{% endif %}
   </figure>
   {%- endif %}
 </section>
 
-<section class="wrap section" aria-labelledby="olympiad">
-  <div class="rule-head"><h2 id="olympiad">The olympiad side</h2></div>
-  <div class="grid-cards">
-    {%- for t in page.olympiad %}
-    <div class="card tl-card">
-      <span class="when">{{ t.when }}</span>
-      <span class="title">{{ t.title }}</span>
-      <span class="text">{{ t.text }}</span>
-    </div>
-    {%- endfor %}
+<section class="band" aria-labelledby="olympiad">
+  <div class="wrap">
+    <h2 class="sec" id="olympiad">The olympiad side</h2>
+    <ul class="timeline">
+      {%- for t in page.olympiad %}
+      <li><span class="timeline__when">{{ t.when }}</span><div><b>{{ t.title }}</b><span>{{ t.text }}</span></div></li>
+      {%- endfor %}
+    </ul>
   </div>
 </section>
 
 <section class="wrap section" aria-labelledby="random">
-  <div class="rule-head"><h2 id="random">Random stuff about me</h2><span class="count">{{ page.random-facts.size }} facts</span></div>
-  <ol class="num-list">
+  <h2 class="sec" id="random">Random stuff about me</h2>
+  <p class="sec-lead">{{ page.random-facts.size }} facts, in no particular order.</p>
+  <ul class="facts">
     {%- for f in page.random-facts %}
-    <li><span class="n">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span><span class="t">{{ f | markdownify | remove: '<p>' | remove: '</p>' | strip }}</span></li>
+    <li>{{ f | markdownify | remove: '<p>' | remove: '</p>' | strip }}</li>
     {%- endfor %}
-  </ol>
+  </ul>
 </section>
 
-<section class="wrap tiles">
+{%- if page.tiles %}
+<section class="wrap statements" aria-label="Two more things">
   {%- for t in page.tiles %}
-  <div class="tile{% if t.accent %} tile--accent{% endif %}"><span class="label">{{ t.label }}</span><span class="big">{{ t.text }}</span></div>
+  <p class="statement{% if t.accent %} statement--accent{% endif %}">{% if t.label %}<span>{{ t.label }}</span>{% endif %}{{ t.text }}</p>
   {%- endfor %}
 </section>
+{%- endif %}

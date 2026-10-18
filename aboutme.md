@@ -2,7 +2,6 @@
 layout: about
 title: Who is Diego Angulo?
 heading: Who is<br>Diego Angulo?
-kicker: 01 / about me
 subtitle: A little about my mission on this planet.
 intro:
   - "My name is **Diego Alejandro Angulo Ramírez**, graduate of Applied Mathematics and Computer Science at [MIPT](https://mipt.ru/english/). Born in Bolivia, raised for some years in Argentina. Both in my heart. I have 4 siblings, and I love each one of them with all my heart."
@@ -34,8 +33,7 @@ random-facts:
   - Music from [The Chainsmokers](https://www.youtube.com/watch?v=eACohWVwTOc_) helped me to go through 2017 and 2018, I owe them a part of my life.
   - Live and let live, leave and let go.
 tiles:
-  - label: belief
-    text: I do believe in causality.
+  - text: I do believe in causality.
   - label: MBTI
     text: ENTJ
     accent: true
