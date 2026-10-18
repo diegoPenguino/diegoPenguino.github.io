@@ -54,7 +54,9 @@ content from the CV and About page:
 
 Feedback so far: B and C liked, A disliked, C alone felt too empty and plain. On D: the
 oxblood footer was disliked, and the page must open with the rotating "My little portion of"
-headline rather than "Problem D. Diego".
+headline rather than "Problem D. Diego". Everything felt too large at 100% zoom, so the type
+scale was reduced by about 18%. The rotating word now rolls letter by letter, and the header
+brings back the Chilly Willy penguin with the real nav (Resources and What's in here? menus).
 
 ## Next steps
 
