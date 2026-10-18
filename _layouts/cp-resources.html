@@ -2,10 +2,11 @@
 layout: base
 ---
 {%- assign d = site.data.cp_resources -%}
-<div class="wrap page-head">
-  {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
-  <h1 class="h1 res-title">{{ page.title }}</h1>
-  <div class="lede res-lede">{{ page.lede | markdownify }}</div>
+<div class="field">
+  <div class="wrap page-head page-head--dark">
+    <h1 class="h1 res-title">{{ page.title }}</h1>
+    <div class="lede res-lede">{{ page.lede | markdownify }}</div>
+  </div>
 </div>
 
 <div class="wrap res-layout">

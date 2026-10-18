@@ -36,11 +36,16 @@
     if (!e.target.closest('.nav__group')) closeDropdowns();
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { closeDropdowns(); setMenu(false); }
+    if (e.key !== 'Escape') return;
+    closeDropdowns();
+    if (menu && !menu.hidden) {
+      var inside = menu.contains(document.activeElement);
+      setMenu(false);
+      if (inside) menuBtn.focus();
+    }
   });
 
   // ----- Header: mobile menu -----
-  var header = $('.site-header');
   var menuBtn = $('[data-menu-toggle]');
   var menu = $('#mobile-menu');
   var closeTimer;
@@ -59,8 +64,6 @@
       menu.classList.add('is-closing');
       closeTimer = setTimeout(function () { menu.hidden = true; menu.classList.remove('is-closing'); }, 220);
     }
-    header.classList.toggle('is-menu-open', open);
-    document.body.classList.toggle('menu-open', open);
     menuBtn.setAttribute('aria-expanded', String(open));
     menuBtn.textContent = open ? 'Close' : 'Menu';
   }
@@ -70,20 +73,36 @@
   }
 
   // ----- Home: rotating word, rolled letter by letter -----
+  // The heading keeps a fixed accessible name; the word pauses on hover, focus or a hidden tab.
   var rot = $('[data-rotate]');
   if (rot && !reduceMotion) {
     var words = JSON.parse(rot.getAttribute('data-rotate'));
+    var title = rot.closest('h1');
     var w = 0;
+    var paused = false;
+    if (title) {
+      title.setAttribute('aria-label', title.innerText.replace(/\s+/g, ' ').trim());
+      title.tabIndex = 0;
+      ['mouseenter', 'focus'].forEach(function (ev) { title.addEventListener(ev, function () { paused = true; }); });
+      ['mouseleave', 'blur'].forEach(function (ev) { title.addEventListener(ev, function () { paused = false; }); });
+    }
     var paint = function (word, cls) {
-      return word.split('').map(function (c, k) {
-        return '<span class="ch ' + cls + '" style="--i:' + k + '" aria-hidden="true">' + c + '</span>';
-      }).join('') + '<span class="sr-only">' + word + '</span>';
+      rot.textContent = '';
+      word.split('').forEach(function (c, k) {
+        var span = document.createElement('span');
+        span.className = 'ch ' + cls;
+        span.style.setProperty('--i', k);
+        span.setAttribute('aria-hidden', 'true');
+        span.textContent = c;
+        rot.appendChild(span);
+      });
     };
     setInterval(function () {
+      if (paused || document.hidden) return;
       var prev = words[w];
       w = (w + 1) % words.length;
-      rot.innerHTML = paint(prev, 'out');
-      setTimeout(function () { rot.innerHTML = paint(words[w], 'in'); }, 380 + prev.length * 28);
+      paint(prev, 'out');
+      setTimeout(function () { paint(words[w], 'in'); }, 380 + prev.length * 28);
     }, 2600);
   }
 

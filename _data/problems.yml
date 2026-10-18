@@ -17,7 +17,7 @@
       links:
         - { label: "PDF", url: "/assets/problems/2023/peluche/statement/statement.pdf", kind: pdf }
       solutions:
-        - { label: "Solution by Gilberto C++", url: "/assets/problems/2023/peluche/sol/gauss_sol.cpp" }
+        - { label: "Solution by Gilberto C++", url: "/assets/problems/2023/peluche/sol/gilberto_sol.cpp" }
         - { label: "Solution by Gauss C++", url: "/assets/problems/2023/peluche/sol/gauss_sol.cpp" }
         - { label: "Subtasks 1,4,5 Python", url: "/assets/problems/2023/peluche/sol/subtask1_4_5.py" }
         - { label: "Subtasks 2,5,6 Python", url: "/assets/problems/2023/peluche/sol/subtask2_5_6.py" }

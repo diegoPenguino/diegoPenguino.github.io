@@ -2,7 +2,6 @@
 layout: problemlist
 title: Problems written and set by me
 title-es: Problemas escritos y creados por mí
-kicker: resources / problems
 # Problems live in _data/problems.yml
 intro-en: |
   Here I will list a set of Competitive Programming problems ***written and created*** by me.<br>

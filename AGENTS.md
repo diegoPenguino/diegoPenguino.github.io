@@ -89,8 +89,10 @@ Cloud Firestore, called straight from the browser (no server). The SDK loads onl
 
 ## Conventions
 
-- Reuse the CSS variables and existing components (`.card`, `.btn`, `.chip`, `.filter`,
-  `.rule-head`, `.kicker`, `.h1`) before adding new styles. Keep touch targets at least 44px.
+- Reuse the CSS variables and existing components (`.field`, `.band`, `.btn`, `.filter`,
+  `.limits`, `.h1`, `h2.sec`) before adding new styles. Keep touch targets at least 44px.
+- House style (see `design-options/README.md`): Newsreader only, square corners, no shadows on
+  things at rest, no monospace outside real code, no index numbers or small labels above titles.
 - Add new top-level files that should not be published to `exclude:` in `_config.yml`.
 - Large PDFs at the repo root are linked from pages; do not rename them
   without updating the links.

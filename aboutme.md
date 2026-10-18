@@ -2,7 +2,6 @@
 layout: about
 title: Who is Diego Angulo?
 heading: Who is<br>Diego Angulo?
-kicker: 01 / about me
 subtitle: A little about my mission on this planet.
 intro:
   - "My name is **Diego Alejandro Angulo Ramírez**, graduate of Applied Mathematics and Computer Science at [MIPT](https://mipt.ru/english/). Born in Bolivia, raised for some years in Argentina. Both in my heart. I have 4 siblings, and I love each one of them with all my heart."

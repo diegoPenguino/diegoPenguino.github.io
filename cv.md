@@ -1,7 +1,6 @@
 ---
 title: CV
 layout: cv
-kicker: 04 / curriculum vitae
 heading: Diego A.<br>Angulo Ramírez
 summary: "**AI Engineer** focused on building LLM-powered backend systems, RAG pipelines, agentic workflows, and AI automation tools. Experience integrating OpenAI/Gemini APIs into production-oriented services using Python, FastAPI, Java, Spring Boot, vector databases, structured outputs, and workflow automation. Strong foundation in algorithms, applied machine learning, and backend architecture, with leadership experience in international competitive programming and AI education initiatives."
 location: Cochabamba, Bolivia
