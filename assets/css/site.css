@@ -177,7 +177,22 @@ a.card:hover, .card--link:hover { background: var(--soft-2); color: var(--text);
   .mobile-menu__links a.is-sub { padding-left: 16px; font-size: 18px; }
   .mobile-menu__links a.is-active { color: var(--accent-light); }
   .mobile-menu__group { color: var(--field-muted); font-style: italic; font-size: 16px; padding-top: 10px; }
+  .mobile-menu:not([hidden]) .mobile-menu__links { transform-origin: top; animation: menuIn .32s var(--ease) both; }
+  .mobile-menu:not([hidden]) .mobile-menu__links > * { animation: menuItemIn .38s var(--ease) both; }
+  .mobile-menu__links > :nth-child(2) { animation-delay: 30ms !important; }
+  .mobile-menu__links > :nth-child(3) { animation-delay: 60ms !important; }
+  .mobile-menu__links > :nth-child(4) { animation-delay: 90ms !important; }
+  .mobile-menu__links > :nth-child(5) { animation-delay: 120ms !important; }
+  .mobile-menu__links > :nth-child(6) { animation-delay: 150ms !important; }
+  .mobile-menu__links > :nth-child(7) { animation-delay: 180ms !important; }
+  .mobile-menu__links > :nth-child(8) { animation-delay: 210ms !important; }
+  .mobile-menu__links > :nth-child(n+9) { animation-delay: 240ms !important; }
+  .mobile-menu.is-closing .mobile-menu__links { animation: menuOut .22s cubic-bezier(.5, 0, .75, 0) both; }
+  .mobile-menu.is-closing .mobile-menu__links > * { animation: none; }
 }
+@keyframes menuIn { from { opacity: 0; transform: translateY(-10px) scaleY(.96); } }
+@keyframes menuItemIn { from { opacity: 0; transform: translateY(-6px); } }
+@keyframes menuOut { to { opacity: 0; transform: translateY(-8px) scaleY(.97); } }
 
 /* ---------- Footer ---------- */
 .site-footer { background: var(--field); color: var(--field-ink); margin-top: var(--gap); padding: clamp(48px, 6vw, 88px) 0 28px; }
