@@ -10,7 +10,7 @@ layout: base
       <p class="hero__bio">{{ page.bio }}</p>
     </div>
     <figure class="hero__fig">
-      <img src="{{ page.portrait | relative_url }}" alt="{{ page.portrait-alt }}" width="960" height="1280">
+      {% include img.html src=page.portrait alt=page.portrait-alt width="960" height="1280" priority=true %}
       <figcaption>{{ page.portrait-caption }}</figcaption>
     </figure>
   </section>
@@ -34,7 +34,7 @@ layout: base
   </div>
   <div class="figs" data-in>
     {%- for f in page.figures %}
-    <figure><img src="{{ f.src | relative_url }}" alt="{{ f.alt }}" loading="lazy"><figcaption><i>Figure {{ forloop.index }}.</i> {{ f.caption }}</figcaption></figure>
+    <figure>{% include img.html src=f.src alt=f.alt width=f.width height=f.height %}<figcaption><i>Figure {{ forloop.index }}.</i> {{ f.caption }}</figcaption></figure>
     {%- endfor %}
   </div>
 </section>
@@ -94,7 +94,8 @@ layout: base
       {%- assign wanted = '/projects/' | append: t[0] | append: '/' -%}
       {%- for p in site.projects -%}{%- if p.url == wanted -%}
       <a class="task task--{{ forloop.parentloop.index }}" href="{{ p.url | relative_url }}" data-in>
-        <div class="task__shot"><img src="{{ p.thumbnail-img | relative_url }}" alt="Preview of {{ p.name | default: p.title }}" loading="lazy"></div>
+        {%- capture shot_alt %}Preview of {{ p.name | default: p.title }}{% endcapture -%}
+        <div class="task__shot">{% include img.html src=p.thumbnail-img alt=shot_alt %}</div>
         <span class="task__pts">Subtask {{ forloop.parentloop.index }}, {{ t[1] }} points</span>
         <h3>{{ p.name | default: p.title }}</h3>
         <p>{{ p.description }}</p>

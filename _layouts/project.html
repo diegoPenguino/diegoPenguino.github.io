@@ -18,7 +18,8 @@ layout: base
   </div>
 </div>
 {%- if page.thumbnail-img %}
-<div class="wrap detail-shot"><img src="{{ page.thumbnail-img | relative_url }}" alt="Preview of {{ page.name | default: page.title }}"></div>
+{%- capture shot_alt %}Preview of {{ page.name | default: page.title }}{% endcapture -%}
+<div class="wrap detail-shot">{% include img.html src=page.thumbnail-img alt=shot_alt priority=true %}</div>
 {%- endif %}
 <article class="narrow prose detail-body">
   {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}

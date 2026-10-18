@@ -11,7 +11,7 @@ layout: base
 <div class="wrap project-list">
   {%- for p in dated %}
   <article class="project-row">
-    <a class="project-row__shot" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true"><img src="{{ p.thumbnail-img | relative_url }}" alt="" loading="lazy"></a>
+    <a class="project-row__shot" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true">{% include img.html src=p.thumbnail-img alt="" %}</a>
     <div class="project-row__text">
       <span class="project-row__date">{{ p.date | date: '%B %Y' }}</span>
       <h2><a href="{{ p.url | relative_url }}">{{ p.name | default: p.title }}</a></h2>
