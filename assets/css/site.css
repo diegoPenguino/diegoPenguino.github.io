@@ -579,8 +579,23 @@ a.task:hover .task__shot img { transform: scale(1.025); }
 
 /* ---------- Generic page / 404 ---------- */
 .page-body { padding-top: clamp(28px, 4vw, 44px); max-width: 920px; }
-.notfound { text-align: center; padding-top: clamp(48px, 8vw, 96px); }
-.notfound img { max-width: min(100%, 420px); margin-top: 28px; }
+.nf-verdict { margin: 0 0 14px; color: var(--accent-light); font-weight: 600; font-size: clamp(17px, .9rem + .3vw, 20px); }
+.nf-body { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(32px, 5vw, 88px); padding-top: clamp(48px, 6vw, 88px); align-items: start; }
+.nf-samples { display: grid; gap: 2px; margin-bottom: 28px; }
+.nf-samples > div { background: var(--soft); padding: 14px 18px; display: grid; grid-template-columns: 9rem 1fr; gap: 4px 16px; align-items: baseline; }
+.nf-samples b { font-weight: 400; font-style: italic; color: var(--muted); }
+.nf-samples pre { margin: 0; font: 16px/1.5 var(--code); white-space: pre-wrap; overflow-wrap: anywhere; }
+.nf-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 24px; margin-top: 18px; }
+.nf-actions a:not(.btn) { color: var(--ink); text-decoration: underline; min-height: 44px; display: inline-flex; align-items: center; }
+.nf-actions a:not(.btn):hover { color: var(--accent); }
+.nf-fig { margin: 0; }
+.nf-fig img { display: block; width: 100%; }
+.nf-fig figcaption { color: var(--muted); font-size: 16px; padding-top: 10px; }
+.nf-fig figcaption i { color: var(--ink); }
+@media (max-width: 760px) {
+  .nf-body { grid-template-columns: 1fr; }
+  .nf-samples > div { grid-template-columns: 1fr; }
+}
 
 /* Whole resource card is clickable through its title link; links inside the note stay usable. */
 .res-card { position: relative; }
