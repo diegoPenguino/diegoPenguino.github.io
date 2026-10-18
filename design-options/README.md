@@ -41,7 +41,8 @@ Diego preferred a mix of B and C (A was rejected). D keeps C's olympiad-statemen
 B's Newsreader type, oxblood accent and then/now photo pair, and fills the page with real
 content from the CV and About page:
 
-- Dark header field: "Problem D. Diego", time/memory/language limits, rotating word, portrait.
+- Dark header field: "My little portion of <rotating word>", short bio, portrait.
+- "Problem D. Diego" opens the statement below the header, with time/memory/language limits.
 - Legend: short bio with Figure 1 (medals, then) and Figure 2 (IOI 2025 team, now).
 - Constraints: real milestones written as inequalities (IOI 2015 and 2017, team leader since
   2023, problemsetter since 2019, two Iberoamerican bronzes, OBI gold 2016, AI olympiad 2025).
@@ -49,9 +50,11 @@ content from the CV and About page:
 - Output: latest posts in two columns.
 - Examples: the facts as sample tests, with "Run the next test" and an Accepted verdict.
 - Subtasks: projects worth 100 points (40/25/20 and 15 for the other five).
-- Clarifications: oxblood footer with the email large.
+- Clarifications: dark footer (same field as the header) with the email large.
 
-Feedback so far: B and C liked, A disliked, C alone felt too empty and plain.
+Feedback so far: B and C liked, A disliked, C alone felt too empty and plain. On D: the
+oxblood footer was disliked, and the page must open with the rotating "My little portion of"
+headline rather than "Problem D. Diego".
 
 ## Next steps
 
