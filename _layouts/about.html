@@ -16,7 +16,7 @@ layout: base
   </div>
   {%- if page.photo %}
   <figure class="about-intro__fig">
-    <img src="{{ page.photo | relative_url }}" alt="{{ page.photo-alt }}">
+    {% include img.html src=page.photo alt=page.photo-alt priority=true %}
     {% if page.photo-label %}<figcaption>{{ page.photo-label | escape }}</figcaption>{% endif %}
   </figure>
   {%- endif %}

@@ -64,7 +64,7 @@ browser at desktop and mobile widths.
 | Story | `story.md` (`layout: story`) | `---` in the text renders as the three-dot section break |
 | Other pages | `links.md`, `something.md`, `404.html` | Generic `page` layout |
 | Standalone pages | `full_rank.html`, `ranking1.html` | Own HTML and styles; not part of the design |
-| Images | `assets/img/` (project thumbnails in `assets/img/projects/`) | Content images get `loading="lazy"` automatically. Prefer WebP over GIF |
+| Images | `assets/img/` (project thumbnails in `assets/img/projects/`) | Layouts render images through `_includes/img.html`, which serves a `.webp` twin when it exists next to the JPG/PNG (keep the original for share images). Make one with `cwebp -q 78 in.jpg -o in.webp`, resized to about 1000-1200px wide. Pass `priority=true` only for the main image above the fold; the rest load lazily |
 | SEO | `_includes/head.html`, `_includes/structured-data.html` | Share image = `share-img`, project thumbnail, or a post's first image; JSON-LD BlogPosting/Person |
 
 Posts and pages mix English and Spanish; keep each piece in the language it was written in.

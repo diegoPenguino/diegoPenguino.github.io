@@ -27,7 +27,7 @@ layout: base
     {%- include post-image.html post=post %}
   <div class="wrap featured" data-featured data-lang="{{ post.lang }}" data-text="{{ text }}">
     <a href="{{ post.url | relative_url }}">
-      {% if post_img != '' %}<img src="{{ post_img | relative_url }}" alt="">{% endif %}
+      {% if post_img != '' %}{% include img.html src=post_img alt="" priority=true %}{% endif %}
       <div class="featured__text">
         <span class="meta">Latest, {{ post.date | date: '%B %-d, %Y' }}{% if post.lang == 'ES' %}, en español{% endif %}</span>
         <span class="title">{{ post.title }}</span>

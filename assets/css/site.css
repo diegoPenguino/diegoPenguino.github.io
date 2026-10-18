@@ -48,6 +48,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; height: auto; }
+picture { display: contents; }
 [hidden] { display: none !important; }
 a { color: var(--accent); text-decoration: none; text-underline-offset: .18em; text-decoration-thickness: .06em; transition: color .2s, background .2s; }
 a:hover { color: var(--ink); }
