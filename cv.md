@@ -106,21 +106,21 @@ education:
     title: Master's coursework in Modern Artificial Intelligence
     place: "[Moscow Institute of Physics and Technology](https://mipt.ru/english/) · Online"
 skills:
-  - group: ai & llm engineering
+  - group: AI & LLM engineering
     items: [OpenAI APIs, Gemini API, AWS Bedrock, Llama, LLM integration, Generative AI, Fine-tuning, RAG, Embeddings, Vector databases, ChromaDB, Structured outputs, Tool-calling agents, Agent design, Multi-agent systems, CrewAI, LangChain, LangGraph, DeepAgents, LLM workflow orchestration, Advanced prompting, AI automation, TensorFlow, PyTorch, Computer vision, Machine learning]
-  - group: programming & frameworks
+  - group: Programming & frameworks
     items: [Python, NumPy, Pandas, SciPy, Matplotlib, Django, FastAPI, SQLAlchemy, Java, Spring Boot, Spring AI, C++, SQL, JavaScript, C#, R]
-  - group: backend & cloud
+  - group: Backend & cloud
     items: [REST APIs, API design, Microservices, Backend development, Enterprise system integration, LLM-integrated backends, Event-driven systems, Authentication, Redis, PostgreSQL, Docker, Docker Compose, Git, CI/CD, Google Cloud, AWS, Self-hosted deployments, Home server]
-  - group: automation & bots
+  - group: Automation & bots
     items: [Telegram Bot API, Webhooks, n8n, Workflow automation, Scheduled tasks, Reminder systems, Google Calendar integrations, Human-in-the-loop workflows, Productivity automation]
-  - group: data & retrieval
+  - group: Data & retrieval
     items: [Data preprocessing, Web scraping (BeautifulSoup), PySpark, Database design, Semantic search, Retrieval pipelines, Knowledge-grounded AI, Mathematical optimization, Constraint programming]
-  - group: foundations
+  - group: Foundations
     items: [Algorithms & data structures, Machine learning, Graph networks, Graph theory, Parallel & distributed programming, Statistics & probability, Competitive programming]
-  - group: operating systems
+  - group: Operating systems
     items: [Debian, Ubuntu, Windows]
-  - group: professional
+  - group: Professional
     items: [Analytical thinking, Proactive mindset, Calm under pressure, Collaboration, Technical leadership, Problem solving, Fast learning]
 languages:
   - [Spanish, Native]

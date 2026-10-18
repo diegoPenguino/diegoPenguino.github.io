@@ -77,4 +77,5 @@ Option D is now the real home (`_layouts/home.html`, content in `index.html` fro
 The header, footer, posts, project pages, the projects index and the blog index were rebuilt in
 the same style. About, CV, CP resources, problem list, story and the generic pages only inherit
 the new tokens (Newsreader, palette, square corners) and still need their own pass.
+About and CV were rebuilt afterwards (dark header, timeline, facts without numbers, skills as text).
 Screenshots of the live pages are the `live-*.png` files in `screenshots/`.
