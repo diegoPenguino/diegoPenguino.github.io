@@ -1,18 +1,23 @@
 {%- assign s = site.social-network-links -%}
 <footer class="site-footer">
-  <div class="wrap">
-    <h2 class="site-footer__title">Clarifications</h2>
-    <p class="site-footer__lead">Questions about the problem go to the author. He answers faster than most juries.</p>
-    {%- if s.email %}
-    <a class="site-footer__mail" href="mailto:{{ s.email }}">{{ s.email }}</a>
-    {%- endif %}
-    <ul class="site-footer__links">
-      {%- if s.github %}<li><a href="https://github.com/{{ s.github }}" target="_blank" rel="noopener">GitHub</a></li>{% endif %}
-      {%- if s.telegram %}<li><a href="https://t.me/{{ s.telegram }}" target="_blank" rel="noopener">Telegram</a></li>{% endif %}
-      {%- if s.instagram %}<li><a href="https://www.instagram.com/{{ s.instagram }}" target="_blank" rel="noopener">Instagram</a></li>{% endif %}
-      {%- if s.facebook %}<li><a href="https://www.facebook.com/{{ s.facebook | uri_escape }}" target="_blank" rel="noopener">Facebook</a></li>{% endif %}
-      <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
-    </ul>
-    <small>{{ site.author }}, {{ 'now' | date: '%Y' }}. penguino.space</small>
+  <div class="wrap site-footer__grid">
+    <div class="site-footer__intro">
+      <h2 class="site-footer__title">Clarifications</h2>
+      <p class="site-footer__lead">Questions about the problem go to the author. He answers faster than most juries.</p>
+    </div>
+    <div class="site-footer__contact">
+      {%- if s.email %}
+      <a class="site-footer__mail" href="mailto:{{ s.email }}">{{ s.email }}</a>
+      {%- endif %}
+      <ul class="site-footer__links">
+        {%- if s.github %}<li><a href="https://github.com/{{ s.github }}" target="_blank" rel="noopener">GitHub</a></li>{% endif %}
+        {%- if s.telegram %}<li><a href="https://t.me/{{ s.telegram }}" target="_blank" rel="noopener">Telegram</a></li>{% endif %}
+        {%- if s.instagram %}<li><a href="https://www.instagram.com/{{ s.instagram }}" target="_blank" rel="noopener">Instagram</a></li>{% endif %}
+        {%- if s.facebook %}<li><a href="https://www.facebook.com/{{ s.facebook | uri_escape }}" target="_blank" rel="noopener">Facebook</a></li>{% endif %}
+        <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
+      </ul>
+    </div>
+    <small class="site-footer__meta">{{ site.author }}, {{ 'now' | date: '%Y' }}. penguino.space</small>
   </div>
 </footer>
+<a class="to-top" href="#" aria-label="Back to top" data-to-top><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 8l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>

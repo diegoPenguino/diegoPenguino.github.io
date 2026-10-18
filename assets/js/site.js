@@ -202,6 +202,20 @@
     });
   });
 
+  // ----- Back to top -----
+  var toTop = $('[data-to-top]');
+  if (toTop) {
+    var onScroll = function () { toTop.classList.toggle('is-shown', window.scrollY > window.innerHeight * 0.8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    toTop.addEventListener('click', function (e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      var brand = $('.brand');
+      if (brand) brand.focus({ preventScroll: true });
+    });
+  }
+
   // ----- Copy link button -----
   $$('[data-copy-link]').forEach(function (b) {
     b.addEventListener('click', function () {
