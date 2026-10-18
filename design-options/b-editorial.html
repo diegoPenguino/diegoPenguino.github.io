@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option B · Editorial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<style>
+:root {
+  --ground: #fafaf8;
+  --surface: #efefeb;
+  --ink: #1a1a1a;
+  --muted: #5b5b57;
+  --accent: #8c1d2f;      /* oxblood */
+  --accent-ink: #fafaf8;
+  --font: "Newsreader", Georgia, "Times New Roman", serif;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1280px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 400 clamp(18px, 1rem + .3vw, 21px)/1.55 var(--font); font-optical-sizing: auto; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-underline-offset: .18em; text-decoration-thickness: .06em; }
+img { display: block; max-width: 100%; height: auto; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+.bar { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px; padding-top: 18px; padding-bottom: 18px; }
+.bar__name { font-weight: 500; font-size: 22px; text-decoration: none; letter-spacing: -.01em; }
+.bar nav { display: flex; flex-wrap: wrap; gap: 0 22px; }
+.bar nav a { text-decoration: none; color: var(--muted); min-height: 44px; display: inline-flex; align-items: center; }
+.bar nav a:hover { color: var(--accent); }
+
+.hero { padding-top: clamp(40px, 7vw, 110px); }
+.hero h1 { font-weight: 300; font-size: clamp(52px, 1rem + 8.4vw, 158px); line-height: .92; letter-spacing: -.04em; margin: 0 0 0 -.05em; max-width: 12ch; }
+.hero h1 .rot { font-style: italic; display: inline-block; min-width: 4ch; }
+.hero__grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(24px, 4vw, 64px); margin-top: clamp(40px, 6vw, 88px); align-items: start; }
+.hero__bio { grid-column: 1 / 3; font-size: clamp(24px, 1rem + 1.3vw, 36px); line-height: 1.25; margin: 0; max-width: 26ch; font-weight: 400; }
+.hero__bio + p { grid-column: 1 / 3; color: var(--muted); margin: -12px 0 0; max-width: 44ch; }
+.hero__fig { grid-column: 3; grid-row: 1 / 4; margin: 0; }
+.hero__fig img { aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 30%; width: 100%; }
+.fact { grid-column: 1 / 3; margin: 0; font-style: italic; color: var(--muted); }
+.fact button { font: inherit; font-style: normal; color: var(--accent); background: none; border: 0; padding: 0 0 0 8px; min-height: 44px; cursor: pointer; text-decoration: underline; text-underline-offset: .18em; }
+.fact span { color: var(--ink); }
+
+.block { padding-top: clamp(96px, 12vw, 180px); }
+.block h2 { font-weight: 300; font-size: clamp(40px, 1rem + 4vw, 88px); line-height: .95; letter-spacing: -.035em; margin: 0 0 clamp(24px, 4vw, 48px); }
+.block h2 a { font-size: 20px; letter-spacing: 0; font-weight: 400; color: var(--accent); margin-left: 16px; white-space: nowrap; }
+
+.posts { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: clamp(32px, 5vw, 80px); }
+.posts li { break-inside: avoid; padding-bottom: clamp(24px, 3vw, 40px); }
+.posts a { text-decoration: none; display: block; }
+.posts strong { font-weight: 500; font-size: clamp(26px, 1rem + 1.4vw, 38px); line-height: 1.08; letter-spacing: -.02em; display: block; }
+.posts a:hover strong { color: var(--accent); }
+.posts .sub { display: block; font-style: italic; margin-top: 6px; }
+.posts .meta { display: block; color: var(--muted); font-size: 16px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+
+.pair { display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(16px, 2vw, 24px); margin-top: clamp(96px, 12vw, 180px); align-items: end; }
+.pair figure { margin: 0; }
+.pair img { width: 100%; object-fit: cover; }
+.pair figure:first-child img { aspect-ratio: 3 / 4; }
+.pair figure:last-child img { aspect-ratio: 16 / 9; }
+.pair figcaption { color: var(--muted); font-size: 16px; padding-top: 10px; font-style: italic; }
+
+.work { display: grid; gap: clamp(56px, 7vw, 96px); }
+.work a { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: center; text-decoration: none; }
+.work a:nth-child(even) .shot { order: 2; }
+.work .shot { background: var(--surface); padding: clamp(16px, 3vw, 40px); }
+.work .shot img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.work a:hover .shot img { transform: translateY(-4px); }
+.work h3 { font-weight: 400; font-size: clamp(30px, 1rem + 2vw, 52px); letter-spacing: -.03em; line-height: 1; margin: 0 0 14px; }
+.work p { margin: 0; max-width: 40ch; }
+
+.close { margin-top: clamp(96px, 12vw, 180px); padding: clamp(56px, 8vw, 110px) 0 32px; background: var(--surface); }
+.close p.big { font-weight: 300; font-size: clamp(40px, 1rem + 6vw, 120px); line-height: .95; letter-spacing: -.04em; margin: 0; max-width: 14ch; }
+.close p.big a { color: var(--accent); }
+.close ul { list-style: none; padding: 0; margin: 40px 0 0; display: flex; flex-wrap: wrap; gap: 0 28px; }
+.close ul a { display: inline-flex; min-height: 44px; align-items: center; }
+.close small { display: block; margin-top: 56px; color: var(--muted); font-size: 15px; }
+
+@media (max-width: 860px) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__bio, .hero__bio + p, .fact { grid-column: 1; }
+  .hero__fig { grid-column: 1; grid-row: auto; max-width: 300px; }
+  .posts { columns: 1; }
+  .pair { grid-template-columns: 1fr; }
+  .work a { grid-template-columns: 1fr; }
+  .work a:nth-child(even) .shot { order: 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="wrap bar">
+  <a class="bar__name" href="#">Diego Angulo Ramírez</a>
+  <nav aria-label="Main"><a href="#">About</a><a href="#">Projects</a><a href="#">Blog</a><a href="#">CV</a><a href="#">Resources</a></nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <h1>My little portion of <span class="rot" data-rotate='["Internet.","Bolivia.","olympiads.","thoughts.","pizza."]'>Internet.</span></h1>
+    <div class="hero__grid">
+      <p class="hero__bio">I'm Diego: programmer, problemsetter, teacher and student from Cochabamba.</p>
+      <p>MIPT graduate, now on an AI master's. I lead Bolivia's team at the International Olympiad in Informatics.</p>
+      <figure class="hero__fig"><img src="../assets/img/diego_prime.jpg" alt="Diego in Moscow at night" width="960" height="1280"></figure>
+      <p class="fact">A fact about me: <span data-fact aria-live="polite">I have a serious addiction to popcorn.</span><button type="button" data-fact-next>Tell me another</button></p>
+    </div>
+  </section>
+
+  <section class="wrap block" aria-labelledby="h-writing">
+    <h2 id="h-writing">Writing <a href="#">all posts</a></h2>
+    <ul class="posts">
+      <li><a href="#"><strong>Thank you team</strong><span class="meta">January 6, 2026</span></a></li>
+      <li><a href="#"><strong>Carta abierta al equipo IOI</strong><span class="meta">June 8, 2025, en español</span></a></li>
+      <li><a href="#"><strong>The paradox of Losing</strong><span class="sub">Trying to find a logic to my life</span><span class="meta">February 1, 2025</span></a></li>
+      <li><a href="#"><strong>Fear Of Missing Out</strong><span class="sub">Every other life is better than mine.</span><span class="meta">April 6, 2024</span></a></li>
+      <li><a href="#"><strong>2023</strong><span class="sub">About letting go, and growing up</span><span class="meta">January 28, 2024</span></a></li>
+    </ul>
+  </section>
+
+  <div class="wrap pair">
+    <figure><img src="../assets/img/3medals.jpg" alt="Diego as a student with three olympiad medals" width="720" height="960" loading="lazy"><figcaption>Then: a contestant with three medals.</figcaption></figure>
+    <figure><img src="../assets/img/bolivia-ioi-team-2025.jpg" alt="Bolivia's IOI 2025 delegation" width="1280" height="980" loading="lazy"><figcaption>Now: Bolivia's delegation at IOI 2025.</figcaption></figure>
+  </div>
+
+  <section class="wrap block" aria-labelledby="h-built">
+    <h2 id="h-built">Things I've built <a href="#">all 8</a></h2>
+    <div class="work">
+      <a href="#"><div class="shot"><img src="../assets/img/projects/obi-web.png" alt="Screenshot of the OBI website" width="1600" height="875" loading="lazy"></div><div><h3>OBI website</h3><p>The official site of the Bolivian Olympiad in Informatics. Static Astro on Cloudflare Pages.</p></div></a>
+      <a href="#"><div class="shot"><img src="../assets/img/projects/obia-chat.png" alt="Screenshot of OBIA-ChatBot" width="997" height="933" loading="lazy"></div><div><h3>OBIA-ChatBot</h3><p>A chatbot for AI contests, with per-contest limits and admin controls for users and tokens.</p></div></a>
+      <a href="#"><div class="shot"><img src="../assets/img/projects/post-contest-edit.png" alt="Diagram of the editorial generator agents" width="725" height="730" loading="lazy"></div><div><h3>Editorial Generator</h3><p>Give it a problem statement and an accepted solution; LangGraph agents write the editorial.</p></div></a>
+    </div>
+  </section>
+</main>
+
+<footer class="close">
+  <div class="wrap">
+    <p class="big">Say hello at <a href="mailto:diegoangulo5@gmail.com">my inbox</a>.</p>
+    <ul>
+      <li><a href="https://github.com/diegoPenguino">GitHub</a></li>
+      <li><a href="https://t.me/diegopenguino">Telegram</a></li>
+      <li><a href="https://instagram.com/diegopenguino">Instagram</a></li>
+      <li><a href="https://facebook.com/diego.anguloramirez">Facebook</a></li>
+    </ul>
+    <small>Diego Angulo Ramírez, 2026. penguino.space</small>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const rot = document.querySelector('[data-rotate]');
+  if (rot && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const words = JSON.parse(rot.dataset.rotate); let i = 0;
+    setInterval(() => { i = (i + 1) % words.length; rot.textContent = words[i]; }, 2200);
+  }
+  const facts = ["I have a serious addiction to popcorn.", "Liverpool FC and FC Barcelona fan.", "Best fried chicken in the world: KFC, Terminal F, Miami Int Airport.", "The Chainsmokers got me through 2017 and 2018. I owe them.", "I did a lot of interesting things, but I might be close to a prime…", "Sometimes I get lost inside my mind. Not ignoring you, promise."];
+  let f = 0; const out = document.querySelector('[data-fact]');
+  document.querySelector('[data-fact-next]').addEventListener('click', () => { f = (f + 1) % facts.length; out.textContent = facts[f]; });
+})();
+</script>
+</body>
+</html>
