@@ -192,6 +192,9 @@ h2.sub { font-weight: 500; font-size: clamp(22.96px, 0.82rem + 1.31vw, 36.08px);
 }
 @media (max-width: 560px) {
   .cons, .doors, .samples { grid-template-columns: 1fr; }
+  .samples > div { min-height: 0; }
+  .t4 li a { flex-direction: column; gap: 0; }
+  .t4 li a span { text-align: left; }
   .limits { grid-template-columns: 1fr; }
   .limits dd { margin-bottom: 8px; }
 }
