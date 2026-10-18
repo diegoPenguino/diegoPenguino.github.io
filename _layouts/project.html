@@ -1,41 +1,39 @@
 ---
 layout: base
 ---
-<div class="wrap detail-head">
-  <a class="back-link" href="{{ '/projects' | relative_url }}">← All projects</a>
-  <h1 class="h1">{{ page.name | default: page.title }}</h1>
-  {% if page.tagline %}<p class="subtitle">{{ page.tagline }}</p>{% endif %}
-  <div class="detail-actions">{% include project-links.html project=page %}</div>
+<div class="field detail-field">
+  <div class="wrap detail-head">
+    <a class="back-link" href="{{ '/projects' | relative_url }}">← All projects</a>
+    <h1 class="detail-title">{{ page.name | default: page.title }}</h1>
+    {% if page.tagline %}<p class="subtitle">{{ page.tagline }}</p>{% endif %}
+    {%- if page.role or page.stack or page.hosting %}
+    <dl class="limits limits--dark" aria-label="At a glance">
+      {% if page.role %}<dt>role</dt><dd>{{ page.role }}</dd>{% endif %}
+      {% if page.stack %}<dt>stack</dt><dd>{{ page.stack | join: ', ' }}</dd>{% endif %}
+      {% if page.hosting %}<dt>hosting</dt><dd>{{ page.hosting }}</dd>{% endif %}
+      <dt>date</dt><dd>{{ page.date | date: '%B %Y' }}</dd>
+    </dl>
+    {%- endif %}
+    <div class="detail-actions">{% include project-links.html project=page %}</div>
+  </div>
 </div>
 {%- if page.thumbnail-img %}
-<div class="wrap detail-shot"><img src="{{ page.thumbnail-img | relative_url }}" alt="{{ page.name | default: page.title }} preview"></div>
+<div class="wrap detail-shot"><img src="{{ page.thumbnail-img | relative_url }}" alt="Preview of {{ page.name | default: page.title }}"></div>
 {%- endif %}
-<div class="wrap detail-body">
-  {%- if page.role or page.stack or page.hosting %}
-  <aside class="card glance" aria-label="At a glance">
-    <span class="mono">at a glance</span>
-    <dl>
-      {% if page.role %}<div><dt>Role</dt><dd>{{ page.role }}</dd></div>{% endif %}
-      {% if page.stack %}<div><dt>Stack</dt><dd class="chips">{% for s in page.stack %}<span class="chip">{{ s }}</span>{% endfor %}</dd></div>{% endif %}
-      {% if page.hosting %}<div><dt>Hosting</dt><dd>{{ page.hosting }}</dd></div>{% endif %}
-    </dl>
-  </aside>
-  {%- endif %}
-  <article class="prose">
-    {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
-  </article>
-</div>
+<article class="narrow prose detail-body">
+  {{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}
+</article>
 {%- if page.collection == 'projects' -%}
   {%- assign list = site.projects | where_exp: "p", "p.date" | sort: "date" | reverse -%}
   {%- for p in list -%}{%- if p.url == page.url -%}{%- assign i = forloop.index0 -%}{%- endif -%}{%- endfor -%}
   {%- assign prev_i = i | minus: 1 -%}
   {%- assign next_i = i | plus: 1 -%}
-  <nav class="wrap pager" aria-label="More projects">
+  <nav class="narrow pager" aria-label="More projects">
     {%- if i > 0 -%}{%- assign prev = list[prev_i] -%}
-    <a class="card" href="{{ prev.url | relative_url }}"><span class="label">← Previous project</span><span class="title">{{ prev.name | default: prev.title }}</span></a>
+    <a href="{{ prev.url | relative_url }}"><span class="label">← Previous project</span><span class="title">{{ prev.name | default: prev.title }}</span></a>
     {%- endif -%}
     {%- if next_i < list.size -%}{%- assign next = list[next_i] -%}
-    <a class="card next" href="{{ next.url | relative_url }}"><span class="label">Next project →</span><span class="title">{{ next.name | default: next.title }}</span></a>
+    <a class="next" href="{{ next.url | relative_url }}"><span class="label">Next project →</span><span class="title">{{ next.name | default: next.title }}</span></a>
     {%- endif -%}
   </nav>
 {%- endif -%}

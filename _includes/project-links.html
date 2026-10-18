@@ -6,11 +6,11 @@
 {%- capture sm -%}{% if include.size == 'sm' %} btn--sm{% endif %}{%- endcapture -%}
 {%- if live != '' -%}
   {%- assign host = live | remove: 'https://' | remove: 'http://' | split: '/' | first -%}
-  <a class="btn{{ sm }}" href="{{ live }}" target="_blank" rel="noopener"><i class="fa-solid fa-globe"></i>{{ host }}</a>
+  <a class="btn{{ sm }}" href="{{ live }}" target="_blank" rel="noopener">{{ host }}</a>
 {%- endif -%}
 {%- if repo != '' -%}
-  <a class="btn{% if live != '' %} btn--ghost{% endif %}{{ sm }}" href="{{ repo }}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i>Open repo</a>
+  <a class="btn{% if live != '' %} btn--ghost{% endif %}{{ sm }}" href="{{ repo }}" target="_blank" rel="noopener">Source code</a>
 {%- endif -%}
 {%- if demo != '' -%}
-  <a class="btn btn--ghost{{ sm }}" href="{{ demo }}" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i>Open demo</a>
+  <a class="btn btn--ghost{{ sm }}" href="{{ demo }}" target="_blank" rel="noopener">Demo</a>
 {%- endif -%}

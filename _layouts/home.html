@@ -2,47 +2,118 @@
 layout: base
 ---
 {%- assign words = page.rotating-words -%}
-{%- assign facts = page.facts -%}
-<section class="wrap hero">
-  <div class="hero__text">
-    <h1 class="hero__title">
-      <span class="line1">My little portion of</span><br>
-      <span class="rotator-line"><span class="rotator" data-rotate='{{ words | jsonify | escape }}'>{{ words[0] }}</span></span>
-    </h1>
-    <p class="hero__bio">{{ page.bio | markdownify | remove: '<p>' | remove: '</p>' | strip }}</p>
-    <div class="fact">
-      <span class="fact__label">Fact #<span data-fact-num>1</span></span>
-      <span class="fact__text" data-fact-text aria-live="polite">{{ facts[0] }}</span>
-      <button class="fact__btn" type="button" aria-label="Another fact" data-fact-next data-facts='{{ facts | jsonify | escape }}'>↻</button>
+<div class="field">
+  <section class="wrap hero" aria-labelledby="title">
+    <h1 id="title" class="hero__title"><span class="nowrap">My little portion</span><br>of <span class="rot" data-rotate='{{ words | jsonify | escape }}'>{{ words[0] }}</span></h1>
+    <div class="hero__text">
+      <p class="hero__lead">{{ page.lead }}</p>
+      <p class="hero__bio">{{ page.bio }}</p>
+    </div>
+    <figure class="hero__fig">
+      <img src="{{ page.portrait | relative_url }}" alt="{{ page.portrait-alt }}" width="960" height="1280">
+      <figcaption>{{ page.portrait-caption }}</figcaption>
+    </figure>
+  </section>
+</div>
+
+<section class="wrap problem-head" aria-labelledby="h-problem">
+  <h2 id="h-problem" data-in>{{ page.problem-title }}</h2>
+  <dl class="limits" data-in>
+    {%- for l in page.limits %}
+    <dt>{{ l[0] }}</dt><dd>{{ l[1] }}</dd>
+    {%- endfor %}
+  </dl>
+</section>
+
+<section class="wrap legend" aria-labelledby="h-legend">
+  <div class="legend__text" data-in>
+    <h2 class="sub-head" id="h-legend">Legend</h2>
+    {%- for p in page.legend %}
+    <p>{{ p }}</p>
+    {%- endfor %}
+  </div>
+  <div class="figs" data-in>
+    {%- for f in page.figures %}
+    <figure><img src="{{ f.src | relative_url }}" alt="{{ f.alt }}" loading="lazy"><figcaption><i>Figure {{ forloop.index }}.</i> {{ f.caption }}</figcaption></figure>
+    {%- endfor %}
+  </div>
+</section>
+
+<section class="band constraints" aria-labelledby="h-cons">
+  <div class="wrap">
+    <h2 class="sec" id="h-cons" data-in>Constraints</h2>
+    <ul class="cons">
+      {%- for c in page.constraints %}
+      <li data-in><span class="math">{{ c.math }}</span><span class="what">{{ c.what }}</span></li>
+      {%- endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="wrap input" aria-labelledby="h-input">
+  <div data-in>
+    <h2 class="sec" id="h-input">Input</h2>
+    <p class="sec-lead">One curious visitor, looking for one of these.</p>
+  </div>
+  <ul class="doors" data-in>
+    {%- for d in page.doors %}
+    <li><a href="{{ d[1] | relative_url }}"{% if d[1] contains '://' %} target="_blank" rel="noopener"{% endif %}><b>{{ d[0] }}</b><span>{{ d[2] }}</span></a></li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<section class="wrap output" aria-labelledby="h-output">
+  <h2 class="sec" id="h-output" data-in>Output</h2>
+  <p class="sec-lead" data-in>The five latest things he wrote, newest first. <a href="{{ '/blog/' | relative_url }}">All posts</a></p>
+  <ul class="out-posts">
+    {%- for post in site.posts limit: 5 %}
+    <li data-in><a href="{{ post.url | relative_url }}"><strong>{{ post.title }}</strong>{% if post.subtitle and post.subtitle != '' %}<span class="sub">{{ post.subtitle }}</span>{% endif %}<span class="meta">{{ post.date | date: '%B %-d, %Y' }}{% if post.lang == 'ES' %}, en español{% endif %}</span></a></li>
+    {%- endfor %}
+  </ul>
+</section>
+
+<section class="band band--dark examples" aria-labelledby="h-ex">
+  <div class="wrap">
+    <h2 class="sec" id="h-ex" data-in>Examples</h2>
+    <p class="sec-lead" data-in>Every test asks for a fact about Diego. The judge has {{ page.facts.size }}.</p>
+    <div class="samples" data-in>
+      <div><b>input</b><pre>tell me a fact about diego</pre></div>
+      <div><b>output</b><pre data-fact-text aria-live="polite">{{ page.facts[0] }}</pre></div>
+    </div>
+    <div class="run"><button type="button" data-fact-next data-facts='{{ page.facts | jsonify | escape }}'>Run the next test</button><span class="verdict" data-verdict>Accepted on test 1</span></div>
+  </div>
+</section>
+
+<section class="wrap subtasks" aria-labelledby="h-sub">
+  <h2 class="sec" id="h-sub" data-in>Subtasks</h2>
+  <p class="sec-lead" data-in>Things he has built, worth 100 points in total.</p>
+  <div class="sub-grid">
+    {%- assign used = 0 -%}
+    {%- assign shown = '' -%}
+    {%- for t in page.subtasks -%}
+      {%- assign wanted = '/projects/' | append: t[0] | append: '/' -%}
+      {%- for p in site.projects -%}{%- if p.url == wanted -%}
+      <a class="task task--{{ forloop.parentloop.index }}" href="{{ p.url | relative_url }}" data-in>
+        <div class="task__shot"><img src="{{ p.thumbnail-img | relative_url }}" alt="Preview of {{ p.name | default: p.title }}" loading="lazy"></div>
+        <span class="task__pts">Subtask {{ forloop.parentloop.index }}, {{ t[1] }} points</span>
+        <h3>{{ p.name | default: p.title }}</h3>
+        <p>{{ p.description }}</p>
+      </a>
+      {%- endif -%}{%- endfor -%}
+      {%- assign used = used | plus: t[1] -%}
+      {%- assign shown = shown | append: wanted | append: '|' -%}
+    {%- endfor -%}
+    {%- assign rest = site.projects | where_exp: "p", "p.date" | sort: "date" | reverse -%}
+    {%- assign n = page.subtasks.size | plus: 1 -%}
+    <div class="task task--rest" data-in>
+      <span class="task__pts">Subtask {{ n }}, {{ 100 | minus: used }} points</span>
+      <h3>Everything else</h3>
+      <ul>
+        {%- for p in rest -%}{%- unless shown contains p.url %}
+        <li><a href="{{ p.url | relative_url }}">{{ p.name | default: p.title }} <span>{{ p.tagline }}</span></a></li>
+        {%- endunless -%}{%- endfor %}
+      </ul>
+      <p class="task__all"><a href="{{ '/projects' | relative_url }}">All {{ site.projects.size }} projects</a></p>
     </div>
   </div>
-  <div class="portrait">
-    <img src="{{ page.portrait | relative_url }}" alt="Diego Angulo Ramírez" width="320" height="420">
-    {% include badge.html class="badge--ioi" id="b-ioi" title="IOI" sub="Team Leader" ring="BOLIVIA" bg="#2f5fc4" fg="#fff" %}
-    {% include badge.html class="badge--mipt" id="b-mipt" title="MIPT" sub="Graduate" bg="#16233a" fg="#fff" %}
-    {% include badge.html class="badge--ai" id="b-ai" title="AI" sub="Engineer" bg="#fff" fg="#16233a" border="#16233a" %}
-  </div>
-</section>
-
-<section class="wrap home-section" aria-labelledby="latest-posts">
-  <div class="rule-head"><h2 id="latest-posts">Latest posts</h2><a href="{{ '/blog/' | relative_url }}">All posts →</a></div>
-  <div class="post-rows">
-    {%- for post in site.posts limit: 5 -%}
-    <a class="post-row" href="{{ post.url | relative_url }}">
-      <span class="post-row__meta"><span class="post-row__date">{{ post.date | date: '%b %-d, %Y' }}</span><span class="lang">{{ post.lang }}</span></span>
-      <span><span class="post-row__title">{{ post.title }}</span>{% if post.subtitle and post.subtitle != '' %}<span class="post-row__sub">{{ post.subtitle }}</span>{% endif %}</span>
-    </a>
-    {%- endfor -%}
-  </div>
-</section>
-
-<section class="wrap home-section" aria-labelledby="built">
-  <div class="rule-head"><h2 id="built">Things I've built</h2><a href="{{ '/projects' | relative_url }}">All {{ site.projects.size }} →</a></div>
-  <div class="mini-projects">
-    {%- for slug in page.featured-projects -%}
-      {%- assign wanted = '/projects/' | append: slug | append: '/' -%}
-      {%- for p in site.projects -%}{%- if p.url == wanted -%}{% include project-card-mini.html project=p %}{%- endif -%}{%- endfor -%}
-    {%- endfor -%}
-  </div>
-  <p class="swipe-hint" aria-hidden="true">← swipe →</p>
 </section>

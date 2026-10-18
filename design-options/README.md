@@ -70,3 +70,11 @@ The project descriptions in the mockups are shortened drafts; check them before 
 Design skills for this work live in `.claude/skills/` (`design-taste-frontend`,
 `redesign-existing-projects`, `stop-slop`, `humanizer`) with reference `DESIGN.md` files in
 `.claude/references/awesome-design-md/`.
+
+## Ported to the site
+
+Option D is now the real home (`_layouts/home.html`, content in `index.html` front matter).
+The header, footer, posts, project pages, the projects index and the blog index were rebuilt in
+the same style. About, CV, CP resources, problem list, story and the generic pages only inherit
+the new tokens (Newsreader, palette, square corners) and still need their own pass.
+Screenshots of the live pages are the `live-*.png` files in `screenshots/`.
