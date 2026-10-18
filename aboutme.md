@@ -34,8 +34,7 @@ random-facts:
   - Music from [The Chainsmokers](https://www.youtube.com/watch?v=eACohWVwTOc_) helped me to go through 2017 and 2018, I owe them a part of my life.
   - Live and let live, leave and let go.
 tiles:
-  - label: belief
-    text: I do believe in causality.
+  - text: I do believe in causality.
   - label: MBTI
     text: ENTJ
     accent: true

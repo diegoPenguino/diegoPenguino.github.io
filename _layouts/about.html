@@ -46,7 +46,7 @@ layout: base
 {%- if page.tiles %}
 <section class="wrap statements" aria-label="Two more things">
   {%- for t in page.tiles %}
-  <p class="statement{% if t.accent %} statement--accent{% endif %}"><span>{{ t.label }}</span>{{ t.text }}</p>
+  <p class="statement{% if t.accent %} statement--accent{% endif %}">{% if t.label %}<span>{{ t.label }}</span>{% endif %}{{ t.text }}</p>
   {%- endfor %}
 </section>
 {%- endif %}

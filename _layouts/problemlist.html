@@ -5,7 +5,6 @@ layout: base
 {%- assign total = 0 -%}{%- for y in years -%}{%- assign total = total | plus: y.problems.size -%}{%- endfor -%}
 <div data-problems>
   <div class="wrap page-head pl-intro show-en" data-i18n>
-    {% if page.kicker %}<p class="kicker">{{ page.kicker }}</p>{% endif %}
     <h1 class="h1" lang="en">{{ page.title }}</h1>
     <h1 class="h1" lang="es">{{ page.title-es }}</h1>
     <div class="lede" lang="en">{{ page.intro-en | markdownify }}</div>
@@ -36,18 +35,18 @@ layout: base
     {%- for p in y.problems %}
     <div class="problem">
       <div class="info">
-        <span class="name"><i class="fa-solid fa-check" aria-label="Solved"></i>{{ p.name }}</span>
+        <span class="name">{{ p.name }}</span>
         {% if p.contest != '' %}<span class="contest">{{ p.contest }}</span>{% endif %}
         {% if p.note %}<div class="note">{{ p.note | markdownify }}</div>{% endif %}
       </div>
       <div class="links">
         {%- for l in p.links %}
-        <a class="plink plink--primary" href="{{ l.url | relative_url }}"{% if l.kind == 'judge' %} target="_blank" rel="noopener"{% endif %}><i class="fa-solid {% if l.kind == 'pdf' %}fa-file-pdf{% else %}fa-globe{% endif %}" aria-hidden="true"></i>{{ l.label }}</a>
+        <a class="plink plink--primary" href="{{ l.url | relative_url }}"{% if l.kind == 'judge' %} target="_blank" rel="noopener"{% endif %}>{% if l.kind == 'pdf' %}Statement (PDF){% else %}{{ l.label }}{% endif %}</a>
         {%- endfor %}
-        {%- for s in p.solutions %}
-        <a class="plink" href="{{ s.url | relative_url }}"><i class="fa-solid fa-code" aria-hidden="true"></i>{{ s.label }}</a>
-        {%- endfor %}
-        {%- if p.soon and p.solutions == nil %}<span class="plink plink--soon">Code coming soon</span>{% endif %}
+        {%- if p.solutions %}
+        <p class="code-links"><span>Code:</span>
+          {%- for s in p.solutions %} <a href="{{ s.url | relative_url }}">{{ s.label }}</a>{% unless forloop.last %},{% endunless %}{% endfor %}</p>
+        {%- elsif p.soon %}<p class="code-links"><span>Code coming soon</span></p>{% endif %}
       </div>
     </div>
     {%- endfor %}
