@@ -1,12 +1,16 @@
 rules_version = '2';
 
-// Blog comments for penguino.space.
+// Blog comments for penguino.space, and the bots people upload to Domain Expansion
+// (https://penguino.space/Domain-Expansion/).
 // Paste this into Firebase console -> Firestore -> Rules, or deploy with
 // `firebase deploy --only firestore:rules` from the firebase/ folder.
 //
 // Data model:
 //   posts/{postId}/comments/{commentId}  { uid, name, photo?, text, parent, createdAt }
 //   users/{uid}                          { lastCommentAt }  (rate limit, never readable)
+//   users/{uid}/bots/{slot}              { uid, ownerName, name, code, createdAt, updatedAt }
+//                                        slot is "1".."5", so each user has at most 5 bots
+//   botLimits/{uid}                      { lastSaveAt }  (rate limit, never readable)
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -65,6 +69,69 @@ service cloud.firestore {
         && request.auth.uid == uid
         && request.resource.data.keys().hasOnly(['lastCommentAt'])
         && request.resource.data.lastCommentAt == request.time;
+      allow delete: if false;
+    }
+
+    // ---------- Domain Expansion bots ----------
+
+    function botLimitDoc() {
+      return /databases/$(database)/documents/botLimits/$(request.auth.uid);
+    }
+
+    function validBot(uid) {
+      let bot = request.resource.data;
+      return bot.keys().hasOnly(['uid', 'ownerName', 'name', 'code', 'createdAt', 'updatedAt'])
+        && bot.keys().hasAll(['uid', 'ownerName', 'name', 'code', 'createdAt', 'updatedAt'])
+        && bot.uid == uid
+        && bot.ownerName is string
+        && bot.ownerName.size() >= 1
+        && bot.ownerName.size() <= 80
+        && bot.name is string
+        && bot.name.trim().size() >= 1
+        && bot.name.size() <= 40
+        && bot.code is string
+        && bot.code.trim().size() >= 1
+        && bot.code.size() <= 20000
+        && bot.updatedAt == request.time;
+    }
+
+    // Rate limit: the same batch must stamp botLimits/{uid}.lastSaveAt, and the previous
+    // save from this user must be at least 10 seconds old.
+    function botSaveAllowed() {
+      return getAfter(botLimitDoc()).data.lastSaveAt == request.time
+        && (!exists(botLimitDoc())
+            || get(botLimitDoc()).data.lastSaveAt < request.time - duration.value(10, 's'));
+    }
+
+    // Anyone can read every bot: the code is public. Written with {path=**} so the page
+    // can list all users' bots with one collectionGroup('bots') query.
+    match /{path=**}/bots/{slot} {
+      allow read: if true;
+    }
+
+    match /users/{uid}/bots/{slot} {
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && slot.matches('^[1-5]$')
+        && validBot(uid)
+        && request.resource.data.createdAt == request.time
+        && botSaveAllowed();
+
+      allow update: if signedIn()
+        && request.auth.uid == uid
+        && validBot(uid)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && botSaveAllowed();
+
+      allow delete: if signedIn() && (request.auth.uid == uid || isAdmin());
+    }
+
+    match /botLimits/{uid} {
+      allow read: if false;
+      allow create, update: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['lastSaveAt'])
+        && request.resource.data.lastSaveAt == request.time;
       allow delete: if false;
     }
 
