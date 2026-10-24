@@ -61,6 +61,7 @@ browser at desktop and mobile widths.
 | CP resources | `resources_for_cp.md` (`layout: cp-resources`) | Content in `_data/cp_resources.yml` |
 | Problem list | `problemlist.md` (`layout: problemlist`) | Intros in front matter, problems in `_data/problems.yml` |
 | Blog comments | `_includes/comments.html`, `assets/js/comments.js`, `firebase/firestore.rules` | See "Comments" below |
+| Domain Expansion bots | `firebase/firestore.rules`, `firebase/tests/` | The game lives in its own repo; only its Firestore rules are here. See "Comments" below |
 | Story | `story.md` (`layout: story`) | `---` in the text renders as the three-dot section break |
 | Other pages | `links.md`, `something.md`, `404.html` | Generic `page` layout |
 | Standalone pages | `full_rank.html`, `ranking1.html` | Own HTML and styles; not part of the design |
@@ -80,10 +81,17 @@ Cloud Firestore, called straight from the browser (no server). The SDK loads onl
 - `firebase/firestore.rules` is the only protection (the config in `_config.yml` is public by
   design). Anyone reads; signed-in users create their own comment (max 2000 chars, one reply level,
   one comment per 30 s); author or `admin-email` deletes; nobody edits.
-- Test rule changes against the emulators before publishing them:
-  `cd firebase && npx -y firebase-tools@15.32.1 emulators:start --only auth,firestore --project demo-penguino`
-  (needs Java: `brew install openjdk@21`). A `demo-` project id in a config overlay makes the site
-  talk to the emulators.
+- The same Firebase project stores the bots people upload to Domain Expansion
+  (https://penguino.space/Domain-Expansion/, repo `diegoPenguino/Domain-Expansion`):
+  `users/{uid}/bots/{slot}` with `{uid, ownerName, name, code, createdAt, updatedAt}`, slot `1`-`5`.
+  Anyone reads (also as a `collectionGroup('bots')` query); the owner creates and edits (code up to
+  20000 chars, one save per 10 s through `botLimits/{uid}.lastSaveAt`); owner or `admin-email` deletes.
+- `firebase/tests/` checks the rules against the Firestore emulator; CI runs it on every PR. Run it
+  before publishing a change: `cd firebase && npm ci && npm test` (needs Java: `brew install openjdk@21`,
+  on the PATH as `/opt/homebrew/opt/openjdk@21/bin`).
+- To try the site against the emulators:
+  `cd firebase && npx firebase emulators:start --only auth,firestore --project demo-penguino`.
+  A `demo-` project id in a config overlay makes the site talk to the emulators.
 - Rules must be published by hand in the Firebase console (Firestore > Rules) or with
   `firebase deploy --only firestore:rules`; changing the file in the repo alone does nothing.
 

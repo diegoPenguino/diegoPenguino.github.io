@@ -21,3 +21,6 @@ vendor/
 
 # design skill working files
 .taste-skill/
+
+# Firebase rules tests
+firebase/node_modules/
