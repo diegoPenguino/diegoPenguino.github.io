@@ -1,4 +1,5 @@
-{%- comment -%} Buttons for a project: live site, repo, demo. Param: project, size ("sm" for cards). {%- endcomment -%}
+{%- comment -%} Buttons for a project: live site, repo, demo. Param: project, size ("sm" for cards).
+The live button shows the site's host unless the project sets live-label. {%- endcomment -%}
 {%- assign p = include.project -%}
 {%- assign live = p.live-url | default: '' -%}
 {%- assign repo = p.repo-url | default: p.repo_url | default: '' -%}
@@ -6,7 +7,7 @@
 {%- capture sm -%}{% if include.size == 'sm' %} btn--sm{% endif %}{%- endcapture -%}
 {%- if live != '' -%}
   {%- assign host = live | remove: 'https://' | remove: 'http://' | split: '/' | first -%}
-  <a class="btn{{ sm }}" href="{{ live }}" target="_blank" rel="noopener">{{ host }}</a>
+  <a class="btn{{ sm }}" href="{{ live }}" target="_blank" rel="noopener">{{ p.live-label | default: host }}</a>
 {%- endif -%}
 {%- if repo != '' -%}
   <a class="btn{% if live != '' %} btn--ghost{% endif %}{{ sm }}" href="{{ repo }}" target="_blank" rel="noopener">Source code</a>

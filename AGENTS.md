@@ -55,7 +55,7 @@ browser at desktop and mobile widths.
 | About | `aboutme.md` (`layout: about`) | All content is front matter |
 | Blog posts | `_posts/YYYY-MM-DD-slug.md` | Front matter needs `lang: EN` or `lang: ES` (blog filter) and a unique `slug` (lowercase, dashes). URL is `/blog/<slug>/`; never change a published slug without adding the old URL to `redirect_from`. Drafts go in `_drafts/` |
 | Blog index | `blog/index.html` (`layout: blog`) | Newest post is featured; its image is `thumbnail-img` or the first image in the post |
-| Projects | `_projects/*.md` (`layout: project`) | Front matter: `title`, `name`, `tagline`, `date`, `description`, `thumbnail-img`, `repo-url`, optional `live-url` / `demo-url`, and `role`, `stack`, `hosting` for the "At a glance" card |
+| Projects | `_projects/*.md` (`layout: project`) | Front matter: `title`, `name`, `tagline`, `date`, `description`, `thumbnail-img`, `repo-url`, optional `live-url` / `demo-url` (`live-label` replaces the host shown on the live button), and `role`, `stack`, `hosting` for the "At a glance" card |
 | Projects index | `projects.md` (`layout: projects`) | Sorted by `date`, newest first |
 | CV | `cv.md` (`layout: cv`) | All content is front matter |
 | CP resources | `resources_for_cp.md` (`layout: cp-resources`) | Content in `_data/cp_resources.yml` |
