@@ -21,3 +21,10 @@ Each player is a Python function, `next_step`, that receives the board and retur
 The repository has the engine, the campers' bots, a `pygame` viewer, and a competition script that plays every arrangement of starting corners so no bot wins because of where it started.
 
 You can also [play it in the browser](https://penguino.space/Domain-Expansion/). The page runs the same Python engine with Pyodide, so you can pick any four bots and watch the match. You can also sign in with Google and upload up to five bots of your own; their code is public, and anyone can put them on the board. Uploaded code runs inside a sandboxed iframe, each bot in its own worker, and a bot that takes more than two seconds on a move is eliminated without stopping the others.
+
+The page also has a challenge. A bot written by Claude Opus 5.5 starts in the first seat, and it is the only one whose code you cannot read. It wins more than 90% of its games against the campers' bots. Here are four copies of it playing each other:
+
+<figure class="prose-figure">
+  <img src="/assets/img/projects/domain-expansion-claude.gif" width="540" height="540" alt="Four copies of Claude's bot playing Domain Expansion. Each one closes a large rectangle in its corner, then they fill the middle of the board until no empty cells are left.">
+  <figcaption>Four copies of Claude's bot, one per corner. The top-right one wins with 955 of the 2500 cells.</figcaption>
+</figure>
