@@ -17,14 +17,17 @@ function fit() {
 }
 new ResizeObserver(fit).observe($("frame"));
 
+// The party's location (the link's href), the same for every guest.
+drawQr($("map-qr"), $("map-link").href, 84);
+
 function status(text, isError = false) {
   $("status").textContent = text;
   $("status").classList.toggle("error", isError);
   $("status").hidden = !text;
 }
 
-// Draws the QR as one SVG path: crisp at any size and in the exported PNG.
-function drawQr(text) {
+// Draws a QR as one SVG path: crisp at any size and in the exported PNG.
+function drawQr(target, text, size) {
   const qr = qrcode(0, "M");
   qr.addData(text);
   qr.make();
@@ -37,15 +40,15 @@ function drawQr(text) {
   }
   const svg = document.createElementNS(SVG_NS, "svg");
   svg.setAttribute("viewBox", `0 0 ${n} ${n}`);
-  svg.setAttribute("width", "104");
-  svg.setAttribute("height", "104");
+  svg.setAttribute("width", String(size));
+  svg.setAttribute("height", String(size));
   svg.setAttribute("shape-rendering", "crispEdges");
   svg.setAttribute("aria-hidden", "true");
   const path = document.createElementNS(SVG_NS, "path");
   path.setAttribute("d", d);
   path.setAttribute("fill", "#1b1310");
   svg.append(path);
-  $("qr").replaceChildren(svg);
+  target.replaceChildren(svg);
 }
 
 async function load() {
@@ -70,7 +73,7 @@ async function load() {
   document.title = `Dieguin Night · ${invite.name}`;
   $("guest").textContent = invite.name;
   $("kicker").textContent = `PASE PERSONAL — ADMITE ${invite.max}`;
-  drawQr(inviteLink(code));
+  drawQr($("qr"), inviteLink(code), 104);
   $("rsvp-link").href = inviteLink(code);
   status("");
   $("download").disabled = false;
