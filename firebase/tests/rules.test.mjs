@@ -10,6 +10,7 @@ import {
 } from "@firebase/rules-unit-testing";
 import {
   Timestamp,
+  collection,
   collectionGroup,
   deleteDoc,
   doc,
@@ -17,6 +18,7 @@ import {
   getDocs,
   serverTimestamp,
   setDoc,
+  updateDoc,
   writeBatch,
 } from "firebase/firestore";
 
@@ -247,5 +249,97 @@ describe("comments: unchanged", () => {
   test("everything else is closed", async () => {
     await assertFails(setDoc(doc(as("ana"), "other/x"), { a: 1 }));
     await assertFails(getDoc(doc(anon(), "other/x")));
+  });
+});
+
+describe("rsvp", () => {
+  const CODE12 = "Ab3dEf6hIj9k";
+  const admin = () => as("diego", { email: ADMIN_EMAIL, email_verified: true });
+  const invite = (fields = {}) => ({
+    name: "Zaira Castro",
+    max: 3,
+    count: null,
+    createdAt: serverTimestamp(),
+    updatedAt: null,
+    ...fields,
+  });
+  const seedInvite = (fields = {}) =>
+    seed(`rsvp/${CODE12}`, { ...invite(), createdAt: secondsAgo(60), ...fields });
+  const answer = (db, count) =>
+    updateDoc(doc(db, "rsvp", CODE12), { count, updatedAt: serverTimestamp() });
+
+  test("the admin can create an invitation", async () => {
+    await assertSucceeds(setDoc(doc(admin(), "rsvp", CODE12), invite()));
+  });
+
+  test("nobody else can create one, signed in or not", async () => {
+    await assertFails(setDoc(doc(as("ana"), "rsvp", CODE12), invite()));
+    await assertFails(setDoc(doc(anon(), "rsvp", CODE12), invite()));
+  });
+
+  test("an invitation needs a 12-character code, a name and a max of 1 to 10", async () => {
+    await assertFails(setDoc(doc(admin(), "rsvp", "short"), invite()));
+    await assertFails(setDoc(doc(admin(), "rsvp", CODE12), invite({ name: " " })));
+    await assertFails(setDoc(doc(admin(), "rsvp", CODE12), invite({ max: 0 })));
+    await assertFails(setDoc(doc(admin(), "rsvp", CODE12), invite({ max: 11 })));
+    await assertFails(setDoc(doc(admin(), "rsvp", CODE12), invite({ count: 2 })));
+    await assertFails(setDoc(doc(admin(), "rsvp", CODE12), invite({ extra: 1 })));
+  });
+
+  test("anyone with the code can read that invitation", async () => {
+    await seedInvite();
+    await assertSucceeds(getDoc(doc(anon(), "rsvp", CODE12)));
+  });
+
+  test("only the admin can list the invitations", async () => {
+    await seedInvite();
+    await assertFails(getDocs(collection(anon(), "rsvp")));
+    await assertFails(getDocs(collection(as("ana"), "rsvp")));
+    await assertSucceeds(getDocs(collection(admin(), "rsvp")));
+  });
+
+  test("a guest can answer from 0 up to the max, and change the answer", async () => {
+    await seedInvite();
+    await assertSucceeds(answer(anon(), 3));
+    await assertSucceeds(answer(anon(), 1));
+    await assertSucceeds(answer(anon(), 0));
+  });
+
+  test("a guest cannot answer more than the max, a negative or a non-integer", async () => {
+    await seedInvite();
+    await assertFails(answer(anon(), 4));
+    await assertFails(answer(anon(), -1));
+    await assertFails(answer(anon(), 1.5));
+    await assertFails(answer(anon(), "3"));
+  });
+
+  test("a guest cannot change the name or the max", async () => {
+    await seedInvite();
+    await assertFails(updateDoc(doc(anon(), "rsvp", CODE12), { max: 10 }));
+    await assertFails(updateDoc(doc(anon(), "rsvp", CODE12), { max: 10, count: 8, updatedAt: serverTimestamp() }));
+    await assertFails(updateDoc(doc(anon(), "rsvp", CODE12), { name: "Otra persona" }));
+  });
+
+  test("the answer time must come from the server", async () => {
+    await seedInvite();
+    await assertFails(updateDoc(doc(anon(), "rsvp", CODE12), { count: 2, updatedAt: secondsAgo(5) }));
+  });
+
+  test("a guest cannot answer an invitation that does not exist", async () => {
+    await assertFails(answer(anon(), 1));
+  });
+
+  test("the admin can change the max and reset the answer, but not createdAt", async () => {
+    await seedInvite({ count: 2, updatedAt: secondsAgo(5) });
+    await assertSucceeds(updateDoc(doc(admin(), "rsvp", CODE12), { max: 5 }));
+    await assertSucceeds(updateDoc(doc(admin(), "rsvp", CODE12), { count: null, updatedAt: null }));
+    await assertFails(updateDoc(doc(admin(), "rsvp", CODE12), { createdAt: secondsAgo(1) }));
+  });
+
+  test("only the admin can delete an invitation", async () => {
+    await seedInvite();
+    await assertFails(deleteDoc(doc(anon(), "rsvp", CODE12)));
+    await assertFails(deleteDoc(doc(as("ana"), "rsvp", CODE12)));
+    await assertSucceeds(deleteDoc(doc(admin(), "rsvp", CODE12)));
   });
 });
