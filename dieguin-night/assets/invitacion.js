@@ -71,6 +71,7 @@ async function load() {
   $("guest").textContent = invite.name;
   $("kicker").textContent = `PASE PERSONAL — ADMITE ${invite.max}`;
   drawQr(inviteLink(code));
+  $("rsvp-link").href = inviteLink(code);
   status("");
   $("download").disabled = false;
 }

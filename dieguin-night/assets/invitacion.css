@@ -115,4 +115,6 @@ body.invite-page { background: #2a0a0d; }
 .p-qr { width: 104px; height: 104px; flex: none; background: var(--paper); }
 .p-qr svg { display: block; width: 100%; height: 100%; }
 .p-scan { font-family: "Shrikhand", cursive; font-size: 24px; line-height: 1.1; color: var(--red); }
-.p-scan-small { margin-top: 6px !important; font-size: 14px; line-height: 1.35; color: var(--muted); }
+.p-scan-small { margin-top: 6px !important; font-size: 16px; line-height: 1.35; color: var(--muted); }
+.p-scan-small a { color: var(--ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.p-scan-small a:hover { color: var(--red); }
