@@ -116,3 +116,20 @@ body.admin { background: var(--paper); }
 .empty { color: var(--muted); }
 
 #add-status { margin-top: 12px; min-height: 1.4em; }
+
+.panel-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; margin-bottom: 12px; }
+.panel-head h2 { margin: 0; }
+.bulk .field { gap: 8px; }
+.bulk textarea {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--ink);
+  font: 16px/1.5 var(--mono);
+  resize: vertical;
+}
+.bulk textarea:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+.bulk-preview { margin: 10px 0 12px; font-size: 15px; color: var(--ink); }
+.bulk-preview:empty { display: none; }

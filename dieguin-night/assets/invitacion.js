@@ -3,7 +3,7 @@
 // send by WhatsApp. Uses qrcode-generator and html2canvas (loaded as globals).
 
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import { db, CODE_RE, inviteLink } from "./firebase.js";
+import { db, CODE_RE, inviteLink, slug } from "./firebase.js";
 
 const $ = (id) => document.getElementById(id);
 const code = new URLSearchParams(location.search).get("i") || "";
@@ -51,41 +51,45 @@ function drawQr(target, text, size) {
   target.replaceChildren(svg);
 }
 
+// Long names ("Omar Angulo, Evelyn Robles y familia") shrink to stay on one line.
+function fitName() {
+  const guest = $("guest");
+  for (let size = 26; size >= 16; size--) {
+    guest.style.fontSize = size + "px";
+    if (guest.scrollWidth <= guest.clientWidth) return;
+  }
+}
+
+// Resolves to true once the invitation is drawn (the admin panel waits on it to export PNGs).
 async function load() {
   if (!CODE_RE.test(code)) {
     status("Falta el código de la invitación en el enlace.", true);
-    return;
+    return false;
   }
   let invite;
   try {
     const snap = await getDoc(doc(db, "rsvp", code));
     if (!snap.exists()) {
       status("No encontramos esta invitación.", true);
-      return;
+      return false;
     }
     invite = snap.data();
   } catch (err) {
     console.error(err);
     status("No se pudo cargar la invitación. Revisa tu conexión y recarga.", true);
-    return;
+    return false;
   }
   guestName = invite.name;
   document.title = `Dieguin Night · ${invite.name}`;
   $("guest").textContent = invite.name;
+  await document.fonts.load('700 26px "Courier Prime"');
+  fitName();
   $("kicker").textContent = `PASE PERSONAL — ADMITE ${invite.max}`;
   drawQr($("qr"), inviteLink(code), 104);
   $("rsvp-link").href = inviteLink(code);
   status("");
   $("download").disabled = false;
-}
-
-function slug(text) {
-  return text
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
+  return true;
 }
 
 // Renders the poster at 1:1 (not the on-screen scale) and twice the pixels: 1080x1920.
@@ -131,4 +135,4 @@ $("download").addEventListener("click", async () => {
 });
 
 window.renderInvitationPng = renderPng;
-load();
+window.invitationReady = load();

@@ -101,7 +101,8 @@ body.invite-page { background: #2a0a0d; }
   font-weight: 700;
   line-height: 1.15;
   min-height: 34px;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .p-stub {

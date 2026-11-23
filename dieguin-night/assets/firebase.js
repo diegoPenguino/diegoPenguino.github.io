@@ -39,6 +39,16 @@ export function inviteLink(code, page = "") {
   return url.toString() + (emulator ? "&emulator" : "");
 }
 
+// "Zaira Castro" -> "zaira-castro", for file names.
+export function slug(text) {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
 // "Vamos 3", "Vamos 2", "Solo yo", "No puedo ir"
 export function answerLabel(count, max) {
   if (count === 0) return "No puedo ir";

@@ -21,13 +21,14 @@ import {
   setDoc,
   updateDoc,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import { app, db, emulator, ADMIN_EMAIL, answerLabel, inviteLink } from "./firebase.js";
+import { app, db, emulator, ADMIN_EMAIL, inviteLink, slug } from "./firebase.js";
 
 const $ = (id) => document.getElementById(id);
 const auth = getAuth(app);
 if (emulator) connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
 
 let unsubscribe = null;
+let current = []; // the invitations on screen, oldest first
 
 // ---------- links ----------
 
@@ -46,7 +47,7 @@ function newCode() {
 }
 
 function whatsappLink(invite, code) {
-  const first = invite.name.trim().split(/\s+/)[0];
+  const first = invite.name.trim().split(/[\s,]+/)[0];
   const text =
     `¡Hola ${first}! Te invito a la Dieguin Night: sábado 19 de diciembre a las 4:00 p. m., ` +
     `en la calle 15 de Agosto, entre Villa de Oropeza y San Lorenzo. ` +
@@ -65,6 +66,7 @@ function el(tag, props = {}, children = []) {
 }
 
 function render(docs) {
+  current = docs;
   const list = $("guests");
   list.replaceChildren();
   $("empty").hidden = docs.length > 0;
@@ -72,11 +74,13 @@ function render(docs) {
   let people = 0;
   let answered = 0;
   let no = 0;
+  let invited = 0;
 
   for (const snap of docs) {
     const invite = snap.data();
     const code = snap.id;
     const count = invite.count ?? null;
+    invited += invite.max;
     if (count !== null) answered++;
     if (count === 0) no++;
     if (count > 0) people += count;
@@ -155,6 +159,9 @@ function render(docs) {
   }
 
   $("s-people").textContent = String(people);
+  $("s-people-label").textContent = `personas confirmadas, de ${invited} invitadas`;
+  $("zip").hidden = docs.length === 0;
+  updateBulkPreview();
   $("s-answered").textContent = `${answered}/${docs.length}`;
   $("s-pending").textContent = String(docs.length - answered);
   $("s-no").textContent = String(no);
@@ -223,6 +230,132 @@ $("add").addEventListener("submit", async (event) => {
     console.error(err);
     status.textContent = "No se pudo crear la invitación.";
   } finally {
+    button.disabled = false;
+  }
+});
+
+// ---------- adding many ----------
+
+// "Guichi, Chente y Di 3" -> { name: "Guichi, Chente y Di", max: 3 }. No number: admits 1.
+function parseLine(line) {
+  const text = line.replace(/^[\s*•-]+/, "").trim().replace(/\s+/g, " ");
+  if (!text) return null;
+  const match = text.match(/^(.*?)\s*[-–:=|]?\s+(\d{1,2})$/);
+  const name = (match ? match[1] : text).trim();
+  const max = match ? Number(match[2]) : 1;
+  return { name, max };
+}
+
+function parseBulk() {
+  const existing = new Set(current.map((snap) => snap.data().name.toLowerCase()));
+  const seen = new Set();
+  const rows = [];
+  const problems = [];
+  for (const line of $("bulk").list.value.split("\n")) {
+    const row = parseLine(line);
+    if (!row) continue;
+    const key = row.name.toLowerCase();
+    if (!row.name || row.name.length > 80) problems.push(`"${row.name.slice(0, 30)}…": nombre de 1 a 80 letras`);
+    else if (row.max < 1 || row.max > 10) problems.push(`${row.name}: admite de 1 a 10`);
+    else if (existing.has(key)) problems.push(`${row.name}: ya tiene invitación`);
+    else if (seen.has(key)) problems.push(`${row.name}: repetido`);
+    else {
+      seen.add(key);
+      rows.push(row);
+    }
+  }
+  return { rows, problems };
+}
+
+function updateBulkPreview() {
+  const { rows, problems } = parseBulk();
+  const people = rows.reduce((sum, row) => sum + row.max, 0);
+  let text = rows.length
+    ? `Se crearán ${rows.length} ${rows.length === 1 ? "invitación" : "invitaciones"} para ${people} ${people === 1 ? "persona" : "personas"}.`
+    : "";
+  if (problems.length) text += ` Se saltan ${problems.length}: ${problems.join("; ")}.`;
+  $("bulk-preview").textContent = text.trim();
+  $("bulk-create").disabled = rows.length === 0;
+}
+
+$("bulk").list.addEventListener("input", updateBulkPreview);
+
+$("bulk").addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const { rows } = parseBulk();
+  if (!rows.length) return;
+  const button = $("bulk-create");
+  const status = $("bulk-status");
+  button.disabled = true;
+  let done = 0;
+  try {
+    // One at a time, so createdAt keeps the order of the list.
+    for (const row of rows) {
+      await setDoc(doc(db, "rsvp", newCode()), {
+        name: row.name,
+        max: row.max,
+        count: null,
+        createdAt: serverTimestamp(),
+        updatedAt: null,
+      });
+      done++;
+      status.textContent = `Creando ${done} de ${rows.length}…`;
+    }
+    status.textContent = `Listo: ${done} invitaciones creadas.`;
+    $("bulk").list.value = "";
+  } catch (err) {
+    console.error(err);
+    status.textContent = `Se crearon ${done} de ${rows.length}; falló la siguiente. Vuelve a intentar: las que ya existen se saltan.`;
+  } finally {
+    updateBulkPreview();
+  }
+});
+
+// ---------- all the PNGs in one ZIP ----------
+
+// Opens each invitation card in a hidden frame, renders it to PNG and zips them all.
+async function renderCard(frame, code) {
+  await new Promise((resolve, reject) => {
+    frame.onload = resolve;
+    frame.onerror = reject;
+    frame.src = inviteLink(code, "invitacion.html");
+  });
+  const win = frame.contentWindow;
+  for (let i = 0; i < 100 && !win.invitationReady; i++) await new Promise((r) => setTimeout(r, 100));
+  if (!(await win.invitationReady)) throw new Error("invitation did not load: " + code);
+  const canvas = await win.renderInvitationPng();
+  return new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+}
+
+$("zip").addEventListener("click", async () => {
+  const button = $("zip");
+  const status = $("zip-status");
+  const invites = current.slice();
+  button.disabled = true;
+  const frame = el("iframe", { title: "Invitación", tabIndex: -1 });
+  frame.setAttribute("aria-hidden", "true");
+  frame.style.cssText = "position:fixed;left:-10000px;top:0;width:600px;height:1100px;border:0;";
+  document.body.append(frame);
+  try {
+    const zip = new JSZip();
+    const width = String(invites.length).length;
+    for (const [i, snap] of invites.entries()) {
+      status.textContent = `Generando ${i + 1} de ${invites.length}: ${snap.data().name}…`;
+      const png = await renderCard(frame, snap.id);
+      const number = String(i + 1).padStart(width, "0");
+      zip.file(`${number}-${slug(snap.data().name) || snap.id}.png`, png);
+    }
+    status.textContent = "Comprimiendo…";
+    const blob = await zip.generateAsync({ type: "blob" });
+    const link = el("a", { href: URL.createObjectURL(blob), download: "dieguin-night-invitaciones.zip" });
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 10000);
+    status.textContent = `Listo: ${invites.length} imágenes en dieguin-night-invitaciones.zip.`;
+  } catch (err) {
+    console.error(err);
+    status.textContent = "No se pudieron generar las imágenes. Recarga e intenta de nuevo.";
+  } finally {
+    frame.remove();
     button.disabled = false;
   }
 });
