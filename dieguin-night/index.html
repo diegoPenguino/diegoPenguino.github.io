@@ -1,0 +1,76 @@
+---
+layout: null
+sitemap: false
+---
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dieguin Night · Confirma tu asistencia</title>
+<meta name="description" content="Sábado 19 de diciembre, 4:00 p. m. Confirma cuántos van con tu pase.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#b3121d">
+<meta property="og:title" content="Dieguin Night">
+<meta property="og:description" content="Sábado 19 de diciembre, 4:00 p. m. Confirma cuántos van con tu pase.">
+<meta property="og:image" content="https://penguino.space/dieguin-night/assets/penguin.png">
+<link rel="icon" href="assets/penguin.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ultra&amp;family=Shrikhand&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<script type="module" src="assets/rsvp.js"></script>
+</head>
+<body class="stage">
+<main class="wrap">
+  <header class="top">
+    <p>Antes conocida como<br><s>Dieguin Fest</s></p>
+    <p class="right">Edición<br><b>Nº 004</b></p>
+  </header>
+
+  <img class="penguin" src="assets/penguin.webp" alt="" width="600" height="750">
+
+  <article class="ticket">
+    <p class="kicker" id="kicker">Pase personal</p>
+    <h1 class="title"><span class="t1">DIEGUIN</span> <span class="t2">Night</span></h1>
+    <p class="tagline">la evolución de la Dieguin Fest</p>
+
+    <div class="perf" aria-hidden="true"></div>
+
+    <dl class="fields">
+      <div class="wide" id="guest-row" hidden>
+        <dt>Pase a nombre de</dt>
+        <dd class="guest" id="guest-name"></dd>
+      </div>
+      <div><dt>Fecha</dt><dd>Sáb 19 dic 2026</dd></div>
+      <div><dt>Hora</dt><dd>4:00 p. m.</dd></div>
+      <div class="wide"><dt>Lugar</dt><dd>Calle 15 de Agosto, entre Villa de Oropeza y San Lorenzo</dd><dd class="map"><a href="https://maps.app.goo.gl/hLAPoASgKug4ggdT9" target="_blank" rel="noopener">Ver en el mapa</a></dd></div>
+      <div><dt>Motivo</dt><dd>Diego cumple 22</dd></div>
+      <div><dt>Incluye</dt><dd>Cenita y tragos</dd></div>
+    </dl>
+
+    <div class="perf" aria-hidden="true"></div>
+
+    <section class="rsvp" aria-labelledby="rsvp-title">
+      <h2 id="rsvp-title" class="rsvp-title">Confirma tu asistencia</h2>
+      <p id="status" class="status" role="status">Cargando tu invitación…</p>
+
+      <form id="form" hidden>
+        <fieldset>
+          <legend id="legend">¿Cuántos van?</legend>
+          <div id="options" class="options"></div>
+        </fieldset>
+        <button type="submit" class="btn" id="submit">Confirmar</button>
+        <p class="hint">Puedes cambiar tu respuesta cuando quieras con este mismo enlace.</p>
+      </form>
+
+      <div id="done" class="done" hidden>
+        <p class="done-big" id="done-big"></p>
+        <p class="done-small" id="done-small"></p>
+        <button type="button" class="btn ghost" id="change">Cambiar respuesta</button>
+      </div>
+    </section>
+  </article>
+</main>
+</body>
+</html>

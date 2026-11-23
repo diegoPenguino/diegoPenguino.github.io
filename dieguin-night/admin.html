@@ -1,0 +1,85 @@
+---
+layout: null
+sitemap: false
+---
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dieguin Night · Invitados</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/penguin.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ultra&amp;family=Shrikhand&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/admin.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script type="module" src="assets/admin.js"></script>
+</head>
+<body class="admin">
+<main class="admin-wrap">
+  <header class="admin-head">
+    <h1><span class="t1">DIEGUIN</span> <span class="t2">Night</span></h1>
+    <div class="who">
+      <p id="who"></p>
+      <button type="button" class="link-btn" id="signout" hidden>Salir</button>
+    </div>
+  </header>
+
+  <section id="gate" class="panel">
+    <p id="gate-msg">Esta página es solo para Diego.</p>
+    <button type="button" class="btn" id="signin">Entrar con Google</button>
+  </section>
+
+  <div id="app" hidden>
+    <section class="stats" aria-label="Resumen">
+      <div><p class="num" id="s-people">0</p><p id="s-people-label">personas confirmadas</p></div>
+      <div><p class="num" id="s-answered">0/0</p><p>pases respondidos</p></div>
+      <div><p class="num" id="s-pending">0</p><p>sin responder</p></div>
+      <div><p class="num" id="s-no">0</p><p>no van</p></div>
+    </section>
+
+    <section class="panel">
+      <h2>Nueva invitación</h2>
+      <form id="add" class="add">
+        <label class="field grow">
+          <span>Nombre</span>
+          <input name="name" type="text" maxlength="80" required autocomplete="off" placeholder="Zaira Castro">
+        </label>
+        <label class="field">
+          <span>Admite</span>
+          <input name="max" type="number" min="1" max="10" step="1" value="1" required inputmode="numeric">
+        </label>
+        <button type="submit" class="btn small">Crear</button>
+      </form>
+      <p class="status" id="add-status" role="status"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Varias a la vez</h2>
+      <form id="bulk" class="bulk">
+        <label class="field">
+          <span>Una invitación por línea, con cuántas personas admite al final. Sin número, admite 1.</span>
+          <textarea name="list" rows="8" autocomplete="off" spellcheck="false" placeholder="Zaira Castro 1&#10;Guichi, Chente y Di 3&#10;Jorge Aizama y padres 3"></textarea>
+        </label>
+        <p class="bulk-preview" id="bulk-preview" aria-live="polite"></p>
+        <button type="submit" class="btn small" id="bulk-create" disabled>Crear invitaciones</button>
+      </form>
+      <p class="status" id="bulk-status" role="status"></p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Invitados</h2>
+        <button type="button" class="chip" id="zip" hidden>Descargar todas las imágenes (ZIP)</button>
+      </div>
+      <p class="status" id="zip-status" role="status"></p>
+      <p class="empty" id="empty">Todavía no hay invitaciones.</p>
+      <ul class="guests" id="guests"></ul>
+    </section>
+  </div>
+</main>
+</body>
+</html>

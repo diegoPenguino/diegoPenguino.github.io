@@ -1,7 +1,8 @@
 rules_version = '2';
 
-// Blog comments for penguino.space, and the bots people upload to Domain Expansion
-// (https://penguino.space/Domain-Expansion/).
+// Blog comments for penguino.space, the bots people upload to Domain Expansion
+// (https://penguino.space/Domain-Expansion/), and the RSVPs for Dieguin Night
+// (https://penguino.space/dieguin-night/).
 // Paste this into Firebase console -> Firestore -> Rules, or deploy with
 // `firebase deploy --only firestore:rules` from the firebase/ folder.
 //
@@ -11,6 +12,8 @@ rules_version = '2';
 //   users/{uid}/bots/{slot}              { uid, ownerName, name, code, createdAt, updatedAt }
 //                                        slot is "1".."5", so each user has at most 5 bots
 //   botLimits/{uid}                      { lastSaveAt }  (rate limit, never readable)
+//   rsvp/{code}                          { name, max, count, createdAt, updatedAt }
+//                                        code is the 12-character secret in the guest's link
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -133,6 +136,51 @@ service cloud.firestore {
         && request.resource.data.keys().hasOnly(['lastSaveAt'])
         && request.resource.data.lastSaveAt == request.time;
       allow delete: if false;
+    }
+
+    // ---------- Dieguin Night RSVP ----------
+    // Each invitation is a document whose id is a random 12-character code that only the
+    // guest's link carries. Guests do not sign in: whoever has the link can read that one
+    // invitation and answer how many people are going, from 0 (not going) up to the max
+    // the admin set. Nobody but the admin can list the invitations or see the others.
+    // count is null until the guest answers.
+
+    function validInvite() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['name', 'max', 'count', 'createdAt', 'updatedAt'])
+        && d.keys().hasAll(['name', 'max', 'count', 'createdAt', 'updatedAt'])
+        && d.name is string
+        && d.name.trim().size() >= 1
+        && d.name.size() <= 80
+        && d.max is int
+        && d.max >= 1
+        && d.max <= 10
+        && (d.count == null || (d.count is int && d.count >= 0 && d.count <= d.max));
+    }
+
+    match /rsvp/{code} {
+      allow get: if code.matches('^[A-Za-z0-9]{12}$');
+      allow list: if isAdmin();
+
+      allow create: if isAdmin()
+        && code.matches('^[A-Za-z0-9]{12}$')
+        && validInvite()
+        && request.resource.data.count == null
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == null;
+
+      // The admin can change the name, the max, or reset the answer.
+      // A guest can only set count (0..max) and stamp updatedAt.
+      allow update: if (isAdmin()
+          && validInvite()
+          && request.resource.data.createdAt == resource.data.createdAt)
+        || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['count', 'updatedAt'])
+          && request.resource.data.count is int
+          && request.resource.data.count >= 0
+          && request.resource.data.count <= resource.data.max
+          && request.resource.data.updatedAt == request.time);
+
+      allow delete: if isAdmin();
     }
 
     match /{document=**} {

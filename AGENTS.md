@@ -65,6 +65,7 @@ browser at desktop and mobile widths.
 | Story | `story.md` (`layout: story`) | `---` in the text renders as the three-dot section break |
 | Other pages | `links.md`, `something.md`, `404.html` | Generic `page` layout |
 | Standalone pages | `full_rank.html`, `ranking1.html` | Own HTML and styles; not part of the design |
+| Dieguin Night RSVP | `dieguin-night/` | Birthday party invitations (Dec 2026), own HTML/CSS/JS in the party's ticket style, not the site design. `index.html?i=<code>` is a guest's pass and RSVP; `invitacion.html?i=<code>` is their invitation card with a QR to that page, downloadable as a 1080x1920 PNG (qrcode-generator and html2canvas from cdnjs); `admin.html` is Diego's panel (one or many invitations at a time, and a ZIP with every card as PNG through jszip from cdnjs). Front matter is only `layout: null` and `sitemap: false`. See "Comments" below |
 | Images | `assets/img/` (project thumbnails in `assets/img/projects/`) | Layouts render images through `_includes/img.html`, which serves a `.webp` twin when it exists next to the JPG/PNG (keep the original for share images). Make one with `cwebp -q 78 in.jpg -o in.webp`, resized to about 1000-1200px wide. Pass `priority=true` only for the main image above the fold; the rest load lazily |
 | SEO | `_includes/head.html`, `_includes/structured-data.html` | Share image = `share-img`, project thumbnail, or a post's first image; JSON-LD BlogPosting/Person |
 
@@ -86,6 +87,11 @@ Cloud Firestore, called straight from the browser (no server). The SDK loads onl
   `users/{uid}/bots/{slot}` with `{uid, ownerName, name, code, createdAt, updatedAt}`, slot `1`-`5`.
   Anyone reads (also as a `collectionGroup('bots')` query); the owner creates and edits (code up to
   20000 chars, one save per 10 s through `botLimits/{uid}.lastSaveAt`); owner or `admin-email` deletes.
+- It also stores the RSVPs for Dieguin Night (`dieguin-night/`): `rsvp/{code}` with
+  `{name, max, count, createdAt, updatedAt}`, where `code` is a random 12-character id that only the
+  guest's link carries and `count` is `null` until they answer. Anyone with the code reads that one
+  document and sets `count` from 0 to `max`; only `admin-email` lists, creates, edits or deletes.
+  The pages talk to the emulators when opened on localhost with `?emulator` in the URL.
 - `firebase/tests/` checks the rules against the Firestore emulator; CI runs it on every PR. Run it
   before publishing a change: `cd firebase && npm ci && npm test` (needs Java: `brew install openjdk@21`,
   on the PATH as `/opt/homebrew/opt/openjdk@21/bin`).
