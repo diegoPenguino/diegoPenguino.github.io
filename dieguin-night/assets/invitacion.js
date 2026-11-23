@@ -3,15 +3,13 @@
 // send by WhatsApp. Uses qrcode-generator and html2canvas (loaded as globals).
 
 import { doc, getDoc } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import { db, emulator, CODE_RE, inviteLink } from "./firebase.js";
+import { db, CODE_RE, inviteLink } from "./firebase.js";
 
 const $ = (id) => document.getElementById(id);
 const code = new URLSearchParams(location.search).get("i") || "";
 const SVG_NS = "http://www.w3.org/2000/svg";
 
 let guestName = "";
-
-if (emulator) $("back").href = "admin.html?emulator";
 
 // Scale the 540x960 poster to the width of its frame.
 function fit() {
