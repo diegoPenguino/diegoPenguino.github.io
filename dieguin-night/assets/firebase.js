@@ -29,6 +29,16 @@ if (emulator) connectFirestoreEmulator(db, "127.0.0.1", 8080);
 
 export const CODE_RE = /^[A-Za-z0-9]{12}$/;
 
+// The guest's personal link: ./?i=<code> (the RSVP page), or another page of this folder.
+// Built from the current page's folder, so it is https://penguino.space/dieguin-night/?i=...
+// in production and keeps ?emulator when testing locally.
+export function inviteLink(code, page = "") {
+  const url = new URL("./" + page, location.href);
+  url.search = "";
+  url.searchParams.set("i", code);
+  return url.toString() + (emulator ? "&emulator" : "");
+}
+
 // "Vamos 3", "Vamos 2", "Solo yo", "No puedo ir"
 export function answerLabel(count, max) {
   if (count === 0) return "No puedo ir";

@@ -21,7 +21,7 @@ import {
   setDoc,
   updateDoc,
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
-import { app, db, emulator, ADMIN_EMAIL, answerLabel } from "./firebase.js";
+import { app, db, emulator, ADMIN_EMAIL, answerLabel, inviteLink } from "./firebase.js";
 
 const $ = (id) => document.getElementById(id);
 const auth = getAuth(app);
@@ -43,13 +43,6 @@ function newCode() {
     }
   }
   return out;
-}
-
-function inviteLink(code) {
-  const url = new URL("./", location.href);
-  url.searchParams.set("i", code);
-  if (emulator) url.searchParams.set("emulator", "");
-  return url.toString().replace("emulator=", "emulator");
 }
 
 function whatsappLink(invite, code) {
@@ -122,12 +115,20 @@ function render(docs) {
       textContent: "WhatsApp",
     });
 
+    const cardLink = el("a", {
+      className: "chip",
+      href: inviteLink(code, "invitacion.html"),
+      target: "_blank",
+      rel: "noopener",
+      textContent: "Invitación con QR",
+    });
+
     const openLink = el("a", {
       className: "chip",
       href: inviteLink(code),
       target: "_blank",
       rel: "noopener",
-      textContent: "Ver pase",
+      textContent: "Ver confirmación",
     });
 
     const delBtn = el("button", { type: "button", className: "chip danger", textContent: "Borrar" });
@@ -148,7 +149,7 @@ function render(docs) {
           el("p", { className: answerClass, textContent: answer }),
         ]),
         el("label", { className: "guest-max" }, ["Admite", maxInput]),
-        el("div", { className: "guest-actions" }, [copyBtn, waLink, openLink, delBtn]),
+        el("div", { className: "guest-actions" }, [cardLink, copyBtn, waLink, openLink, delBtn]),
       ]),
     );
   }

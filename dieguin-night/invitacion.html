@@ -1,0 +1,81 @@
+---
+layout: null
+sitemap: false
+---
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dieguin Night · Invitación</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="assets/penguin.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ultra&amp;family=Shrikhand&amp;family=Courier+Prime:ital,wght@0,400;0,700;1,400&amp;display=swap">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/admin.css">
+<link rel="stylesheet" href="assets/invitacion.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script type="module" src="assets/invitacion.js"></script>
+</head>
+<body class="invite-page">
+<main class="invite-shell">
+  <div class="invite-bar">
+    <a class="chip light" href="admin.html" id="back">Invitados</a>
+    <button type="button" class="btn small" id="download" disabled>Descargar imagen</button>
+  </div>
+  <p class="status light" id="status" role="status">Cargando la invitación…</p>
+
+  <div class="poster-frame" id="frame">
+    <div class="poster" id="poster">
+      <p class="p-top left">Antes conocida como<br><s>Dieguin Fest</s></p>
+      <p class="p-top right">Edición<br><b>Nº 004</b></p>
+
+      <img class="p-penguin" src="assets/penguin.png" alt="" width="600" height="750">
+
+      <div class="p-card">
+        <p class="p-kicker" id="kicker">PASE PERSONAL</p>
+        <p class="p-t1">DIEGUIN</p>
+        <p class="p-t2">Night</p>
+        <p class="p-tagline">la evolución de la Dieguin Fest</p>
+
+        <div class="p-perf"><span></span><span></span></div>
+
+        <div class="p-fields">
+          <div class="wide">
+            <p class="p-label">Pase a nombre de</p>
+            <p class="p-guest" id="guest"></p>
+          </div>
+          <div>
+            <p class="p-label">Fecha</p>
+            <p class="p-value">Sáb 19 dic 2026</p>
+          </div>
+          <div>
+            <p class="p-label">Hora</p>
+            <p class="p-value">4:00 p. m.</p>
+          </div>
+          <div class="wide">
+            <p class="p-label">Lugar</p>
+            <p class="p-value">Calle 15 de Agosto, entre Villa de Oropeza y San Lorenzo</p>
+          </div>
+          <div class="wide">
+            <p class="p-label">Motivo</p>
+            <p class="p-value">Diego cumple 22</p>
+          </div>
+        </div>
+
+        <div class="p-stub">
+          <div class="p-qr" id="qr" role="img" aria-label="Código QR para confirmar asistencia"></div>
+          <div class="p-stub-text">
+            <p class="p-scan">Escanea para confirmar</p>
+            <p class="p-scan-small">o abre el enlace que te mandó Diego</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+</body>
+</html>
