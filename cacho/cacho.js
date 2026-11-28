@@ -53,10 +53,11 @@
   const quedan = (j) => TODAS.filter((c) => !anotada(j, c)).length;
   const panzaDeOro = (j) => j.puntos.escalera === 25 && j.puntos.full === 35 && j.puntos.poker === 45
     && (j.puntos.grande1 === 50 || j.puntos.grande2 === 50);
-  // Palitos (tiros malos). Salen de la hoja misma, así que deshacer o corregir los ajusta solos.
+  // Palitos (tiros malos). Salen de la hoja (más el orden en que se anotaron las grandes), así que deshacer
+  // o corregir los ajusta solos.
   // Propios: cada casilla tachada, cada juego del medio que no fue de mano y cada número con menos de 4 dados.
-  // Por grandes: con su primera grande, el que la sacó se lleva 1 palito y cada uno de los demás 2;
-  // con su segunda grande, cada uno de los demás se lleva 1.
+  // Por grandes: con la primera grande de la partida, quien la sacó se lleva 1 palito y cada uno de los demás 2;
+  // con cada grande que sale después, cada uno de los demás se lleva 1.
   function palitosPropios(j) {
     let n = 0;
     for (const c of TODAS) {
@@ -70,10 +71,25 @@
     }
     return n;
   }
-  const grandesDe = (j) => (j.puntos.grande1 === 50 ? 1 : 0) + (j.puntos.grande2 === 50 ? 1 : 0);
-  const palitosQueDa = (j) => { const g = grandesDe(j); return (g >= 1 ? 2 : 0) + (g >= 2 ? 1 : 0); };
-  const palitos = (j) => palitosPropios(j) + (grandesDe(j) >= 1 ? 1 : 0)
-    + estado.jugadores.reduce((s, o) => s + (o === j ? 0 : palitosQueDa(o)), 0);
+  const GRANDES = ['grande1', 'grande2'];
+  // Las grandes anotadas, de la primera a la última. j.orden[cat] guarda cuándo se anotó cada una.
+  function grandesEnOrden() {
+    const lista = [];
+    estado.jugadores.forEach((j, i) => {
+      for (const c of GRANDES) {
+        if (j.puntos[c] === 50) lista.push({ j, orden: (j.orden && j.orden[c]) || Infinity, i });
+      }
+    });
+    return lista.sort((a, b) => (a.orden - b.orden) || (a.i - b.i));
+  }
+  function palitos(j) {
+    let n = palitosPropios(j);
+    grandesEnOrden().forEach((g, k) => {
+      if (g.j === j) n += k === 0 ? 1 : 0;
+      else n += k === 0 ? 2 : 1;
+    });
+    return n;
+  }
   const nPalitos = (n) => `${n} palito${n === 1 ? '' : 's'}`;
   const nombreDe = (j) => j.nombre.trim() || `Jugador ${estado.jugadores.indexOf(j) + 1}`;
 
@@ -111,9 +127,15 @@
     if (!j) return;
     const habiaFin = resultado();
     const antes = anotada(j, cat) ? j.puntos[cat] : null;
-    registrar({ tipo: 'punto', pid, cat, antes, turno: estado.turno });
+    const ordenAntes = (j.orden && j.orden[cat]) || null;
+    registrar({ tipo: 'punto', pid, cat, antes, ordenAntes, turno: estado.turno });
     if (valor === null) delete j.puntos[cat];
     else j.puntos[cat] = valor;
+    if (GRANDES.includes(cat)) {
+      j.orden = j.orden || {};
+      if (valor !== 50) delete j.orden[cat];
+      else if (antes !== 50) j.orden[cat] = estado.seq = (estado.seq || 0) + 1;
+    }
     const idx = estado.jugadores.indexOf(j);
     if (valor !== null && antes === null && idx === estado.turno) avanzarTurno();
     recien = valor === null ? null : `${pid}:${cat}`;
@@ -135,6 +157,10 @@
       if (j) {
         if (e.antes === null) delete j.puntos[e.cat];
         else j.puntos[e.cat] = e.antes;
+        if (j.orden) {
+          if (e.ordenAntes) j.orden[e.cat] = e.ordenAntes;
+          else delete j.orden[e.cat];
+        }
       }
     } else if (e.tipo === 'dormida') {
       estado.dormida = e.antes;
