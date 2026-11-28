@@ -1,0 +1,78 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cacho · Hoja de puntajes</title>
+<meta name="description" content="Anota los puntajes del cacho (Alalay) como en una hoja de papel: un gato por jugador, servidas, tachadas, grandes y dormida.">
+<meta name="theme-color" content="#f7f2e3">
+<meta property="og:title" content="Cacho · Hoja de puntajes">
+<meta property="og:description" content="Un gato por jugador, como en papel. Para jugar cacho con los amigos.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='6' width='52' height='52' rx='10' fill='%23f7f2e3' stroke='%231f3c88' stroke-width='5'/%3E%3Cg fill='%231f3c88'%3E%3Ccircle cx='21' cy='21' r='5'/%3E%3Ccircle cx='32' cy='32' r='5'/%3E%3Ccircle cx='43' cy='43' r='5'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=Patrick+Hand&amp;display=swap">
+<link rel="stylesheet" href="/cacho/cacho.css">
+<script src="/cacho/cacho.js" defer></script>
+</head>
+<body>
+<main class="hoja">
+  <header class="cabecera">
+    <h1>Cacho</h1>
+    <p>Hoja de puntajes · Alalay</p>
+  </header>
+
+  <nav class="marcador" id="marcador" aria-label="Totales y turno"></nav>
+
+  <section class="jugadores" id="jugadores" aria-label="Hojas de los jugadores"></section>
+
+  <div class="acciones">
+    <button type="button" class="boton" id="agregar">+ Jugador</button>
+    <button type="button" class="boton" id="deshacer">Deshacer</button>
+    <button type="button" class="boton" id="nueva">Nueva partida</button>
+  </div>
+
+  <details class="reglas">
+    <summary>Cómo se anota</summary>
+    <ul>
+      <li><b>Balas, Tontos, Tricas, Cuadras, Quinas y Senas</b> (unos a seises): la cara por la cantidad de dados. Tres senas son 18.</li>
+      <li><b>Escalera</b> 20, <b>Full</b> 30 y <b>Póker</b> 40. Si salen <b>de mano</b> (servidas, en el primer tiro) valen 25, 35 y 45.</li>
+      <li><b>Grande</b>: cinco dados iguales, 50. Hay dos casillas de grande, abajo del gato.</li>
+      <li><b>Dormida</b>: grande de mano, en el primer tiro. Gana el partido.</li>
+      <li><b>Panza de oro</b>: escalera, full y póker de mano y al menos una grande. También gana.</li>
+      <li>Si no te sirve el tiro, <b>tachas</b> una casilla libre: queda con una raya y vale 0.</li>
+      <li>Cuando todos llenan sus once casillas, gana el que suma más.</li>
+    </ul>
+    <p>Toca una casilla para anotar, corregir o tachar. La partida se guarda en este navegador.</p>
+  </details>
+</main>
+
+<dialog class="papelito" id="elegir">
+  <form method="dialog">
+    <p class="elegir-quien" id="elegir-quien"></p>
+    <h2 id="elegir-cat"></h2>
+    <div class="opciones" id="opciones"></div>
+    <div class="otras">
+      <button class="boton" value="x" id="tachar">Tachar</button>
+      <button class="boton" value="borrar" id="borrar">Borrar</button>
+      <button class="boton suave" value="">Cancelar</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog class="papelito" id="fin">
+  <form method="dialog">
+    <h2 id="fin-titulo"></h2>
+    <p id="fin-como"></p>
+    <ol class="ranking" id="fin-ranking"></ol>
+    <div class="otras">
+      <button class="boton" value="nueva">Nueva partida</button>
+      <button class="boton suave" value="">Ver la hoja</button>
+    </div>
+  </form>
+</dialog>
+</body>
+</html>

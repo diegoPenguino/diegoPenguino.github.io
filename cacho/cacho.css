@@ -1,0 +1,345 @@
+/* Hoja de puntajes del cacho: una hoja de cuaderno con un gato por jugador. */
+:root {
+  --papel: #f7f2e3;
+  --renglon: rgba(70, 120, 190, 0.2);
+  --margen: rgba(205, 70, 62, 0.5);
+  --tinta: #1f3c88;
+  --tinta-suave: rgba(31, 60, 136, 0.55);
+  --lapiz: #3d3a36;
+  --lapiz-suave: rgba(61, 58, 54, 0.5);
+  --rojo: #b8322a;
+  --resaltador: rgba(255, 214, 64, 0.65);
+  --mano: "Caveat", "Bradley Hand", "Segoe Print", cursive;
+  --letra: "Patrick Hand", "Comic Sans MS", "Chalkboard SE", cursive;
+  --renglon-alto: 2rem;
+  --borde-izq: 2.6rem;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--lapiz);
+  font-family: var(--letra);
+  font-size: 1.15rem;
+  line-height: var(--renglon-alto);
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(90deg, transparent calc(var(--borde-izq) - 1px), var(--margen) calc(var(--borde-izq) - 1px), var(--margen) calc(var(--borde-izq) + 1px), transparent calc(var(--borde-izq) + 1px)),
+    repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--renglon-alto) - 1px), var(--renglon) calc(var(--renglon-alto) - 1px), var(--renglon) var(--renglon-alto));
+  background-attachment: local;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, input { font: inherit; color: inherit; }
+
+.hoja {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1rem 4rem calc(var(--borde-izq) + 0.9rem);
+}
+
+.cabecera h1 {
+  margin: 0;
+  font-family: var(--mano);
+  font-weight: 700;
+  font-size: 3.4rem;
+  line-height: 4rem;
+  color: var(--tinta);
+}
+.cabecera p { margin: 0 0 0.5rem; color: var(--lapiz-suave); }
+
+/* Totales arriba: siempre a la vista mientras se baja por las hojas. */
+.marcador {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  margin: 0 -1rem 1rem calc(-1 * var(--borde-izq) - 0.9rem);
+  padding: 0.4rem 1rem 0.4rem calc(var(--borde-izq) + 0.9rem);
+  background: var(--papel);
+  border-bottom: 1.5px dashed var(--lapiz-suave);
+}
+.ficha {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.3rem 0.55rem;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 1.2;
+}
+.ficha .n { max-width: 9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ficha .t { font-family: var(--mano); font-weight: 700; font-size: 1.7rem; color: var(--tinta); }
+.ficha.turno .n, .jugador.turno .nombre { background: linear-gradient(transparent 52%, var(--resaltador) 52%, var(--resaltador) 92%, transparent 92%); }
+.ficha .estrella { color: var(--rojo); }
+.marcador .aviso { flex-basis: 100%; margin: 0; color: var(--rojo); font-family: var(--mano); font-size: 1.6rem; font-weight: 700; }
+
+.jugadores {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2rem 2.5rem;
+}
+
+.jugador { min-width: 0; }
+
+.jug-cabeza {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  max-width: 360px;
+}
+.nombre {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 0.15rem;
+  border: 0;
+  border-bottom: 1.5px solid var(--lapiz-suave);
+  background-color: transparent;
+  font-family: var(--mano);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--tinta);
+  border-radius: 0;
+}
+.nombre::placeholder { color: var(--tinta-suave); font-weight: 500; }
+.nombre:focus { outline: none; border-bottom-color: var(--tinta); }
+.jug-cabeza .total {
+  font-family: var(--mano);
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: var(--tinta);
+  white-space: nowrap;
+}
+.jug-cabeza .total small { font-family: var(--letra); font-size: 1rem; color: var(--lapiz-suave); font-weight: 400; }
+
+/* El gato: 3x3 sin borde exterior, con rayas dibujadas a mano encima. */
+.gato {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1;
+  margin-top: 0.6rem;
+}
+.rayas, .barra {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--lapiz);
+  stroke-width: 2.2px;
+  stroke-linecap: round;
+}
+.rayas path, .barra path, .tachon path { vector-effect: non-scaling-stroke; }
+
+.casilla {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.casilla:hover { background: rgba(31, 60, 136, 0.05); }
+.casilla:focus-visible { outline: 2px dashed var(--tinta); outline-offset: -6px; }
+.casilla .etq {
+  position: absolute;
+  top: 0.35rem;
+  left: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  color: var(--lapiz-suave);
+  text-align: left;
+}
+.casilla.vacia .etq { color: var(--lapiz); opacity: 0.6; }
+.casilla .etq i { font-style: normal; display: block; font-size: 0.8rem; opacity: 0.85; }
+.casilla .val {
+  font-family: var(--mano);
+  font-weight: 700;
+  font-size: clamp(2.2rem, 11vw, 3rem);
+  line-height: 1;
+  color: var(--tinta);
+  transform: rotate(-3deg) translateY(0.2rem);
+}
+.casilla .val.mano::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1.7em;
+  height: 1.15em;
+  translate: -50% -50%;
+  border: 2px solid var(--tinta);
+  border-radius: 50%;
+  transform: rotate(-8deg);
+  opacity: 0.7;
+}
+.casilla .val.mano { position: relative; }
+.tachon {
+  position: absolute;
+  inset: 18%;
+  width: 64%;
+  height: 64%;
+  overflow: visible;
+  fill: none;
+  stroke: var(--tinta);
+  stroke-width: 3px;
+  stroke-linecap: round;
+}
+
+/* Las dos grandes van abajo, separadas por una barra, como en el papel. */
+.grandes {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 62%;
+  max-width: 224px;
+  height: 92px;
+  margin: 0.4rem 0 0 calc(min(100%, 360px) * 0.19);
+}
+.grandes .casilla .etq { top: 0.25rem; }
+.grandes .casilla + .casilla .etq { top: auto; bottom: 0.25rem; left: auto; right: 0.5rem; text-align: right; }
+/* Ya anotada, la grande muestra solo su valor, cada una en su lado de la barra. */
+.grandes .casilla:not(.vacia) .etq { display: none; }
+.grandes .tachon { inset: 25%; width: 50%; height: 50%; }
+.grandes .casilla:first-child .val, .grandes .casilla:first-child .tachon { translate: -0.5rem -0.9rem; }
+.grandes .casilla + .casilla .val, .grandes .casilla + .casilla .tachon { translate: 0.5rem 0.9rem; }
+
+.jug-pie {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 0.75rem;
+  max-width: 360px;
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  color: var(--lapiz-suave);
+}
+.jug-pie .quedan { margin-right: auto; }
+.enlace {
+  min-height: 44px;
+  padding: 0 0.25rem;
+  border: 0;
+  background: none;
+  color: var(--tinta);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.enlace.peligro { color: var(--rojo); }
+
+.sello {
+  display: inline-block;
+  margin-top: 0.3rem;
+  padding: 0 0.6rem;
+  border: 2.5px solid var(--rojo);
+  color: var(--rojo);
+  font-family: var(--mano);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  transform: rotate(-4deg);
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 2.5rem 0 1.5rem;
+}
+.boton {
+  min-height: 44px;
+  padding: 0.2rem 1rem;
+  border: 2px solid var(--lapiz);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  background: var(--papel);
+  cursor: pointer;
+  line-height: 1.3;
+  touch-action: manipulation;
+}
+.boton:hover { background: rgba(31, 60, 136, 0.07); }
+.boton:disabled { opacity: 0.4; cursor: default; }
+.boton.suave { border-color: var(--lapiz-suave); color: var(--lapiz-suave); }
+
+.reglas { max-width: 40rem; }
+.reglas summary { cursor: pointer; color: var(--tinta); min-height: 44px; display: list-item; line-height: 44px; }
+.reglas ul { margin: 0; padding-left: 1.2rem; }
+.reglas p { color: var(--lapiz-suave); }
+
+/* Papelitos: los diálogos parecen un pedazo de hoja suelto. */
+.papelito {
+  width: min(26rem, calc(100vw - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 1rem 1.2rem 1.2rem;
+  border: 0;
+  background: var(--papel);
+  background-image: repeating-linear-gradient(180deg, transparent 0, transparent calc(var(--renglon-alto) - 1px), var(--renglon) calc(var(--renglon-alto) - 1px), var(--renglon) var(--renglon-alto));
+  color: var(--lapiz);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transform: rotate(-0.6deg);
+}
+.papelito::backdrop { background: rgba(40, 34, 24, 0.45); }
+.papelito h2 { margin: 0; font-family: var(--mano); font-size: 2.4rem; line-height: 2.6rem; color: var(--tinta); }
+.elegir-quien { margin: 0; color: var(--lapiz-suave); }
+.opciones {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(4.4rem, 1fr));
+  gap: 0.5rem;
+  margin: 0.8rem 0 1rem;
+}
+.opcion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.6rem;
+  padding: 0.3rem;
+  border: 2px solid var(--lapiz-suave);
+  border-radius: 12px 4px 14px 5px / 5px 14px 4px 12px;
+  background: none;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.opcion:hover { border-color: var(--tinta); }
+.opcion .num { font-family: var(--mano); font-weight: 700; font-size: 2.3rem; line-height: 1; color: var(--tinta); }
+.opcion .cap { font-size: 0.9rem; line-height: 1.2; color: var(--lapiz-suave); text-align: center; }
+.opcion.actual { border-color: var(--tinta); background: rgba(31, 60, 136, 0.08); }
+.opciones.dos { grid-template-columns: 1fr 1fr; }
+.opciones.dos .opcion { min-height: 5.6rem; }
+.otras { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+#tachar { color: var(--rojo); border-color: var(--rojo); }
+
+.ranking { margin: 0.5rem 0 1.2rem; padding-left: 1.4rem; font-size: 1.25rem; }
+.ranking b { font-family: var(--mano); font-size: 1.6rem; color: var(--tinta); }
+
+@media (max-width: 420px) {
+  :root { --borde-izq: 1.6rem; }
+  .hoja { padding-right: 0.75rem; }
+  .cabecera h1 { font-size: 3rem; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .casilla.recien .val, .casilla.recien .tachon { animation: escribir 0.25s ease-out; }
+  @keyframes escribir { from { opacity: 0; scale: 1.25; } to { opacity: 1; scale: 1; } }
+}
