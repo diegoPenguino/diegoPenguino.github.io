@@ -53,6 +53,44 @@
   const quedan = (j) => TODAS.filter((c) => !anotada(j, c)).length;
   const panzaDeOro = (j) => j.puntos.escalera === 25 && j.puntos.full === 35 && j.puntos.poker === 45
     && (j.puntos.grande1 === 50 || j.puntos.grande2 === 50);
+  // Palitos (tiros malos). Salen de la hoja (más el orden en que se anotaron las grandes), así que deshacer
+  // o corregir los ajusta solos.
+  // Propios: cada casilla tachada, cada juego del medio que no fue de mano y cada número con menos de 4 dados.
+  // Por grandes: con la primera grande de la partida, quien la sacó se lleva 1 palito y cada uno de los demás 2;
+  // con cada grande que sale después, cada uno de los demás se lleva 1.
+  function palitosPropios(j) {
+    let n = 0;
+    for (const c of TODAS) {
+      const v = j.puntos[c];
+      const cat = CATS[c];
+      if (v === 'x') n++;
+      else if (typeof v === 'number') {
+        if (cat.cara && v / cat.cara < 4) n++;
+        if (cat.mano !== undefined && v !== cat.mano) n++;
+      }
+    }
+    return n;
+  }
+  const GRANDES = ['grande1', 'grande2'];
+  // Las grandes anotadas, de la primera a la última. j.orden[cat] guarda cuándo se anotó cada una.
+  function grandesEnOrden() {
+    const lista = [];
+    estado.jugadores.forEach((j, i) => {
+      for (const c of GRANDES) {
+        if (j.puntos[c] === 50) lista.push({ j, orden: (j.orden && j.orden[c]) || Infinity, i });
+      }
+    });
+    return lista.sort((a, b) => (a.orden - b.orden) || (a.i - b.i));
+  }
+  function palitos(j) {
+    let n = palitosPropios(j);
+    grandesEnOrden().forEach((g, k) => {
+      if (g.j === j) n += k === 0 ? 1 : 0;
+      else n += k === 0 ? 2 : 1;
+    });
+    return n;
+  }
+  const nPalitos = (n) => `${n} palito${n === 1 ? '' : 's'}`;
   const nombreDe = (j) => j.nombre.trim() || `Jugador ${estado.jugadores.indexOf(j) + 1}`;
 
   // Quién ganó, o null si la partida sigue.
@@ -89,9 +127,15 @@
     if (!j) return;
     const habiaFin = resultado();
     const antes = anotada(j, cat) ? j.puntos[cat] : null;
-    registrar({ tipo: 'punto', pid, cat, antes, turno: estado.turno });
+    const ordenAntes = (j.orden && j.orden[cat]) || null;
+    registrar({ tipo: 'punto', pid, cat, antes, ordenAntes, turno: estado.turno });
     if (valor === null) delete j.puntos[cat];
     else j.puntos[cat] = valor;
+    if (GRANDES.includes(cat)) {
+      j.orden = j.orden || {};
+      if (valor !== 50) delete j.orden[cat];
+      else if (antes !== 50) j.orden[cat] = estado.seq = (estado.seq || 0) + 1;
+    }
     const idx = estado.jugadores.indexOf(j);
     if (valor !== null && antes === null && idx === estado.turno) avanzarTurno();
     recien = valor === null ? null : `${pid}:${cat}`;
@@ -113,6 +157,10 @@
       if (j) {
         if (e.antes === null) delete j.puntos[e.cat];
         else j.puntos[e.cat] = e.antes;
+        if (j.orden) {
+          if (e.ordenAntes) j.orden[e.cat] = e.ordenAntes;
+          else delete j.orden[e.cat];
+        }
       }
     } else if (e.tipo === 'dormida') {
       estado.dormida = e.antes;
@@ -158,7 +206,20 @@
   }
   function tachon(id) {
     const r = azar(id);
-    return `<svg class="tachon" viewBox="0 0 100 100" aria-hidden="true">${trazo(8, 92, 92, 8, r, 8)}</svg>`;
+    return `<svg class="tachon" viewBox="0 0 100 100" aria-hidden="true">${trazo(10, 90, 90, 10, r, 8)}${trazo(12, 10, 88, 92, r, 8)}</svg>`;
+  }
+  // Palitos de 5 en 5: cuatro rayas y la quinta las cruza.
+  function dibujoPalitos(n, id) {
+    const r = azar(`${id}p`);
+    let html = '';
+    for (let g = 0; g * 5 < n; g++) {
+      const enGrupo = Math.min(5, n - g * 5);
+      let d = '';
+      for (let k = 0; k < Math.min(4, enGrupo); k++) d += trazo(8 + k * 9, 6, 9 + k * 9, 34, r, 3);
+      if (enGrupo === 5) d += trazo(2, 31, 44, 9, r, 3);
+      html += `<svg viewBox="0 0 46 40" aria-hidden="true">${d}</svg>`;
+    }
+    return html;
   }
 
   // ---------- Vista ----------
@@ -212,6 +273,10 @@
         ${casilla(j, 'grande1')}${casilla(j, 'grande2')}
         <svg class="barra" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${barraGrandes(j.id)}</svg>
       </div>
+      <div class="palitos" aria-label="${nPalitos(palitos(j))}">
+        <span class="palitos-etq">Palitos <b>${palitos(j)}</b></span>
+        <span class="palitos-trazos">${dibujoPalitos(palitos(j), j.id)}</span>
+      </div>
       ${sello}
       <div class="jug-pie">
         <span class="quedan">${q === 0 ? 'Hoja llena' : turno ? `Le toca · quedan ${q}` : `Quedan ${q}`}</span>
@@ -229,7 +294,8 @@
       const turno = !fin && i === estado.turno;
       const lider = max > 0 && total(j) === max;
       return `<button type="button" class="ficha${turno ? ' turno' : ''}" data-pid="${j.id}" title="Ir a la hoja (y darle el turno)">`
-        + `<span class="n">${escapar(nombreDe(j))}</span><span class="t">${total(j)}</span>${lider ? '<span class="estrella" aria-label="va ganando">★</span>' : ''}</button>`;
+        + `<span class="n">${escapar(nombreDe(j))}</span><span class="t">${total(j)}</span>${lider ? '<span class="estrella" aria-label="va ganando">★</span>' : ''}`
+        + `${palitos(j) ? `<span class="p">${nPalitos(palitos(j))}</span>` : ''}</button>`;
     }).join('');
     if (fin) {
       const nombres = fin.ganadores.map(nombreDe).join(' y ');
@@ -293,7 +359,7 @@
         : fin.ganadores.length > 1 ? `${nombres.join(' y ')} terminaron con ${total(fin.ganadores[0])}.`
           : `Con ${total(fin.ganadores[0])} puntos.`;
     const orden = [...estado.jugadores].sort((a, b) => total(b) - total(a));
-    $('fin-ranking').innerHTML = orden.map((j) => `<li>${escapar(nombreDe(j))} · <b>${total(j)}</b></li>`).join('');
+    $('fin-ranking').innerHTML = orden.map((j) => `<li>${escapar(nombreDe(j))} · <b>${total(j)}</b> <small>${nPalitos(palitos(j))}</small></li>`).join('');
     dlgFin.returnValue = '';
     dlgFin.showModal();
   }
