@@ -55,7 +55,8 @@
     && (j.puntos.grande1 === 50 || j.puntos.grande2 === 50);
   // Palitos (tiros malos). Salen de la hoja misma, así que deshacer o corregir los ajusta solos.
   // Propios: cada casilla tachada, cada juego del medio que no fue de mano y cada número con menos de 4 dados.
-  // Por grandes ajenas: la primera grande de otro jugador da 2 palitos a cada uno de los demás; su segunda, 1.
+  // Por grandes: con su primera grande, el que la sacó se lleva 1 palito y cada uno de los demás 2;
+  // con su segunda grande, cada uno de los demás se lleva 1.
   function palitosPropios(j) {
     let n = 0;
     for (const c of TODAS) {
@@ -71,7 +72,7 @@
   }
   const grandesDe = (j) => (j.puntos.grande1 === 50 ? 1 : 0) + (j.puntos.grande2 === 50 ? 1 : 0);
   const palitosQueDa = (j) => { const g = grandesDe(j); return (g >= 1 ? 2 : 0) + (g >= 2 ? 1 : 0); };
-  const palitos = (j) => palitosPropios(j)
+  const palitos = (j) => palitosPropios(j) + (grandesDe(j) >= 1 ? 1 : 0)
     + estado.jugadores.reduce((s, o) => s + (o === j ? 0 : palitosQueDa(o)), 0);
   const nPalitos = (n) => `${n} palito${n === 1 ? '' : 's'}`;
   const nombreDe = (j) => j.nombre.trim() || `Jugador ${estado.jugadores.indexOf(j) + 1}`;
